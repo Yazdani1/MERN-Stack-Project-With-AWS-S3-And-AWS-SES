@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 
-mongoose.connect(process.env.MONGODBNOTE,{
+mongoose.connect(process.env.localdb,{
   useNewUrlParser: true,
   useUnifiedTopology: true,
 },(err)=>{

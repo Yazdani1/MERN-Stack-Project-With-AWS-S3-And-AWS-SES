@@ -28,7 +28,7 @@ exports.createPost = (req, res) => {
 exports.getPosts = (req, res) => {
   Post.find({})
     .sort({ date: "DESC" })
-    .limit(10)
+  
     .then((result) => {
       res.json(result);
     })
