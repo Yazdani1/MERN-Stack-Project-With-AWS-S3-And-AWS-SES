@@ -3,8 +3,7 @@ import "./App.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
-const Post = ({totalpost}) => {
+const Post = ({ totalpost }) => {
   const [title, setTitle] = useState("");
   const [des, setDes] = useState("");
   const [error, setError] = useState(false);
@@ -77,7 +76,9 @@ const Post = ({totalpost}) => {
           <div className="form-design card">
             <form>
               <div className="text-center">
-                <h5 className="text-center">Write Your Note here</h5>
+           
+                <h5 className="text-center">Notebook app</h5>
+                <h5 className="text-center">write your note here</h5>
                 <p>Total Note is: {totalpost.length}</p>
                 {showError()}
                 {showSuccess()}
@@ -122,7 +123,6 @@ const Post = ({totalpost}) => {
         </div>
       </div>
       <ToastContainer autoClose={8000} />
-
     </div>
   );
 };
