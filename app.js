@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // "dev": "concurrently \"npm run server\" \"npm start --prefix client\""
 //"proxy": "http://localhost:5000"
 
-app.use("/api",require("./router/Post"));
+app.use("/api",require("./router/post"));
 
 // Serve static assets if in production
 
