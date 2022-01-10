@@ -66,7 +66,7 @@ const Post = ({totalpost}) => {
       className="alert alert-success"
       style={{ display: success ? "" : "none" }}
     >
-      Your Comment has been posted Successfully!
+      Your Note has been posted Successfully!
     </div>
   );
 
