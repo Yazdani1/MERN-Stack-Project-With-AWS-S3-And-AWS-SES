@@ -4,11 +4,11 @@ exports.createPost = (req, res) => {
   const { title, des } = req.body;
 
   if (!title) {
-    return res.status(422).json({ error: "Please add post title" });
+    return res.status(422).json({ error: "add note title" });
   }
 
   if (!des) {
-    return res.status(422).json({ error: "Please add post des" });
+    return res.status(422).json({ error: "add note description" });
   }
 
   const postdata = Post({
