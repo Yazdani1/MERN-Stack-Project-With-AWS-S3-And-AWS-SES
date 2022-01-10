@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
 
 
-// "proxy": "http://localhost:8080"
+//  "proxy": "http://localhost:5000"
 // "dev": "concurrently \"npm run server\" \"npm start --prefix client\""
 //"proxy": "http://localhost:5000"
 
@@ -35,14 +35,14 @@ app.use("/api",require("./router/post"));
 
 //to deploy vercel
 
-// if(process.env.NODE_ENV=='production'){
-//   const path = require('path')
+if(process.env.NODE_ENV=='production'){
+  const path = require('path')
 
-//   app.get('/',(req,res)=>{
-//       app.use(express.static(path.resolve(__dirname,'client','build')))
-//       res.sendFile(path.resolve(__dirname,'client','build','index.html'))
-//   })
-// }
+  app.get('/',(req,res)=>{
+      app.use(express.static(path.resolve(__dirname,'client','build')))
+      res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+  })
+}
 
 
 app.listen(port, (req, res) => {
