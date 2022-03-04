@@ -28,7 +28,7 @@ exports.createPost = (req, res) => {
 exports.getPosts = (req, res) => {
   Post.find({})
     .sort({ date: "DESC" })
-  
+
     .then((result) => {
       res.json(result);
     })
@@ -38,13 +38,23 @@ exports.getPosts = (req, res) => {
 };
 
 exports.deletePost = (req, res) => {
+  
   var deletequery = { _id: req.params.id };
 
-  Post.findOneAndDelete(deletequery)
+  const query = { _id: { $in: deletequery } };
+  Post.deleteMany(query)
     .then((result) => {
       res.json({ message: "Post deleted " });
     })
     .catch((err) => {
       console.log(err);
     });
+
+  // Post.findOneAndDelete(deletequery)
+  //   .then((result) => {
+  //     res.json({ message: "Post deleted " });
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
 };
