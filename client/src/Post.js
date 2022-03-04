@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import "./App.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 
 const Post = ({ totalpost }) => {
   const [title, setTitle] = useState("");
@@ -71,13 +72,14 @@ const Post = ({ totalpost }) => {
 
   return (
     <div className="container">
+    
       <div className="row">
         <div className="col-lg-12 col-md-12 col-sm-12">
           <div className="form-design card">
             <form>
               <div className="text-center">
            
-                <h5 className="text-center">Notebook app</h5>
+                <h5 className="text-center">Notebook app. Create your note today</h5>
                 <h5 className="text-center">write your note here</h5>
                 <p>Total Note is: {totalpost.length}</p>
                 {showError()}
