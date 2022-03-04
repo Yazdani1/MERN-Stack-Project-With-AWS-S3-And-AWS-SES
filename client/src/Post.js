@@ -79,7 +79,7 @@ const Post = ({ totalpost }) => {
             <form>
               <div className="text-center">
            
-                <h5 className="text-center">Notebook app</h5>
+                <h5 className="text-center">Notebook app. Create your note today</h5>
                 <h5 className="text-center">write your note here</h5>
                 <p>Total Note is: {totalpost.length}</p>
                 {showError()}
