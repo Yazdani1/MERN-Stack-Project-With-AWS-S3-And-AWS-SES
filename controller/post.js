@@ -40,9 +40,9 @@ exports.getPosts = (req, res) => {
 exports.deletePost = (req, res) => {
   var deletequery = { _id: req.params.id };
 
-  Post.findByIdAndDelete(deletequery)
+  Post.findOneAndDelete(deletequery)
     .then((result) => {
-      res.json({ message: "Post deleted successfully" });
+      res.json({ message: "Post deleted " });
     })
     .catch((err) => {
       console.log(err);

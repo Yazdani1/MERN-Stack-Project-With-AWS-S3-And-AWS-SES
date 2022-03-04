@@ -29,9 +29,9 @@ const App = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        if (result) {
+        if (result.message) {
           console.log("post deleted success");
-          toast.info("Post Deleted Successfully!", {
+          toast.info(result.message, {
             position: toast.POSITION.TOP_RIGHT,
           });
           loadallPosts();
@@ -53,7 +53,8 @@ const App = () => {
         arrlist.push(id._id);
       }
     });
-    console.log(arrlist)
+    deletePost(arrlist);
+    console.log(arrlist);
   };
 
   return (
