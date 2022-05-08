@@ -3,10 +3,10 @@ const { ObjectId } = mongoose.Schema.Types;
 
 var postSchema = mongoose.Schema({
   title: {
-    type: String,
+    type: Number,
   },
   des: {
-    type: String,
+    type: Number,
   },
   date: {
     type: Date,

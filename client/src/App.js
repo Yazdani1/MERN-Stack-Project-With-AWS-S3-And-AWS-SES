@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import Post from "./Post";
 
+import { ShowCharts } from "./charts/ShowCharts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const App = () => {
@@ -48,6 +49,7 @@ const App = () => {
   return (
     <div>
       <Post totalpost={allposts}/>
+      <ShowCharts allposts={allposts}/>
 
       <div className="container">
         {allposts.map((item, index) => (
