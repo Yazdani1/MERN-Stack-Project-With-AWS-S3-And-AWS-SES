@@ -33,7 +33,7 @@ exports.createPost = (req, res) => {
 exports.getPosts = (req, res) => {
   Post.find({})
     .sort({ date: "DESC" })
-    .populate("categoryBy", "_id categoryName")
+    .populate("categoryBy", "_id categoryName date")
     .then((result) => {
       res.json(result);
     })
@@ -66,7 +66,7 @@ exports.deletePost = async (req, res) => {
 //get post by category
 
 exports.getpostBycategory = async (req, res) => {
-  
+
   try {
     const categoryInfo = await Category.findOne({ _id: req.params.id });
     const postsData = await Post.find({ categoryBy: req.params.id }).populate(

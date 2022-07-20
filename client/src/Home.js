@@ -74,12 +74,15 @@ const Home = () => {
               <div>
                 <p className="postinfo">Income: {item.title}</p>
                 <p className="postinfo">Expense: {item.des}</p>
+                <p>{item.date}</p>
 
                 <Link
                   to={"/category/" + item.categoryBy?._id}
                   style={{ textDecoration: "none" }}
                 >
                   <h6>{item.categoryBy?.categoryName}</h6>
+                  <p>{item.categoryBy?.date}</p>
+
 
                 </Link>
                 {/* <p className="postinfo">{item.date}</p> */}
