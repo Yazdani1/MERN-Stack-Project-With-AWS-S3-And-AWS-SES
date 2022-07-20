@@ -1,76 +1,33 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
+import React from "react";
+import Home from "./Home";
+import Navbar from "./Navbar";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import PageLayout from "./PageLayout";
 import Post from "./Post";
+import CreateCategory from "./CreateCategory";
 
-import { ShowCharts } from "./charts/ShowCharts";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 const App = () => {
-  const [allposts, setPosts] = useState([]);
-  const loadallPosts = () => {
-    fetch(`/api/getposts`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if(result){
-          setPosts(result);
-          console.log(result);
-         
-        }
-        
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  const deletePost = (id) => {
-    fetch("/api/delete/" + id, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result) {
-          console.log("post deleted success");
-          toast.info("Post Deleted Successfully!", {
-            position: toast.POSITION.TOP_RIGHT,
-          });
-          loadallPosts();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  useEffect(() => {
-    loadallPosts();
-  }, [allposts]);
-
   return (
-    <div>
-      <Post totalpost={allposts}/>
-      <ShowCharts allposts={allposts}/>
+    <BrowserRouter>
+      <Switch>
+    
+        <Route path="/" exact>
+          <PageLayout FrontProtected={Home} />
+        </Route>
 
-      <div className="container">
-        {allposts.map((item, index) => (
-          <div className="card post-items" key={item._id}>
-            <div>
-              <p className="postinfo">{item.title}</p>
-              <p className="postinfo">{item.des}</p>
-              <p className="postinfo">{item.date}</p>
-            </div>
-            <button
-              className="btn-delete"
-              onClick={() => deletePost(item._id)}
-            >
-              Delete
-            </button>
-          </div>
-        ))}
-      </div>
-      <ToastContainer autoClose={8000} />
+        <Route path="/post" exact>
+          <PageLayout FrontProtected={Post} />
+        </Route>
+        <Route path="/create-category" exact>
+          <PageLayout FrontProtected={CreateCategory} />
+        </Route>
+      </Switch>
+    </BrowserRouter>
 
-    </div>
+    // <div>
+    //   <Navbar/>
+    //   <Home/>
+    // </div>
   );
 };
 

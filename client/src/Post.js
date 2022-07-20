@@ -79,7 +79,6 @@ const Post = ({ totalpost }) => {
            
                 <h5 className="text-center">Notebook app</h5>
                 <h5 className="text-center">write your note here</h5>
-                <p>Total Note is: {totalpost.length}</p>
                 {showError()}
                 {showSuccess()}
               </div>
@@ -89,17 +88,17 @@ const Post = ({ totalpost }) => {
                   value={title}
                   onChange={handleChange}
                   className="form-control"
-                  placeholder="Title..."
+                  placeholder="Income..."
                 />
               </div>
               <div className="form-group">
                 <textarea
-                  type="password"
+                  
                   value={des}
                   onChange={handleChangedes}
                   className="form-control"
                   rows="5"
-                  placeholder="Description..."
+                  placeholder="Expense..."
                 />
               </div>
 

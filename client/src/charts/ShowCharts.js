@@ -12,6 +12,8 @@ import {
 } from "recharts";
 
 export const ShowCharts = ({ title, des, date, allposts }) => {
+
+
   function formatXAxis(tickItem) {
     // If using moment.js
     return moment(tickItem).format("MMM Do YY");
@@ -49,11 +51,10 @@ export const ShowCharts = ({ title, des, date, allposts }) => {
             stroke="red"
             activeDot={{ r: 8 }}
           />
-        
 
           <Line
             type="monotone"
-            dataKey="address.geo.lng"
+            dataKey="allposts.length"
             stroke="blue"
             activeDot={{ r: 8 }}
           />
