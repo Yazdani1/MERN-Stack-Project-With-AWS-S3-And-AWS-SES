@@ -80,6 +80,7 @@ const Home = () => {
                   style={{ textDecoration: "none" }}
                 >
                   <h6>{item.categoryBy?.categoryName}</h6>
+
                 </Link>
                 {/* <p className="postinfo">{item.date}</p> */}
               </div>

@@ -6,8 +6,10 @@ import "react-toastify/dist/ReactToastify.css";
 const Post = ({ totalpost }) => {
   const [title, setTitle] = useState("");
   const [des, setDes] = useState("");
+  const [choseCategory, setChooseCategory] = useState("");
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [allcategory, setAllcategory] = useState([]);
 
   const handleChange = (e) => {
     setError("");
@@ -31,7 +33,7 @@ const Post = ({ totalpost }) => {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify({ title, des }),
+      body: JSON.stringify({ title, des,categoryBy:choseCategory }),
     })
       .then((res) => res.json())
       .then((result) => {
@@ -42,6 +44,7 @@ const Post = ({ totalpost }) => {
           setError("");
           setSuccess(true);
           setTitle("");
+          setChooseCategory("");
           setDes("");
 
           toast.success("Post created Successfully!", {
@@ -69,6 +72,26 @@ const Post = ({ totalpost }) => {
     </div>
   );
 
+  const loadallCategory = () => {
+    fetch(`/api/getall-category`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result) {
+          setAllcategory(result);
+          console.log(result);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    loadallCategory();
+  }, []);
+
   return (
     <div className="container">
       <div className="row">
@@ -76,7 +99,6 @@ const Post = ({ totalpost }) => {
           <div className="form-design card">
             <form>
               <div className="text-center">
-           
                 <h5 className="text-center">Notebook app</h5>
                 <h5 className="text-center">write your note here</h5>
                 {showError()}
@@ -91,9 +113,24 @@ const Post = ({ totalpost }) => {
                   placeholder="Income..."
                 />
               </div>
+
+              <div className="event-form">
+                <label for="exampleInputEmail1" className="form-label">
+                  Select Category
+                </label>
+                <select
+                  className="custom-select"
+                  value={choseCategory}
+                  onChange={(e) => setChooseCategory(e.target.value)}
+                >
+                  {allcategory.map((c, index) => (
+                    <option key={index} value={c._id}>{c.categoryName}</option>
+                  ))}
+                </select>
+              </div>
+
               <div className="form-group">
                 <textarea
-                  
                   value={des}
                   onChange={handleChangedes}
                   className="form-control"

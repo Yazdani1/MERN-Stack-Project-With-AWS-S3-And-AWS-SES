@@ -29,7 +29,7 @@ const PostbyCategory = () => {
     <div className="container">
       {categoryPost?.postsData?.length <= 1 && "No posts"}
       <h5 style={{ marginTop: "60px", backgroundColor: "red",color:"white",padding:"20px" }}>
-        {categoryPost?.categoryInfo?.categoryName}
+        {categoryPost?.categoryInfo?.categoryName} Total posts: {categoryPost?.postsData?.length}
       </h5>
       <div className="row">
         <div className="col-xl-12 col-lg-12">

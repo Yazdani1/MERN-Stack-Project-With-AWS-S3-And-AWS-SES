@@ -11,6 +11,8 @@ router.get("/getposts", postController.getPosts);
 
 router.get("/getpostsbycategory/:id", postController.getpostBycategory);
 
+//to count number of poss in each category
+
 
 router.delete("/delete/:id",postController.deletePost);
 
