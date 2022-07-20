@@ -10,6 +10,8 @@ const App = () => {
   return (
     <BrowserRouter>
       <Switch>
+
+    
     
         <Route path="/" exact>
           <PageLayout FrontProtected={Home} />
