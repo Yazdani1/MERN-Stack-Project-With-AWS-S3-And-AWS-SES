@@ -20,6 +20,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //"proxy": "http://localhost:5000"
 
 app.use("/api",require("./router/post"));
+app.use("/api",require("./router/category"));
+
 
 // Serve static assets if in production
 

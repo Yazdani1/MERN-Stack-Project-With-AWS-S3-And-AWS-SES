@@ -1,7 +1,8 @@
 const Post = require("../model/Post");
+const Category = require("../model/Category");
 
 exports.createPost = (req, res) => {
-  const { title, des } = req.body;
+  const { title, des, categoryBy } = req.body;
 
   if (!title) {
     return res.status(422).json({ error: "add note title" });
@@ -10,10 +11,14 @@ exports.createPost = (req, res) => {
   if (!des) {
     return res.status(422).json({ error: "add note description" });
   }
+  if (!categoryBy) {
+    return res.status(422).json({ error: "add note category" });
+  }
 
   const postdata = Post({
     title,
     des,
+    categoryBy,
   });
 
   Post.create(postdata)
@@ -28,7 +33,7 @@ exports.createPost = (req, res) => {
 exports.getPosts = (req, res) => {
   Post.find({})
     .sort({ date: "DESC" })
-  
+    .populate("categoryBy", "_id categoryName")
     .then((result) => {
       res.json(result);
     })
@@ -47,4 +52,25 @@ exports.deletePost = (req, res) => {
     .catch((err) => {
       console.log(err);
     });
+};
+
+//get post by category
+
+exports.getpostBycategory = (req, res) => {
+
+  Category.findOne({ _id: req.params.id })
+    .then((categoryInfo) => {
+      Post.find({ categoryBy: req.params.id })
+        .populate("categoryBy", "_id categoryName ")
+        .exec((err, postsData) => {
+          if (err) {
+            return res.status(422).json({ error: err });
+          }
+          res.json({ categoryInfo, postsData });
+        });
+    })
+    .catch((err) => {
+      return res.status(404).json({ error: err });
+    });
+
 };

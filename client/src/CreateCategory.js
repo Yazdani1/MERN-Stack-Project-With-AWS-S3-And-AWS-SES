@@ -7,22 +7,60 @@ const CreateCategory = () => {
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const [catagory, setCatagory] = useState("");
+  const [categoryName, setCatagoryName] = useState("");
+  const [allcategory, setAllcategory] = useState([]);
 
   const handleChange = (e) => {
     setError("");
-    setCatagory(e.target.value);
+    setCatagoryName(e.target.value);
   };
 
-
-  const submitData = (e)=>{
+  const submitData = (e) => {
     e.preventDefault();
 
     setError("");
     setSuccess(false);
 
-  }
+    fetch("/api/categoryceate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ categoryName }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.error) {
+          setError(result.error);
+          console.log(result.error);
+        } else {
+          setError("");
+          setSuccess(true);
+          setCatagoryName("");
 
+          toast.success("Category created Successfully!", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
+      });
+  };
+
+  const loadallCategory = () => {
+    fetch(`/api/getall-category`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result) {
+          setAllcategory(result);
+          console.log(result);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const showError = () => (
     <div
@@ -42,6 +80,10 @@ const CreateCategory = () => {
     </div>
   );
 
+  useEffect(() => {
+    loadallCategory();
+  }, []);
+
   return (
     <div className="container">
       <div className="row">
@@ -57,7 +99,7 @@ const CreateCategory = () => {
               <div className="form-group">
                 <input
                   type="text"
-                  value={catagory}
+                  value={categoryName}
                   onChange={handleChange}
                   className="form-control"
                   placeholder="Income..."
@@ -78,6 +120,13 @@ const CreateCategory = () => {
               </div>
             </form>
           </div>
+
+          {allcategory.map((c, index) => (
+            <div style={{ border:"1px solid black",margin:"10px",padding:"10px",borderRadius:"10px" }}>
+              <h5>{c.categoryName}</h5>
+            </div>
+          ))}
+        
         </div>
       </div>
       <ToastContainer autoClose={8000} />

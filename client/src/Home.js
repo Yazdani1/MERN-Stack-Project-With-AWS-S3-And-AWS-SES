@@ -7,18 +7,18 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Home = () => {
   const [allposts, setPosts] = useState([]);
+  const [allcategory, setAllcategory] = useState([]);
+
   const loadallPosts = () => {
     fetch(`/api/getposts`, {
       method: "GET",
     })
       .then((res) => res.json())
       .then((result) => {
-        if(result){
+        if (result) {
           setPosts(result);
           console.log(result);
-         
         }
-        
       })
       .catch((err) => {
         console.log(err);
@@ -42,34 +42,65 @@ const Home = () => {
         console.log(err);
       });
   };
+
+  const loadallCategory = () => {
+    fetch(`/api/getall-category`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result) {
+          setAllcategory(result);
+          console.log(result);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     loadallPosts();
-  }, [allposts]);
+    loadallCategory();
+  }, []);
 
   return (
-    <div>
-      {/* <Post totalpost={allposts}/> */}
-      <ShowCharts allposts={allposts}/>
-
-      <div className="container">
-        {allposts.map((item, index) => (
-          <div className="card post-items" key={item._id}>
-            <div>
-              <p className="postinfo">Income: {item.title}</p>
-              <p className="postinfo">Expense: {item.des}</p>
-              <p className="postinfo">{item.date}</p>
+    <div className="container">
+      <div className="row">
+        <div className="col-xl-6 col-lg-6">
+          <ShowCharts allposts={allposts} />
+          {allposts.map((item, index) => (
+            <div className="card post-items" key={item._id}>
+              <div>
+                <p className="postinfo">Income: {item.title}</p>
+                <p className="postinfo">Expense: {item.des}</p>
+                <h6>{item.categoryBy?.categoryName}</h6>
+                {/* <p className="postinfo">{item.date}</p> */}
+              </div>
+              <button
+                className="btn-delete"
+                onClick={() => deletePost(item._id)}
+              >
+                Delete
+              </button>
             </div>
-            <button
-              className="btn-delete"
-              onClick={() => deletePost(item._id)}
+          ))}
+        </div>
+        <div className="col-xl-4 col-lg-4">
+          {allcategory.map((c, index) => (
+            <div
+              style={{
+                border: "1px solid black",
+                margin: "10px",
+                padding: "10px",
+                borderRadius: "10px",
+              }}
             >
-              Delete
-            </button>
-          </div>
-        ))}
+              <h5>{c.categoryName}</h5>
+            </div>
+          ))}
+        </div>
       </div>
-      <ToastContainer autoClose={8000} />
-
     </div>
   );
 };

@@ -19,10 +19,9 @@ export const ShowCharts = ({ title, des, date, allposts }) => {
     return moment(tickItem).format("MMM Do YY");
   }
   return (
-    <React.Fragment>
       <div className="container" style={{ marginTop: "30px" }}>
         <LineChart
-          width={900}
+          width={500}
           height={500}
           data={allposts}
           margin={{
@@ -67,6 +66,6 @@ export const ShowCharts = ({ title, des, date, allposts }) => {
           <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
         </LineChart>
       </div>
-    </React.Fragment>
+
   );
 };

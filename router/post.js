@@ -7,6 +7,13 @@ router.post("/post", postController.createPost);
 
 router.get("/getposts", postController.getPosts);
 
-router.delete("/delete/:id",postController.deletePost); 
+//post get by category
+
+router.get("/getpostsbycategory/:id", postController.getpostBycategory);
+
+
+router.delete("/delete/:id",postController.deletePost);
+
+
 
 module.exports = router;

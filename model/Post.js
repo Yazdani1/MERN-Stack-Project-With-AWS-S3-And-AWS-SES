@@ -12,6 +12,13 @@ var postSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+
+  categoryBy: {
+    type: ObjectId,
+    ref: "Category",
+  },
+
+
 });
 
 module.exports = mongoose.model("Post", postSchema);
