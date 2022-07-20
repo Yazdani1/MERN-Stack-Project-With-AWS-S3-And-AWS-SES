@@ -62,7 +62,7 @@ const Home = () => {
   useEffect(() => {
     loadallPosts();
     loadallCategory();
-  }, []);
+  }, [allposts]);
 
   return (
     <div className="container">
