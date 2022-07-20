@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Post from "./Post";
-
+import { Link, useHistory, useParams } from "react-router-dom";
 import { ShowCharts } from "./charts/ShowCharts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -74,7 +74,13 @@ const Home = () => {
               <div>
                 <p className="postinfo">Income: {item.title}</p>
                 <p className="postinfo">Expense: {item.des}</p>
-                <h6>{item.categoryBy?.categoryName}</h6>
+
+                <Link
+                  to={"/category/" + item.categoryBy?._id}
+                  style={{ textDecoration: "none" }}
+                >
+                  <h6>{item.categoryBy?.categoryName}</h6>
+                </Link>
                 {/* <p className="postinfo">{item.date}</p> */}
               </div>
               <button
@@ -96,7 +102,12 @@ const Home = () => {
                 borderRadius: "10px",
               }}
             >
-              <h5>{c.categoryName}</h5>
+              <Link
+                to={"/category/" + c._id}
+                style={{ textDecoration: "none" }}
+              >
+                <h5>{c.categoryName}</h5>
+              </Link>
             </div>
           ))}
         </div>
