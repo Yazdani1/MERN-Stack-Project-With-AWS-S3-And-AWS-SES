@@ -81,6 +81,11 @@ exports.getpostBycategory = async (req, res) => {
 
 };
 
+
+
+
+
+
 // exports.getpostBycategory = (req, res) => {
 
 //   Category.findOne({ _id: req.params.id })
