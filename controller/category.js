@@ -24,12 +24,22 @@ exports.createCategory = (req, res) => {
 
 exports.getCategory = async (req, res) => {
   try {
-
-    
     const catecoryList = await Category.find({}).sort({ date: "DESC" });
     res.json(catecoryList);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
+//to delete category list
 
+exports.deleteCategory = async (req, res) => {
+  try {
+    const delete_category_query = { _id: req.params.id };
+    const category_delete = await Category.findByIdAndDelete(
+      delete_category_query
+    );
+    res.json({ result: "Category deleted successfully" });
   } catch (err) {
     console.log(err);
   }

@@ -32,12 +32,11 @@ exports.createPost = (req, res) => {
 
 exports.getPosts = async (req, res) => {
   try {
-    
+
     const allpostlist = await Post.find({})
       .sort({ date: "DESC" })
       .populate("categoryBy", "_id categoryName date");
 
-      
     res.json(allpostlist);
   } catch (err) {
     console.log(err);
