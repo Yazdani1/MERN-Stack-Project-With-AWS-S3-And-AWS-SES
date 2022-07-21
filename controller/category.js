@@ -39,7 +39,7 @@ exports.deleteCategory = async (req, res) => {
     const category_delete = await Category.findByIdAndDelete(
       delete_category_query
     );
-    res.json({ result: "Category deleted successfully" });
+    res.json({success:true});
   } catch (err) {
     console.log(err);
   }
