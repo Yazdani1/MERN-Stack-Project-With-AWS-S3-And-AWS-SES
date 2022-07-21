@@ -30,16 +30,28 @@ exports.createPost = (req, res) => {
     });
 };
 
-exports.getPosts = (req, res) => {
-  Post.find({})
-    .sort({ date: "DESC" })
-    .populate("categoryBy", "_id categoryName date")
-    .then((result) => {
-      res.json(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+exports.getPosts = async (req, res) => {
+  try {
+    
+    const allpostlist = await Post.find({})
+      .sort({ date: "DESC" })
+      .populate("categoryBy", "_id categoryName date");
+
+      
+    res.json(allpostlist);
+  } catch (err) {
+    console.log(err);
+  }
+
+  // Post.find({})
+  //   .sort({ date: "DESC" })
+  //   .populate("categoryBy", "_id categoryName date")
+  //   .then((result) => {
+  //     res.json(result);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
 };
 
 exports.deletePost = async (req, res) => {
@@ -66,7 +78,6 @@ exports.deletePost = async (req, res) => {
 //get post by category
 
 exports.getpostBycategory = async (req, res) => {
-
   try {
     const categoryInfo = await Category.findOne({ _id: req.params.id });
     const postsData = await Post.find({ categoryBy: req.params.id }).populate(
@@ -78,13 +89,7 @@ exports.getpostBycategory = async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-
 };
-
-
-
-
-
 
 // exports.getpostBycategory = (req, res) => {
 
