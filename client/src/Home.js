@@ -93,6 +93,7 @@ const Home = () => {
               </div>
               <button
                 className="btn-delete"
+                // onMouseEnter={() => deletePost(item._id)}
                 onClick={() => deletePost(item._id)}
               >
                 Delete

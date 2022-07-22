@@ -1,4 +1,5 @@
 const Category = require("../model/Category");
+const Post = require("../model/Post");
 
 exports.createCategory = (req, res) => {
   const { categoryName } = req.body;
@@ -25,6 +26,8 @@ exports.createCategory = (req, res) => {
 exports.getCategory = async (req, res) => {
   try {
     const catecoryList = await Category.find({}).sort({ date: "DESC" });
+
+
     res.json(catecoryList);
   } catch (err) {
     console.log(err);
