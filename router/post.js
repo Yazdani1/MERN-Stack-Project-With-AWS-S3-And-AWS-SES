@@ -13,7 +13,7 @@ router.get("/getpostsbycategory/:id", postController.getpostBycategory);
 
 //related post by category
 
-router.get("/relatedpost-bycategory/:id", postController.getrelatedPostbyCategory);
+router.get("/details-post/:id", postController.getrelatedPostbyCategory);
 
 
 router.delete("/delete/:id", postController.deletePost);

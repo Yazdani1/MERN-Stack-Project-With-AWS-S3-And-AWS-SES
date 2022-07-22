@@ -99,20 +99,23 @@ exports.getrelatedPostbyCategory =async (req,res)=>{
 
   try{
 
-    const onepost = await Post.findOne({ _id: req.params.id },).populate(
+
+    const detailsquery = { _id: req.params.id }
+
+    const detailspost = await Post.findOne(detailsquery).populate(
       "categoryBy",
       "_id categoryName "
     );
 
 
-    const allpostinsamecat = await Post.find({ categoryBy: onepost.categoryBy.id },).populate(
+    const relatedpost = await Post.find({_id: { $ne: detailsquery }, categoryBy: detailspost.categoryBy.id },).populate(
       "categoryBy",
       "_id categoryName "
     );
 
 
 
-    res.json({onepost,allpostinsamecat})
+    res.json({detailspost,relatedpost})
 
   }catch(err){
     console.log(err)
