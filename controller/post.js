@@ -90,6 +90,26 @@ exports.getpostBycategory = async (req, res) => {
   }
 };
 
+
+//related post by category
+
+
+exports.getrelatedPostbyCategory =async (req,res)=>{
+
+
+  try{
+
+    
+
+  }catch(err){
+    console.log(err)
+  }
+
+
+
+}
+
+
 // exports.getpostBycategory = (req, res) => {
 
 //   Category.findOne({ _id: req.params.id })
