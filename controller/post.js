@@ -99,7 +99,20 @@ exports.getrelatedPostbyCategory =async (req,res)=>{
 
   try{
 
-    
+    const onepost = await Post.findOne({ _id: req.params.id },).populate(
+      "categoryBy",
+      "_id categoryName "
+    );
+
+
+    const allpostinsamecat = await Post.find({ categoryBy: onepost.categoryBy.id },).populate(
+      "categoryBy",
+      "_id categoryName "
+    );
+
+
+
+    res.json({onepost,allpostinsamecat})
 
   }catch(err){
     console.log(err)
