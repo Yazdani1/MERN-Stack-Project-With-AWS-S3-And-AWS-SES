@@ -6,6 +6,7 @@ import PageLayout from "./PageLayout";
 import Post from "./Post";
 import CreateCategory from "./CreateCategory";
 import PostbyCategory from "./PostbyCategory";
+import Detailspost from "./Detailspost";
 
 const App = () => {
   return (
@@ -24,6 +25,9 @@ const App = () => {
 
         <Route path="/category/:id" exact>
           <PageLayout FrontProtected={PostbyCategory} />
+        </Route>
+        <Route path="/details-post/:id" exact>
+          <PageLayout FrontProtected={Detailspost} />
         </Route>
 
 

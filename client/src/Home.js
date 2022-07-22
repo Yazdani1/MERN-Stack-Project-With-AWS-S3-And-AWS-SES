@@ -72,7 +72,13 @@ const Home = () => {
           {allposts.map((item, index) => (
             <div className="card post-items" key={item._id}>
               <div>
-                <p className="postinfo">Income: {item.title}</p>
+                <Link
+                  to={"/details-post/" + item._id}
+                  style={{ textDecoration: "none" }}
+                >
+                  <p className="postinfo">Income: {item.title}</p>
+                </Link>
+
                 <p className="postinfo">Expense: {item.des}</p>
                 <p>{item.date}</p>
 
@@ -82,8 +88,6 @@ const Home = () => {
                 >
                   <h6>{item.categoryBy?.categoryName}</h6>
                   <p>{item.categoryBy?.date}</p>
-
-
                 </Link>
                 {/* <p className="postinfo">{item.date}</p> */}
               </div>

@@ -32,7 +32,6 @@ exports.createPost = (req, res) => {
 
 exports.getPosts = async (req, res) => {
   try {
-
     const allpostlist = await Post.find({})
       .sort({ date: "DESC" })
       .populate("categoryBy", "_id categoryName date");
@@ -90,41 +89,27 @@ exports.getpostBycategory = async (req, res) => {
   }
 };
 
-
 //related post by category
 
-
-exports.getrelatedPostbyCategory =async (req,res)=>{
-
-
-  try{
-
-
-    const detailsquery = { _id: req.params.id }
+exports.getrelatedPostbyCategory = async (req, res) => {
+  try {
+    const detailsquery = { _id: req.params.id };
 
     const detailspost = await Post.findOne(detailsquery).populate(
       "categoryBy",
       "_id categoryName "
     );
 
+    const relatedpost = await Post.find({
+      _id: { $ne: detailsquery },
+      categoryBy: detailspost.categoryBy.id,
+    }).populate("categoryBy", "_id categoryName ");
 
-    const relatedpost = await Post.find({_id: { $ne: detailsquery }, categoryBy: detailspost.categoryBy.id },).populate(
-      "categoryBy",
-      "_id categoryName "
-    );
-
-
-
-    res.json({detailspost,relatedpost})
-
-  }catch(err){
-    console.log(err)
+    res.json({ detailspost, relatedpost });
+  } catch(err) {
+    res.status(400).json({ err: "Something went wrong" });
   }
-
-
-
-}
-
+};
 
 // exports.getpostBycategory = (req, res) => {
 
