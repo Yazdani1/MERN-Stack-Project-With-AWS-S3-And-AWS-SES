@@ -116,7 +116,7 @@ const Home = () => {
                 style={{ textDecoration: "none" }}
               >
                 <h5>
-                  {c.categoryName} -{" "}
+                  {c.categoryName} 
                   
                 </h5>
               </Link>

@@ -123,7 +123,7 @@ const Post = ({ totalpost }) => {
                   value={choseCategory}
                   onChange={(e) => setChooseCategory(e.target.value)}
                 >
-                  {allcategory.map((c, index) => (
+                  {allcategory.catecoryList?.map((c, index) => (
                     <option key={index} value={c._id}>{c.categoryName}</option>
                   ))}
                 </select>

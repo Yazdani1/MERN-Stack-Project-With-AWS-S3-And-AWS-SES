@@ -89,7 +89,7 @@ exports.getpostBycategory = async (req, res) => {
   }
 };
 
-//related post by category
+// related post by category
 
 exports.getrelatedPostbyCategory = async (req, res) => {
   try {
