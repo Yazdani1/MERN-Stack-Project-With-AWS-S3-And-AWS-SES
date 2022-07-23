@@ -48,6 +48,7 @@ const Detailspost = () => {
       </div>
 
       <div className="related-posts">
+        <h4>Related Post : {singlepost.relatedpost?.length}</h4>
         <div className="row">
           {singlepost.relatedpost &&
             singlepost.relatedpost.map((item, index) => (
