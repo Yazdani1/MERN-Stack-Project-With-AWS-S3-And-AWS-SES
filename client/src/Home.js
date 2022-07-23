@@ -117,11 +117,7 @@ const Home = () => {
               >
                 <h5>
                   {c.categoryName} -{" "}
-                  {allcategory.postcount?.map((p, index) => (
-                    <>
-                    <p>{p.length}</p>
-                    </>
-                  ))}
+                  
                 </h5>
               </Link>
             </div>
