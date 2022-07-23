@@ -102,7 +102,7 @@ const Home = () => {
           ))}
         </div>
         <div className="col-xl-4 col-lg-4">
-          {allcategory.map((c, index) => (
+          {allcategory.catecoryList?.map((c, index) => (
             <div
               style={{
                 border: "1px solid black",
@@ -115,7 +115,14 @@ const Home = () => {
                 to={"/category/" + c._id}
                 style={{ textDecoration: "none" }}
               >
-                <h5>{c.categoryName}</h5>
+                <h5>
+                  {c.categoryName} -{" "}
+                  {allcategory.postcount?.map((p, index) => (
+                    <>
+                    <p>{p.length}</p>
+                    </>
+                  ))}
+                </h5>
               </Link>
             </div>
           ))}

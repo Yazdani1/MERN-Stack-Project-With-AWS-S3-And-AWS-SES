@@ -121,7 +121,7 @@ const CreateCategory = () => {
             </form>
           </div>
 
-          {allcategory.map((c, index) => (
+          {allcategory.catecoryList?.map((c, index) => (
             <div style={{ border:"1px solid black",margin:"10px",padding:"10px",borderRadius:"10px" }}>
               <h5>{c.categoryName}</h5>
             </div>

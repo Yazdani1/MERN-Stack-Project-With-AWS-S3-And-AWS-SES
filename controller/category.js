@@ -28,7 +28,33 @@ exports.getCategory = async (req, res) => {
     const catecoryList = await Category.find({}).sort({ date: "DESC" });
 
 
-    res.json(catecoryList);
+    let eachcatid = undefined;
+    let items = catecoryList._id;
+
+
+    const catid = catecoryList.map(cat=>cat._id);
+
+    // for(eachcatid of catecoryList){
+
+    //   postcount = await Post.find({categoryBy:eachcatid._id})
+
+    // }
+
+  
+
+    // catecoryList.forEach(function(post){
+
+    //   eachcatid = post.categoryName
+
+    
+    // })
+
+
+
+    const postcount = await Post.find({categoryBy:catid}).populate("categoryBy", "_id categoryName ");
+
+
+    res.json({catecoryList, eachcatid,postcount,catid});
   } catch (err) {
     console.log(err);
   }
