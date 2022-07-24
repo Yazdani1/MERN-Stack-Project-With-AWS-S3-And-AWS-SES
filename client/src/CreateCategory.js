@@ -80,14 +80,16 @@ const CreateCategory = () => {
     </div>
   );
 
-
-  const deleteCategory = (id)=>{
-
-    
-
-
-  }
-
+  const deleteCategory = (id) => {
+    fetch("/api/category-delete/" + id, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then(result > {})
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     loadallCategory();
@@ -131,12 +133,23 @@ const CreateCategory = () => {
           </div>
 
           {allcategory.catecoryList?.map((c, index) => (
-            <div style={{ border:"1px solid black",margin:"10px",padding:"10px",borderRadius:"10px" }}>
+            <div
+              style={{
+                border: "1px solid black",
+                margin: "10px",
+                padding: "10px",
+                borderRadius: "10px",
+              }}
+            >
               <h5>{c.categoryName}</h5>
-              <button className="btn btn-danger" onClick={deleteCategory(c._id)}>Delete</button>
+              <button
+                className="btn btn-danger"
+                onClick={deleteCategory(c._id)}
+              >
+                Delete
+              </button>
             </div>
           ))}
-        
         </div>
       </div>
       <ToastContainer autoClose={8000} />
