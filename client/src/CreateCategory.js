@@ -85,7 +85,13 @@ const CreateCategory = () => {
       method: "DELETE",
     })
       .then((res) => res.json())
-      .then(result > {})
+      .then((result) => {
+        if (result) {
+          toast.info("Post Deleted Successfully!", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
+      })
       .catch((err) => {
         console.log(err);
       });
