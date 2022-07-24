@@ -124,6 +124,7 @@ const CreateCategory = () => {
           {allcategory.catecoryList?.map((c, index) => (
             <div style={{ border:"1px solid black",margin:"10px",padding:"10px",borderRadius:"10px" }}>
               <h5>{c.categoryName}</h5>
+              <button className="btn btn-danger">Delete</button>
             </div>
           ))}
         
