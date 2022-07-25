@@ -80,19 +80,19 @@ const Home = () => {
                 </Link>
 
                 <p className="postinfo">Expense: {item.des}</p>
-                <p>{item.date}</p>
+                {/* <p>{item.date}</p> */}
 
                 <Link
                   to={"/category/" + item.categoryBy?._id}
                   style={{ textDecoration: "none" }}
                 >
                   <h6>{item.categoryBy?.categoryName}</h6>
-                  <p>{item.categoryBy?.date}</p>
+                  {/* <p>{item.categoryBy?.date}</p> */}
                 </Link>
                 {/* <p className="postinfo">{item.date}</p> */}
               </div>
               <button
-                className="btn-delete"
+                className="btn btn-delete"
                 // onMouseEnter={() => deletePost(item._id)}
                 onClick={() => deletePost(item._id)}
               >
