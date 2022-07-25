@@ -90,6 +90,8 @@ const CreateCategory = () => {
           toast.info("Post Deleted Successfully!", {
             position: toast.POSITION.TOP_RIGHT,
           });
+          loadallCategory();
+
         }
       })
       .catch((err) => {
