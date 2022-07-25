@@ -63,7 +63,7 @@ const Detailspost = () => {
                 >
                   <h1>{item.title}</h1>
                   <h4>{item.des}</h4>
-                  <h5>{item.categoryBy?.categoryName}</h5>
+                  <h5>{item.categoryBy && item.categoryBy?.categoryName}</h5>
                 </div>
               </div>
             ))}

@@ -100,6 +100,7 @@ exports.getrelatedPostbyCategory = async (req, res) => {
       "_id categoryName "
     );
 
+
     const relatedpost = await Post.find({
       _id: { $ne: detailsquery },
       categoryBy: detailspost.categoryBy.id,
