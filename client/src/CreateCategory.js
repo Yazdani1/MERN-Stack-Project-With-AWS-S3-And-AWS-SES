@@ -150,7 +150,7 @@ const CreateCategory = () => {
               <h5>{c.categoryName}</h5>
               <button
                 className="btn btn-danger"
-                onClick={deleteCategory(c._id)}
+                onClick={()=>deleteCategory(c._id)}
               >
                 Delete
               </button>
