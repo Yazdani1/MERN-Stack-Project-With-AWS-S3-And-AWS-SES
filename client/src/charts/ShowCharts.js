@@ -11,12 +11,15 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-export const ShowCharts = ({ title, des, date, allposts }) => {
+export const ShowCharts = ({ allposts }) => {
+
 
 
   function formatXAxis(tickItem) {
     // If using moment.js
     return moment(tickItem).format("MMM Do YY");
+
+
   }
   return (
       <div className="container" style={{ marginTop: "30px" }}>
