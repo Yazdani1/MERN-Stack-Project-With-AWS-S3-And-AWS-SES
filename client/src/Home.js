@@ -105,7 +105,7 @@ const Home = () => {
           {allcategory.catecoryList?.map((c, index) => (
             <div
               style={{
-                border: "1px solid black",
+                border: "1px solid yellow",
                 margin: "10px",
                 padding: "10px",
                 borderRadius: "10px",
@@ -116,7 +116,7 @@ const Home = () => {
                 style={{ textDecoration: "none" }}
               >
                 <h5>
-                  {c.categoryName} 
+                  {c.categoryName} -
                   
                 </h5>
               </Link>
