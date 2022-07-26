@@ -147,6 +147,7 @@ const CreateCategory = () => {
                 margin: "10px",
                 padding: "10px",
                 borderRadius: "10px",
+                display:"flex"
               }}
             >
               <h5>{c.categoryName}</h5>
