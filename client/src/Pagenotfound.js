@@ -2,7 +2,7 @@ import React from 'react'
 
 const Pagenotfound = () => {
   return (
-        <div>
+        <div style={{backgroundColor:"red",color:"white"}}>
             <h1>Something went wrong. Page not found.... 404 Error</h1>
             <p>Please visit the right URL</p>
         </div>
