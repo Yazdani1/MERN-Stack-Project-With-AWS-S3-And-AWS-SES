@@ -7,6 +7,7 @@ import Post from "./Post";
 import CreateCategory from "./CreateCategory";
 import PostbyCategory from "./PostbyCategory";
 import Detailspost from "./Detailspost";
+import Pagenotfound from "./Pagenotfound";
 
 const App = () => {
   return (
@@ -29,9 +30,7 @@ const App = () => {
         <Route path="/details-post/:id" exact>
           <PageLayout FrontProtected={Detailspost} />
         </Route>
-
-
-
+        <Route path="*" exact component={Pagenotfound} />
       </Switch>
     </BrowserRouter>
 
