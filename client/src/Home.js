@@ -64,20 +64,31 @@ const Home = () => {
     loadallCategory();
   }, []);
 
+  const [winner, setWinner] = useState("");
 
-  const [winner,setWinner] = useState("");
+  const randomWinner = () => {
+    fetch("/api/getrandom-winner", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log("From backend" + result);
 
+        if (result.error) {
+        } else {
+          setWinner(result);
+          console.log("From backend" + result);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-  const randomWinner = ()=>{
+    // let lottarywinner = allposts[Math.floor(Math.random() * allposts.length)];
+    // setWinner(lottarywinner);
 
-   let lottarywinner = allposts[Math.floor(Math.random()*allposts.length)];
-    setWinner(lottarywinner)
-
-    console.log("Resulkt"+lottarywinner.des)
-
-  }
-
-
+    // console.log("Resulkt" + lottarywinner.des);
+  };
 
   return (
     <div className="container">
@@ -85,13 +96,22 @@ const Home = () => {
         <div className="col-xl-6 col-lg-6">
           <ShowCharts allposts={allposts} />
 
-          <div style={{backgroundColor: "orangered",height:"250px",color:"white",textAlign:"center",padding:"20px"}}>
-
+          <div
+            style={{
+              backgroundColor: "orangered",
+              height: "250px",
+              color: "white",
+              textAlign: "center",
+              padding: "20px",
+            }}
+          >
             <h2>Random Winner Selected</h2>
-            <button className="btn btn-info" onClick={()=>randomWinner()}>Winner Genereate</button>
 
-          <h1> dsds {winner.categoryBy?.categoryName}</h1>
+            <button className="btn btn-info" onClick={() => randomWinner()}>
+              Winner Genereate
+            </button>
 
+            <h1> {winner.des}</h1>
           </div>
 
           {allposts.map((item, index) => (
@@ -140,10 +160,7 @@ const Home = () => {
                 to={"/category/" + c._id}
                 style={{ textDecoration: "none" }}
               >
-                <h5>
-                  {c.categoryName} -
-                  
-                </h5>
+                <h5>{c.categoryName} -</h5>
               </Link>
             </div>
           ))}

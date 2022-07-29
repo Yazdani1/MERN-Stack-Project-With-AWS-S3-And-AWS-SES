@@ -100,14 +100,13 @@ exports.getrelatedPostbyCategory = async (req, res) => {
       "_id categoryName "
     );
 
-
     const relatedpost = await Post.find({
       _id: { $ne: detailsquery },
       categoryBy: detailspost.categoryBy.id,
     }).populate("categoryBy", "_id categoryName ");
 
     res.json({ detailspost, relatedpost });
-  } catch(err) {
+  } catch (err) {
     res.status(400).json({ err: "Something went wrong" });
   }
 };
@@ -130,3 +129,18 @@ exports.getrelatedPostbyCategory = async (req, res) => {
 //     });
 
 // };
+
+exports.getrandomWinner = async (req, res) => {
+  try {
+
+    const getallpost = await Post.find({}).populate("categoryBy", "_id categoryName ");
+    var lottarywinner = getallpost[Math.floor(Math.random()*getallpost.length)];
+
+
+    res.json(lottarywinner);
+
+
+  } catch (error) {
+    res.status(400).json({ error: "Something went wrong" });
+  }
+};

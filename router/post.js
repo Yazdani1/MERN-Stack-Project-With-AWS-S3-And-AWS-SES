@@ -18,4 +18,8 @@ router.get("/details-post/:id", postController.getrelatedPostbyCategory);
 
 router.delete("/delete/:id", postController.deletePost);
 
+// get random post selection
+
+router.get("/getrandom-winner",postController.getrandomWinner)
+
 module.exports = router;
