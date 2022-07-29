@@ -193,7 +193,7 @@ const CreateCategory = () => {
       <div>
         <h1>Lottery Winner</h1>
 
-        {JSON.stringify(lottarywinner)}
+       <h1>Name: {lottarywinner.name}</h1>
        
       </div>
 
