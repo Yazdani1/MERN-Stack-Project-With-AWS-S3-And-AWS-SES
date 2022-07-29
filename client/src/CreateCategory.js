@@ -91,7 +91,6 @@ const CreateCategory = () => {
             position: toast.POSITION.TOP_RIGHT,
           });
           loadallCategory();
-
         }
       })
       .catch((err) => {
@@ -102,6 +101,35 @@ const CreateCategory = () => {
   useEffect(() => {
     loadallCategory();
   }, []);
+
+  const lotarydata = [
+    {
+      id: 1,
+      name: "Jonson",
+    },
+    {
+      id: 2,
+      name: "David",
+    },
+    {
+      id: 3,
+      name: "Kery",
+    },
+    {
+      id: 4,
+      name: "Alexandar",
+    },
+    {
+      id: 5,
+      name: "Muller",
+    },
+    {
+      id: 6,
+      name: "Clark",
+    },
+  ];
+
+  var lottarywinner = lotarydata[Math.floor(Math.random()*lotarydata.length)];
 
   return (
     <div className="container">
@@ -147,13 +175,13 @@ const CreateCategory = () => {
                 margin: "10px",
                 padding: "10px",
                 borderRadius: "10px",
-                display:"flex"
+                display: "flex",
               }}
             >
               <h5>{c.categoryName}</h5>
               <button
                 className="btn btn-danger"
-                onClick={()=>deleteCategory(c._id)}
+                onClick={() => deleteCategory(c._id)}
               >
                 Delete
               </button>
@@ -161,6 +189,14 @@ const CreateCategory = () => {
           ))}
         </div>
       </div>
+
+      <div>
+        <h1>Lottery Winner</h1>
+
+        {JSON.stringify(lottarywinner)}
+       
+      </div>
+
       <ToastContainer autoClose={8000} />
     </div>
   );
