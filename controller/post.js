@@ -1,5 +1,6 @@
 const Post = require("../model/Post");
 const Category = require("../model/Category");
+const Winner = require("../model/Winner");
 
 exports.createPost = (req, res) => {
   const { title, des, categoryBy } = req.body;
@@ -130,16 +131,32 @@ exports.getrelatedPostbyCategory = async (req, res) => {
 
 // };
 
+exports.postrandomWinner = async (req, res) => {
+  try {
+    const getallpost = await Post.find({}).populate(
+      "categoryBy",
+      "_id categoryName "
+    );
+    var lottarywinner =
+      getallpost[Math.floor(Math.random() * getallpost.length)];
+
+    const winnerdata = new Winner({
+      winnername: lottarywinner.des,
+    });
+
+    const savewinner = await Winner.create(winnerdata);
+
+    res.json(savewinner);
+  } catch (error) {
+    res.status(400).json({ error: "Something went wrong" });
+  }
+};
+
 exports.getrandomWinner = async (req, res) => {
   try {
+    const winnerlist = await Winner.findOne().sort({ date: "DESC" });
 
-    const getallpost = await Post.find({}).populate("categoryBy", "_id categoryName ");
-    var lottarywinner = getallpost[Math.floor(Math.random()*getallpost.length)];
-
-
-    res.json(lottarywinner);
-
-
+    res.json(winnerlist);
   } catch (error) {
     res.status(400).json({ error: "Something went wrong" });
   }

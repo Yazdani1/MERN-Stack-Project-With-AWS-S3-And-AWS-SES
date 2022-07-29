@@ -62,26 +62,21 @@ const Home = () => {
   useEffect(() => {
     loadallPosts();
     loadallCategory();
+    getrandomWinner();
   }, []);
 
   const [winner, setWinner] = useState("");
 
   const randomWinner = () => {
-    fetch("/api/getrandom-winner", {
-      method: "GET",
+    fetch("/api/postrandom-winner", {
+      method: "POST",
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log("From backend" + result);
+        console.log("From backend" + result.winnername);
 
-        if (result.error) {
-        } else {
-          setWinner(result);
-          console.log("From backend" + result);
-        }
       })
       .catch((err) => {
-        console.log(err);
       });
 
     // let lottarywinner = allposts[Math.floor(Math.random() * allposts.length)];
@@ -89,6 +84,29 @@ const Home = () => {
 
     // console.log("Resulkt" + lottarywinner.des);
   };
+
+  const getrandomWinner = () => {
+    fetch("/api/getrandom-winner", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log("From backend" + result.winnername);
+        if(result){
+          setWinner(result);
+        }
+
+      })
+      .catch((err) => {
+      });
+
+    // let lottarywinner = allposts[Math.floor(Math.random() * allposts.length)];
+    // setWinner(lottarywinner);
+
+    // console.log("Resulkt" + lottarywinner.des);
+  };
+
+
 
   return (
     <div className="container">
@@ -111,7 +129,8 @@ const Home = () => {
               Winner Genereate
             </button>
 
-            <h1> {winner.des}</h1>
+            <h1> {winner.winnername}</h1>
+            {JSON.stringify(winner)}
           </div>
 
           {allposts.map((item, index) => (

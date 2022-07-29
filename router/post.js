@@ -20,6 +20,7 @@ router.delete("/delete/:id", postController.deletePost);
 
 // get random post selection
 
+router.post("/postrandom-winner",postController.postrandomWinner)
 router.get("/getrandom-winner",postController.getrandomWinner)
 
 module.exports = router;
