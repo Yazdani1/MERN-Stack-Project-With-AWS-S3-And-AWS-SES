@@ -130,7 +130,6 @@ const Home = () => {
             </button>
 
             <h1> {winner.winnername}</h1>
-            {JSON.stringify(winner)}
           </div>
 
           {allposts.map((item, index) => (
