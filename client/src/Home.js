@@ -74,10 +74,8 @@ const Home = () => {
       .then((res) => res.json())
       .then((result) => {
         console.log("From backend" + result.winnername);
-
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
 
     // let lottarywinner = allposts[Math.floor(Math.random() * allposts.length)];
     // setWinner(lottarywinner);
@@ -92,21 +90,17 @@ const Home = () => {
       .then((res) => res.json())
       .then((result) => {
         console.log("From backend" + result.winnername);
-        if(result){
+        if (result) {
           setWinner(result);
         }
-
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
 
     // let lottarywinner = allposts[Math.floor(Math.random() * allposts.length)];
     // setWinner(lottarywinner);
 
     // console.log("Resulkt" + lottarywinner.des);
   };
-
-
 
   return (
     <div className="container">
@@ -129,7 +123,10 @@ const Home = () => {
               Winner Genereate
             </button>
 
-            <h1> {winner.winnername}</h1>
+            <h1 style={{ background: "yellow", fontSize: "30px" }}>
+              {" "}
+              {winner.winnername}
+            </h1>
           </div>
 
           {allposts.map((item, index) => (
