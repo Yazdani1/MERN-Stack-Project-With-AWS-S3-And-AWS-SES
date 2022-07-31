@@ -62,17 +62,7 @@ exports.deletePost = async (req, res) => {
   }
 };
 
-// exports.deletePost = (req, res) => {
-//   var deletequery = { _id: req.params.id };
 
-//   Post.findByIdAndDelete(deletequery)
-//     .then((result) => {
-//       res.json({ message: "Post deleted successfully" });
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// };
 
 //get post by category
 

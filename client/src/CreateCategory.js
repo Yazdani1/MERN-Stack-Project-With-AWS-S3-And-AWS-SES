@@ -190,7 +190,7 @@ const CreateCategory = () => {
         </div>
       </div>
 
-      <div>
+      <div style={{backgroundColor:"red",color:"white"}}>
         <h1>Lottery Winner</h1>
 
        <h1>Name: {lottarywinner.name}</h1>
