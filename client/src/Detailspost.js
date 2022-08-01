@@ -33,7 +33,7 @@ const Detailspost = () => {
     <div className="container">
       {/* header section */}
 
-      <div className="header-section">
+      <div className="header-section" style={{height:"300px",backgroundColor:"orangered",textAlign:"center"}}>
         <h5>Category Page</h5>
       </div>
 
