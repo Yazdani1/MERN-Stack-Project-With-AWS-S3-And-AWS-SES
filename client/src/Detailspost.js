@@ -5,7 +5,7 @@ const Detailspost = () => {
   const { id } = useParams();
 
   const [singlepost, setSinglepost] = useState([]);
-  const [error,setError] = useState();
+  const [error, setError] = useState();
 
   const loadDetailspost = () => {
     fetch(`/api/details-post/` + id, {
@@ -14,12 +14,11 @@ const Detailspost = () => {
       .then((res) => res.json())
       .then((result) => {
         if (result.err) {
-            setError(result.err);
+          setError(result.err);
         } else {
-            setSinglepost(result);
-        console.log(result);
+          setSinglepost(result);
+          console.log(result);
         }
-        
       })
       .catch((err) => {
         console.log(err);
@@ -32,6 +31,12 @@ const Detailspost = () => {
 
   return (
     <div className="container">
+      {/* header section */}
+
+      <div className="header-section">
+        <h5>Category Page</h5>
+      </div>
+
       <div
         className="details-post"
         style={{
