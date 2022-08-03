@@ -104,6 +104,12 @@ const Home = () => {
 
   return (
     <div className="container">
+
+      <div className="home_header">
+
+        <h4>Home Page</h4>
+      </div>
+
       <div className="row">
         <div className="col-xl-6 col-lg-6">
           <ShowCharts allposts={allposts} />
