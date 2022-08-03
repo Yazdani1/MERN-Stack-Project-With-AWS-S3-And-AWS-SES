@@ -104,9 +104,15 @@ const Home = () => {
 
   return (
     <div className="container">
-
-      <div className="home_header">
-
+      <div
+        className="home_header"
+        style={{
+          height: "300px",
+          backgroundColor: "red",
+          borderRadius: "20px",
+          border: "1px solid black",
+        }}
+      >
         <h4>Home Page</h4>
       </div>
 
