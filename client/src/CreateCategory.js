@@ -134,7 +134,7 @@ const CreateCategory = () => {
   return (
     <div className="container">
 
-      <div className="category-header">
+      <div className="category-header" style={{height:"300px",backgroundColor:"orangered",color:"white" }}>
         <h1>Category Page</h1>
       </div>
 
