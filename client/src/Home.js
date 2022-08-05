@@ -174,7 +174,15 @@ const Home = () => {
           ))}
         </div>
         <div className="col-xl-4 col-lg-4">
-          <div className="category-section" style={{backgroundColor: "orangered",color:"white"}}>
+          <div
+            className="category-section"
+            style={{
+              backgroundColor: "orangered",
+              color: "white",
+              margin: "10px",
+              padding: "20px",
+            }}
+          >
             {allcategory.catecoryList?.map((c, index) => (
               <div
                 style={{
