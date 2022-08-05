@@ -174,23 +174,25 @@ const Home = () => {
           ))}
         </div>
         <div className="col-xl-4 col-lg-4">
-          {allcategory.catecoryList?.map((c, index) => (
-            <div
-              style={{
-                border: "1px solid yellow",
-                margin: "10px",
-                padding: "10px",
-                borderRadius: "10px",
-              }}
-            >
-              <Link
-                to={"/category/" + c._id}
-                style={{ textDecoration: "none" }}
+          <div className="category-section" style={{backgroundColor: "orangered",color:"white"}}>
+            {allcategory.catecoryList?.map((c, index) => (
+              <div
+                style={{
+                  border: "1px solid yellow",
+                  margin: "10px",
+                  padding: "10px",
+                  borderRadius: "10px",
+                }}
               >
-                <h5>{c.categoryName} -</h5>
-              </Link>
-            </div>
-          ))}
+                <Link
+                  to={"/category/" + c._id}
+                  style={{ textDecoration: "none" }}
+                >
+                  <h5>{c.categoryName} -</h5>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
