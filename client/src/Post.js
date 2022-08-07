@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import "./App.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CardLayout from "./Components/CardLayout";
 
 const Post = ({ totalpost }) => {
   const [title, setTitle] = useState("");
@@ -33,7 +34,7 @@ const Post = ({ totalpost }) => {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify({ title, des,categoryBy:choseCategory }),
+      body: JSON.stringify({ title, des, categoryBy: choseCategory }),
     })
       .then((res) => res.json())
       .then((result) => {
@@ -94,70 +95,72 @@ const Post = ({ totalpost }) => {
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-lg-12 col-md-12 col-sm-12">
-          <div className="form-design card">
-            <form>
-              <div className="text-center">
-                <h5 className="text-center">Notebook app</h5>
-                <h5 className="text-center">write your note here</h5>
-                {showError()}
-                {showSuccess()}
-              </div>
-              <div className="form-group">
-                <input
-                  type="text"
-                  value={title}
-                  onChange={handleChange}
-                  className="form-control"
-                  placeholder="Income..."
-                />
-              </div>
+      <CardLayout title="Create new post">
+        <div className="row">
+          <div className="col-lg-12 col-md-12 col-sm-12">
+            <div className="form-design ">
+              <form>
+                <div className="text-center">
+                  {showError()}
+                  {showSuccess()}
+                </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    value={title}
+                    onChange={handleChange}
+                    className="form-control"
+                    placeholder="Income..."
+                  />
+                </div>
 
-              <div className="event-form">
-                <label for="exampleInputEmail1" className="form-label">
-                  Select Category
-                </label>
-                <select
-                  className="custom-select"
-                  value={choseCategory}
-                  onChange={(e) => setChooseCategory(e.target.value)}
-                >
-                  {allcategory.catecoryList?.map((c, index) => (
-                    <option key={index} value={c._id}>{c.categoryName}</option>
-                  ))}
-                </select>
-              </div>
+                <div className="event-form">
+                  <label for="exampleInputEmail1" className="form-label">
+                    Select Category
+                  </label>
+                  <select
+                    className="custom-select"
+                    value={choseCategory}
+                    onChange={(e) => setChooseCategory(e.target.value)}
+                  >
+                    {allcategory.catecoryList?.map((c, index) => (
+                      <option key={index} value={c._id}>
+                        {c.categoryName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-              <div className="form-group">
-                <textarea
-                  value={des}
-                  onChange={handleChangedes}
-                  className="form-control"
-                  rows="5"
-                  placeholder="Expense..."
-                />
-              </div>
+                <div className="form-group">
+                  <textarea
+                    value={des}
+                    onChange={handleChangedes}
+                    className="form-control"
+                    rows="5"
+                    placeholder="Expense..."
+                  />
+                </div>
 
-              <div class="form-group justify-content-center align-items-center">
-                <button
-                  type="submit"
-                  // onKeyDown={buttonKeyDown}
+                <div class="form-group justify-content-center align-items-center">
+                  <button
+                    type="submit"
+                    // onKeyDown={buttonKeyDown}
 
-                  name="btnSubmit"
-                  className="btnContact"
-                  value="Sign In"
-                  onClick={(e) => {
-                    submitData(e);
-                  }}
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
+                    name="btnSubmit"
+                    className="btnContact"
+                    value="Sign In"
+                    onClick={(e) => {
+                      submitData(e);
+                    }}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+      </CardLayout>
       <ToastContainer autoClose={8000} />
     </div>
   );

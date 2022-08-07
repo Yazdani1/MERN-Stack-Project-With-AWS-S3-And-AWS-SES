@@ -166,6 +166,7 @@ const CreateCategory = () => {
                     placeholder="Income..."
                   />
                 </div>
+            
 
                 <div class="form-group justify-content-center align-items-center">
                   <button
