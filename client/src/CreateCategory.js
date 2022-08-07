@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import "./App.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CardLayout from "./Components/CardLayout";
 
 const CreateCategory = () => {
   const [error, setError] = useState(false);
@@ -129,77 +130,93 @@ const CreateCategory = () => {
     },
   ];
 
-  var lottarywinner = lotarydata[Math.floor(Math.random()*lotarydata.length)];
+  var lottarywinner = lotarydata[Math.floor(Math.random() * lotarydata.length)];
 
   return (
     <div className="container">
-
-      <div className="category-header" style={{height:"300px",backgroundColor:"orangered",color:"white" }}>
+      <div
+        className="category-header"
+        style={{
+          height: "300px",
+          backgroundColor: "orangered",
+          color: "white",
+        }}
+      >
         <h1>Category Page</h1>
       </div>
 
-      <div className="row">
-        <div className="col-lg-12 col-md-12 col-sm-12">
-          <div className="form-design card">
-            <form>
-              <div className="text-center">
-                <h5 className="text-center">Notebook app</h5>
-                <h5 className="text-center">Create Category</h5>
-                {showError()}
-                {showSuccess()}
-              </div>
-              <div className="form-group">
-                <input
-                  type="text"
-                  value={categoryName}
-                  onChange={handleChange}
-                  className="form-control"
-                  placeholder="Income..."
-                />
-              </div>
+    
+        <div className="row">
+          <div className="col-lg-12 col-md-12 col-sm-12">
+          <CardLayout>
+            <div className="form-design">
+              <form>
+                <div className="text-center">
+                  <h5 className="text-center">Notebook app</h5>
+                  <h5 className="text-center">Create Category</h5>
+                  {showError()}
+                  {showSuccess()}
+                </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    value={categoryName}
+                    onChange={handleChange}
+                    className="form-control"
+                    placeholder="Income..."
+                  />
+                </div>
 
-              <div class="form-group justify-content-center align-items-center">
+                <div class="form-group justify-content-center align-items-center">
+                  <button
+                    type="submit"
+                    name="btnSubmit"
+                    className="btnContact"
+                    onClick={(e) => {
+                      submitData(e);
+                    }}
+                  >
+                    Create Category
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            </CardLayout>
+            {allcategory.catecoryList?.map((c, index) => (
+              <div
+                style={{
+                  border: "1px solid black",
+                  margin: "10px",
+                  padding: "10px",
+                  borderRadius: "10px",
+                  display: "flex",
+                }}
+              >
+                <h5>{c.categoryName}</h5>
                 <button
-                  type="submit"
-                  name="btnSubmit"
-                  className="btnContact"
-                  onClick={(e) => {
-                    submitData(e);
-                  }}
+                  className="btn btn-danger"
+                  onClick={() => deleteCategory(c._id)}
                 >
-                  Create Category
+                  Delete
                 </button>
               </div>
-            </form>
+            ))}
           </div>
-
-          {allcategory.catecoryList?.map((c, index) => (
-            <div
-              style={{
-                border: "1px solid black",
-                margin: "10px",
-                padding: "10px",
-                borderRadius: "10px",
-                display: "flex",
-              }}
-            >
-              <h5>{c.categoryName}</h5>
-              <button
-                className="btn btn-danger"
-                onClick={() => deleteCategory(c._id)}
-              >
-                Delete
-              </button>
-            </div>
-          ))}
         </div>
-      </div>
+   
 
-      <div style={{backgroundColor:"red",color:"white",height:"250px",border:"1px solid black"}}>
+      <div
+        style={{
+          backgroundColor: "red",
+          color: "white",
+          height: "250px",
+          border: "1px solid black",
+        }}
+      >
         <h1>Lottery Winner</h1>
 
-       <h1>Name: {lottarywinner.name}</h1>
-       
+        <h1>Name: {lottarywinner.name}</h1>
       </div>
 
       <ToastContainer autoClose={8000} />

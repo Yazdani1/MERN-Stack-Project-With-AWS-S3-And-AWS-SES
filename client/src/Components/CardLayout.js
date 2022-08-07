@@ -1,8 +1,11 @@
 import React from 'react'
+import "./cardlayout.css";
 
-const CardLayout = () => {
+const CardLayout = ({children}) => {
   return (
-    <div>CardLayout</div>
+    <div className='card-layout-design'>
+        {children}
+    </div>
   )
 }
 
