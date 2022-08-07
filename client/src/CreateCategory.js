@@ -148,12 +148,12 @@ const CreateCategory = () => {
     
         <div className="row">
           <div className="col-lg-12 col-md-12 col-sm-12">
-          <CardLayout>
+          <CardLayout title="Category">
             <div className="form-design">
               <form>
                 <div className="text-center">
-                  <h5 className="text-center">Notebook app</h5>
-                  <h5 className="text-center">Create Category</h5>
+                  {/* <h5 className="text-center">Notebook app</h5>
+                  <h5 className="text-center">Create Category</h5> */}
                   {showError()}
                   {showSuccess()}
                 </div>
