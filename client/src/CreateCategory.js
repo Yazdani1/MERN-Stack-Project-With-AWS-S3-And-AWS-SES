@@ -39,6 +39,7 @@ const CreateCategory = () => {
           setError("");
           setSuccess(true);
           setCatagoryName("");
+          loadallCategory();
 
           toast.success("Category created Successfully!", {
             position: toast.POSITION.TOP_RIGHT,
