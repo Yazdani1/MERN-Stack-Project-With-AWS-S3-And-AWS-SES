@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CardLayout from "./Components/CardLayout";
 const axios = require("axios");
+const { getallCategory, deleteSingleCategory, postCategory } = require("./API");
 
 const CreateCategory = () => {
   const [error, setError] = useState(false);
@@ -25,8 +26,9 @@ const CreateCategory = () => {
 
     try {
       const payload = { categoryName };
+      const response = await postCategory(payload);
 
-      const response = await axios.post("/api/categoryceate", payload);
+      // const response = await axios.post("/api/categoryceate", payload);
 
       if (response) {
         toast.success("Category created Successfully!", {
@@ -76,12 +78,23 @@ const CreateCategory = () => {
 
   const loadallCategory = async () => {
     try {
-      const response = await axios.get("/api/getall-category");
+      const response = await getallCategory();
       setAllcategory(response.data);
     } catch (error) {
       setError(error.response && error.response.data.err);
     }
   };
+
+  // to get category list using axios http
+
+  // const loadallCategory = async () => {
+  //   try {
+  //     const response = await axios.get("/api/getall-category");
+  //     setAllcategory(response.data);
+  //   } catch (error) {
+  //     setError(error.response && error.response.data.err);
+  //   }
+  // };
 
   // const loadallCategory = () => {
 
@@ -120,7 +133,7 @@ const CreateCategory = () => {
 
   const deleteCategory = async (id) => {
     try {
-      const response = await axios.delete("/api/category-delete/" + id);
+      const response = await deleteSingleCategory(id);
 
       if (response) {
         toast.info("Post Deleted Successfully!", {
@@ -132,6 +145,23 @@ const CreateCategory = () => {
       setError(error.response && error.response.data.err);
     }
   };
+
+  // to delete using axios
+
+  // const deleteCategory = async (id) => {
+  //   try {
+  //     const response = await axios.delete("/api/category-delete/" + id);
+
+  //     if (response) {
+  //       toast.info("Post Deleted Successfully!", {
+  //         position: toast.POSITION.TOP_RIGHT,
+  //       });
+  //       loadallCategory();
+  //     }
+  //   } catch (error) {
+  //     setError(error.response && error.response.data.err);
+  //   }
+  // };
 
   // const deleteCategory = (id) => {
   //   fetch("/api/category-delete/" + id, {

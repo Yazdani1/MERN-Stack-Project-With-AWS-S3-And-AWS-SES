@@ -6,7 +6,7 @@ exports.createPost = (req, res) => {
   const { title, des, categoryBy } = req.body;
 
   if (!title) {
-    return res.status(422).json({ error: "add note title" });
+    return res.status(422).json({ error: "add note title to create post" });
   }
 
   if (!des) {

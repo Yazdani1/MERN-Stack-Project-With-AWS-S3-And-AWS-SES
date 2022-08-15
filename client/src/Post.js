@@ -3,6 +3,7 @@ import "./App.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CardLayout from "./Components/CardLayout";
+const axios = require("axios");
 
 const Post = ({ totalpost }) => {
   const [title, setTitle] = useState("");
@@ -22,38 +23,70 @@ const Post = ({ totalpost }) => {
     setDes(e.target.value);
   };
 
-  const submitData = (e) => {
+  const submitData = async (e) => {
     e.preventDefault();
 
     setError("");
     setSuccess(false);
 
-    fetch("/api/post", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({ title, des, categoryBy: choseCategory }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result.error) {
-          setError(result.error);
-          console.log(result.error);
-        } else {
-          setError("");
-          setSuccess(true);
-          setTitle("");
-          setChooseCategory("");
-          setDes("");
-
-          toast.success("Post created Successfully!", {
-            position: toast.POSITION.TOP_RIGHT,
-          });
-        }
+    try {
+      const response = await axios.post("/api/post", {
+        title,
+        des,
+        categoryBy: choseCategory,
       });
+
+      if (response) {
+        toast.success("Post created Successfully!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+
+        setError("");
+        setSuccess(true);
+        setTitle("");
+        setChooseCategory("");
+        setDes("");
+      }
+    } catch (error) {
+      toast.error(error.response && error.response.data.error, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      setError(error.response && error.response.data.error);
+    }
   };
+
+  // const submitData = (e) => {
+  //   e.preventDefault();
+
+  //   setError("");
+  //   setSuccess(false);
+
+  //   fetch("/api/post", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //     },
+  //     body: JSON.stringify({ title, des, categoryBy: choseCategory }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       if (result.error) {
+  //         setError(result.error);
+  //         console.log(result.error);
+  //       } else {
+  //         setError("");
+  //         setSuccess(true);
+  //         setTitle("");
+  //         setChooseCategory("");
+  //         setDes("");
+
+  //         toast.success("Post created Successfully!", {
+  //           position: toast.POSITION.TOP_RIGHT,
+  //         });
+  //       }
+  //     });
+  // };
 
   const showError = () => (
     <div
@@ -73,20 +106,13 @@ const Post = ({ totalpost }) => {
     </div>
   );
 
-  const loadallCategory = () => {
-    fetch(`/api/getall-category`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result) {
-          setAllcategory(result);
-          console.log(result);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const loadallCategory = async () => {
+    try {
+      const response = await axios.get("/api/getall-category");
+      setAllcategory(response.data);
+    } catch (error) {
+      setError(error.response && error.response.data.err);
+    }
   };
 
   useEffect(() => {
