@@ -3,6 +3,7 @@ import "./App.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CardLayout from "./Components/CardLayout";
+const axios = require("axios");
 
 const CreateCategory = () => {
   const [error, setError] = useState(false);
@@ -16,53 +17,88 @@ const CreateCategory = () => {
     setCatagoryName(e.target.value);
   };
 
-  const submitData = (e) => {
+  const submitData = async (e) => {
     e.preventDefault();
 
     setError("");
     setSuccess(false);
 
-    fetch("/api/categoryceate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({ categoryName }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result.error) {
-          setError(result.error);
-          console.log(result.error);
-        } else {
-          setError("");
-          setSuccess(true);
-          setCatagoryName("");
-          loadallCategory();
+    try {
+      const payload = { categoryName };
 
-          toast.success("Category created Successfully!", {
-            position: toast.POSITION.TOP_RIGHT,
-          });
-        }
-      });
+      const response = await axios.post("/api/categoryceate", payload);
+
+      if (response) {
+        toast.success("Category created Successfully!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        setError("");
+        setSuccess(true);
+        setCatagoryName("");
+        loadallCategory();
+      }
+    } catch (error) {
+      setError(error.response && error.response.data.error);
+    }
   };
 
-  const loadallCategory = () => {
-    fetch(`/api/getall-category`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result) {
-          setAllcategory(result);
-          console.log(result);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  // const submitData = (e) => {
+  //   e.preventDefault();
+
+  //   setError("");
+  //   setSuccess(false);
+
+  //   fetch("/api/categoryceate", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //     },
+  //     body: JSON.stringify({ categoryName }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       if (result.error) {
+  //         setError(result.error);
+  //         console.log(result.error);
+  //       } else {
+  //         setError("");
+  //         setSuccess(true);
+  //         setCatagoryName("");
+  //         loadallCategory();
+
+  //         toast.success("Category created Successfully!", {
+  //           position: toast.POSITION.TOP_RIGHT,
+  //         });
+  //       }
+  //     });
+  // };
+
+  const loadallCategory = async () => {
+    try {
+      const response = await axios.get("/api/getall-category");
+      setAllcategory(response.data);
+    } catch (error) {
+      setError(error.response && error.response.data.err);
+    }
   };
+
+  // const loadallCategory = () => {
+
+  //   fetch(`/api/getall-category`, {
+  //     method: "GET",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       if (result) {
+  //         setAllcategory(result);
+  //         console.log(result);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   const showError = () => (
     <div
@@ -82,23 +118,38 @@ const CreateCategory = () => {
     </div>
   );
 
-  const deleteCategory = (id) => {
-    fetch("/api/category-delete/" + id, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result) {
-          toast.info("Post Deleted Successfully!", {
-            position: toast.POSITION.TOP_RIGHT,
-          });
-          loadallCategory();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const deleteCategory = async (id) => {
+    try {
+      const response = await axios.delete("/api/category-delete/" + id);
+
+      if (response) {
+        toast.info("Post Deleted Successfully!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        loadallCategory();
+      }
+    } catch (error) {
+      setError(error.response && error.response.data.err);
+    }
   };
+
+  // const deleteCategory = (id) => {
+  //   fetch("/api/category-delete/" + id, {
+  //     method: "DELETE",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       if (result) {
+  //         toast.info("Post Deleted Successfully!", {
+  //           position: toast.POSITION.TOP_RIGHT,
+  //         });
+  //         loadallCategory();
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   useEffect(() => {
     loadallCategory();
@@ -146,9 +197,8 @@ const CreateCategory = () => {
         <h1>Category Page</h1>
       </div>
 
-    
-        <div className="row">
-          <div className="col-lg-12 col-md-12 col-sm-12">
+      <div className="row">
+        <div className="col-lg-12 col-md-12 col-sm-12">
           <CardLayout title="Category">
             <div className="form-design">
               <form>
@@ -167,7 +217,6 @@ const CreateCategory = () => {
                     placeholder="Income..."
                   />
                 </div>
-            
 
                 <div class="form-group justify-content-center align-items-center">
                   <button
@@ -183,30 +232,28 @@ const CreateCategory = () => {
                 </div>
               </form>
             </div>
-
-            </CardLayout>
-            {allcategory.catecoryList?.map((c, index) => (
-              <div
-                style={{
-                  border: "1px solid black",
-                  margin: "10px",
-                  padding: "10px",
-                  borderRadius: "10px",
-                  display: "flex",
-                }}
+          </CardLayout>
+          {allcategory.catecoryList?.map((c, index) => (
+            <div
+              style={{
+                border: "1px solid black",
+                margin: "10px",
+                padding: "10px",
+                borderRadius: "10px",
+                display: "flex",
+              }}
+            >
+              <h5>{c.categoryName}</h5>
+              <button
+                className="btn btn-danger"
+                onClick={() => deleteCategory(c._id)}
               >
-                <h5>{c.categoryName}</h5>
-                <button
-                  className="btn btn-danger"
-                  onClick={() => deleteCategory(c._id)}
-                >
-                  Delete
-                </button>
-              </div>
-            ))}
-          </div>
+                Delete
+              </button>
+            </div>
+          ))}
         </div>
-   
+      </div>
 
       <div
         style={{

@@ -56,7 +56,8 @@ exports.getCategory = async (req, res) => {
 
     res.json({catecoryList, eachcatid,postcount,catid});
   } catch (err) {
-    console.log(err);
+    res.status(400).json({ err: "Something went wrong..Category Could not Found" });
+
   }
 };
 
@@ -70,7 +71,7 @@ exports.deleteCategory = async (req, res) => {
     );
     res.json({success:true});
   } catch (err) {
-    console.log(err);
+    res.status(404).json({ err: "Something went wrong.Could not Delete" });
   }
 };
 

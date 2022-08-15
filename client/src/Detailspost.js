@@ -23,7 +23,6 @@ const Detailspost = () => {
 
       setError(error.response && error.response.data.err);
 
-
     }
   };
 
