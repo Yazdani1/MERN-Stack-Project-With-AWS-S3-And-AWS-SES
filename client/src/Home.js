@@ -5,61 +5,96 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import { ShowCharts } from "./charts/ShowCharts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+const axios = require("axios");
+
 const Home = () => {
   const [allposts, setPosts] = useState([]);
   const [allcategory, setAllcategory] = useState([]);
 
-  const loadallPosts = () => {
-    fetch(`/api/getposts`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result) {
-          setPosts(result);
-          console.log(result);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const loadallPosts = async () => {
+    try {
+      const response = await axios.get("/api/getposts");
+      setPosts(response.data);
+    } catch (error) {
+      console.log(error.response && error.response.data.error);
+    }
   };
 
-  
-  const deletePost = (id) => {
-    fetch("/api/delete/" + id, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result) {
-          console.log("post deleted success");
-          toast.info("Post Deleted Successfully!", {
-            position: toast.POSITION.TOP_RIGHT,
-          });
-          loadallPosts();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  // const loadallPosts = () => {
+  //   fetch(`/api/getposts`, {
+  //     method: "GET",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       if (result) {
+  //         setPosts(result);
+  //         console.log(result);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
+  const deletePost = async (id) => {
+    try {
+      const response = await axios.delete("/api/delete/" + id);
+
+      if (response) {
+        toast.info("Post Deleted Successfully!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        loadallPosts();
+        loadallCategory();
+      }
+    } catch (error) {
+      console.log(error.response && error.response.data.error);
+    }
   };
 
-  const loadallCategory = () => {
-    fetch(`/api/getall-category`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result) {
-          setAllcategory(result);
-          console.log(result);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  // const deletePost = (id) => {
+  //   fetch("/api/delete/" + id, {
+  //     method: "DELETE",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       if (result) {
+  //         console.log("post deleted success");
+  //         toast.info("Post Deleted Successfully!", {
+  //           position: toast.POSITION.TOP_RIGHT,
+  //         });
+  //         loadallPosts();
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
+
+  const loadallCategory = async () => {
+    try {
+      const response = await axios.get("/api/getall-category");
+      setAllcategory(response.data);
+    } catch (error) {
+      console.log(error.response && error.response.data.error);
+    }
   };
+
+  // const loadallCategory = () => {
+  //   fetch(`/api/getall-category`, {
+  //     method: "GET",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       if (result) {
+  //         setAllcategory(result);
+  //         console.log(result);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   useEffect(() => {
     loadallPosts();
@@ -205,6 +240,8 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={8000} />
+
     </div>
   );
 };

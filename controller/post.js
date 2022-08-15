@@ -39,7 +39,7 @@ exports.getPosts = async (req, res) => {
 
     res.json(allpostlist);
   } catch (err) {
-    console.log(err);
+    res.status(400).json({ err: "Something went wrong.. Could not get Post" });
   }
 
   // Post.find({})
@@ -57,8 +57,10 @@ exports.deletePost = async (req, res) => {
   try {
     var deletequery = { _id: req.params.id };
     const deletedata = await Post.findByIdAndDelete(deletequery);
+    res.status(200).json(deletedata);
   } catch (err) {
-    console.log(err);
+    res.status(404).json({ err: "Something went wrong..Post Could not found to Delete" });
+
   }
 };
 
