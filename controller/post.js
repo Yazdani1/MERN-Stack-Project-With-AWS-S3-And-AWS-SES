@@ -98,7 +98,7 @@ exports.getrelatedPostbyCategory = async (req, res) => {
 
     res.json({ detailspost, relatedpost });
   } catch (err) {
-    res.status(400).json({ err: "Something went wrong" });
+    res.status(400).json({ err: "Something went wrong..Post Could not found" });
   }
 };
 

@@ -24,6 +24,8 @@ const Home = () => {
         console.log(err);
       });
   };
+
+  
   const deletePost = (id) => {
     fetch("/api/delete/" + id, {
       method: "DELETE",
