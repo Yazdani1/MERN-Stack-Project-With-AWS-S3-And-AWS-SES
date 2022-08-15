@@ -2,7 +2,10 @@ const axios = require('axios');
 
 
 
-// Category
+/***********/////////////////////////////////////**********/
+/************************* Category ***********************/
+/***********/////////////////////////////////////**********/
+
 
 // to load all the category
 const getallCategory = async()=>{
@@ -10,10 +13,14 @@ const getallCategory = async()=>{
     return response;
 }
 
+// to delete category
+
 const deleteSingleCategory = async(id)=>{
     const response = await axios.delete(`/api/category-delete/${id}`);
     return response;
 }
+
+// to post category
 
 const postCategory = async(payload)=>{
     const response = await axios.post("/api/categoryceate",payload);
@@ -21,10 +28,46 @@ const postCategory = async(payload)=>{
 }
 
 
+
+
+/***********/////////////////////////////////////**********/
+/************************* Post ***********************/
+/***********/////////////////////////////////////**********/
+
+// to create post
+
+const createPost = async(payload)=>{
+
+    const response = await axios.post("/api/post",payload);
+    return response;
+
+}
+
+// to get all the post
+
+const getAllpost = async()=>{
+
+    const response = await axios.get("/api/getposts");
+    return response;
+}
+
+const deleteSinglePost = async(id)=>{
+
+    const response = await axios.delete("/api/delete/" + id);
+    return response;
+
+}
+
+
+
+
 module.exports = {
     getallCategory,
     deleteSingleCategory,
-    postCategory
+    postCategory,
+    createPost,
+    getAllpost,
+    deleteSinglePost
 }
 
 

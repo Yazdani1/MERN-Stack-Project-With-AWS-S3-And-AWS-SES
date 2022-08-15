@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CardLayout from "./Components/CardLayout";
 const axios = require("axios");
+const { getallCategory, createPost } = require("./API");
 
 const Post = ({ totalpost }) => {
   const [title, setTitle] = useState("");
@@ -30,7 +31,7 @@ const Post = ({ totalpost }) => {
     setSuccess(false);
 
     try {
-      const response = await axios.post("/api/post", {
+      const response = await createPost({
         title,
         des,
         categoryBy: choseCategory,
@@ -108,7 +109,7 @@ const Post = ({ totalpost }) => {
 
   const loadallCategory = async () => {
     try {
-      const response = await axios.get("/api/getall-category");
+      const response = await getallCategory();
       setAllcategory(response.data);
     } catch (error) {
       setError(error.response && error.response.data.err);

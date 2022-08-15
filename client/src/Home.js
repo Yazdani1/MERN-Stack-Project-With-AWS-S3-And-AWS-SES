@@ -6,6 +6,7 @@ import { ShowCharts } from "./charts/ShowCharts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const axios = require("axios");
+const { getallCategory, createPost,getAllpost,deleteSinglePost } = require("./API");
 
 const Home = () => {
   const [allposts, setPosts] = useState([]);
@@ -13,7 +14,7 @@ const Home = () => {
 
   const loadallPosts = async () => {
     try {
-      const response = await axios.get("/api/getposts");
+      const response = await getAllpost();
       setPosts(response.data);
     } catch (error) {
       console.log(error.response && error.response.data.error);
@@ -38,7 +39,7 @@ const Home = () => {
 
   const deletePost = async (id) => {
     try {
-      const response = await axios.delete("/api/delete/" + id);
+      const response = await deleteSinglePost(id);
 
       if (response) {
         toast.info("Post Deleted Successfully!", {
