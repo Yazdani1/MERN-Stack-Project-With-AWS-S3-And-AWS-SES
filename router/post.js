@@ -7,11 +7,11 @@ router.post("/post", postController.createPost);
 
 router.get("/getposts", postController.getPosts);
 
-//post get by category
+// post get by category
 
-router.get("/getpostsbycategory/:id", postController.getpostBycategory);
+router.get("/getpostsbycategory/:slug", postController.getpostBycategory);
 
-//related post by category
+// related post by category
 
 router.get("/details-post/:id", postController.getrelatedPostbyCategory);
 

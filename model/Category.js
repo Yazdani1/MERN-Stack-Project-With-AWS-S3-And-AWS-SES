@@ -5,6 +5,12 @@ var categorySchema = mongoose.Schema({
   categoryName: {
     type: String,
   },
+  slug: {
+    type: String,
+    lowercase: true,
+    unique: true,
+    index: true,
+  },
   date: {
     type: Date,
     default: Date.now,

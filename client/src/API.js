@@ -1,59 +1,67 @@
-const axios = require('axios');
+const axios = require("axios");
 
-
-
-/***********/////////////////////////////////////**********/
+/***********/ ////////////////////////////////////**********/
 /************************* Category ***********************/
-/***********/////////////////////////////////////**********/
-
+/***********/ ////////////////////////////////////**********/
 
 // to load all the category
-const getallCategory = async()=>{
-    const response = await axios.get("/api/getall-category");
-    return response;
-}
+const getallCategory = async () => {
+  const response = await axios.get("/api/getall-category");
+  return response;
+};
 
 // to delete category
 
-const deleteSingleCategory = async(id)=>{
-    const response = await axios.delete(`/api/category-delete/${id}`);
-    return response;
-}
+const deleteSingleCategory = async (id) => {
+  const response = await axios.delete(`/api/category-delete/${id}`);
+  return response;
+};
 
 // to post category
 
-const postCategory = async(payload)=>{
-    const response = await axios.post("/api/categoryceate",payload);
-    return response;
-}
+const postCategory = async (payload) => {
+  const response = await axios.post("/api/categoryceate", payload);
+  return response;
+};
 
-
-
-
-/***********/////////////////////////////////////**********/
+/***********/ ////////////////////////////////////**********/
 /************************* Post ***********************/
-/***********/////////////////////////////////////**********/
+/***********/ ////////////////////////////////////**********/
 
 // to create post
 
-const createPost = async(payload)=>{
-
-    const response = await axios.post("/api/post",payload);
-    return response;
-
-}
+const createPost = async (payload) => {
+  const response = await axios.post("/api/post", payload);
+  return response;
+};
 
 // to get all the post
 
-const getAllpost = async()=>{
+const getAllpost = async () => {
+  const response = await axios.get("/api/getposts");
+  return response;
+};
 
-    const response = await axios.get("/api/getposts");
+const deleteSinglePost = async (id) => {
+  const response = await axios.delete("/api/delete/" + id);
+  return response;
+};
+
+/***********/ ////////////////////////////////////**********/
+/************************* Random Winner *******************/
+/***********/ ////////////////////////////////////**********/
+
+const getRandomWinner = async()=>{
+
+    const response = await axios.get("/api/getrandom-winner");
     return response;
+
 }
 
-const deleteSinglePost = async(id)=>{
 
-    const response = await axios.delete("/api/delete/" + id);
+const postRandomWinner = async()=>{
+
+    const response = await axios.post("/api/postrandom-winner");
     return response;
 
 }
@@ -62,13 +70,12 @@ const deleteSinglePost = async(id)=>{
 
 
 module.exports = {
-    getallCategory,
-    deleteSingleCategory,
-    postCategory,
-    createPost,
-    getAllpost,
-    deleteSinglePost
-}
-
-
-
+  getallCategory,
+  deleteSingleCategory,
+  postCategory,
+  createPost,
+  getAllpost,
+  deleteSinglePost,
+  getRandomWinner,
+  postRandomWinner
+};

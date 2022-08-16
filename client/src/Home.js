@@ -6,7 +6,7 @@ import { ShowCharts } from "./charts/ShowCharts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const axios = require("axios");
-const { getallCategory, createPost,getAllpost,deleteSinglePost } = require("./API");
+const { getallCategory, getRandomWinner,getAllpost,deleteSinglePost,postRandomWinner } = require("./API");
 
 const Home = () => {
   const [allposts, setPosts] = useState([]);
@@ -74,7 +74,7 @@ const Home = () => {
 
   const loadallCategory = async () => {
     try {
-      const response = await axios.get("/api/getall-category");
+      const response = await getallCategory();
       setAllcategory(response.data);
     } catch (error) {
       console.log(error.response && error.response.data.error);
@@ -105,15 +105,30 @@ const Home = () => {
 
   const [winner, setWinner] = useState("");
 
-  const randomWinner = () => {
-    fetch("/api/postrandom-winner", {
-      method: "POST",
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        console.log("From backend" + result.winnername);
-      })
-      .catch((err) => {});
+  const randomWinner = async() => {
+
+    try {
+      const response = await postRandomWinner();
+
+      if(response){
+        getrandomWinner();
+      }
+
+    } catch(error){
+      console.log(error);
+      console.log(error.response && error.response.data.error);
+
+    }
+
+    // fetch("/api/postrandom-winner", {
+    //   method: "POST",
+    // })
+    //   .then((res) => res.json())
+    //   .then((result) => {
+    //     console.log("From backend" + result.winnername);
+    //     getrandomWinner();
+    //   })
+    //   .catch((err) => {});
 
     // let lottarywinner = allposts[Math.floor(Math.random() * allposts.length)];
     // setWinner(lottarywinner);
@@ -121,18 +136,16 @@ const Home = () => {
     // console.log("Resulkt" + lottarywinner.des);
   };
 
-  const getrandomWinner = () => {
-    fetch("/api/getrandom-winner", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        console.log("From backend" + result.winnername);
-        if (result) {
-          setWinner(result);
-        }
-      })
-      .catch((err) => {});
+  const getrandomWinner = async() => {
+
+    try {
+      const response = await getRandomWinner();
+      setWinner(response.data);
+    } catch(error){
+      console.log(error.response && error.response.data.error);
+    }
+
+
 
     // let lottarywinner = allposts[Math.floor(Math.random() * allposts.length)];
     // setWinner(lottarywinner);
@@ -147,8 +160,9 @@ const Home = () => {
         style={{
           height: "300px",
           backgroundColor: "red",
-          borderRadius: "20px",
+          borderRadius: "10px",
           border: "1px solid black",
+          marginTop:"30px"
         }}
       >
         <h4>Home Page</h4>
@@ -173,7 +187,7 @@ const Home = () => {
               Winner Genereate
             </button>
 
-            <h1 style={{ background: "yellow", fontSize: "30px" }}>
+            <h1 style={{ background: "orange", fontSize: "30px",marginTop:"30px" }}>
               {" "}
               {winner.winnername}
             </h1>
@@ -231,10 +245,10 @@ const Home = () => {
                 }}
               >
                 <Link
-                  to={"/category/" + c._id}
-                  style={{ textDecoration: "none" }}
+                  to={"/category/" + c.slug}
+                  style={{ textDecoration: "none",color:"White" }}
                 >
-                  <h5>{c.categoryName} -</h5>
+                  <h5>{c.categoryName} </h5>
                 </Link>
               </div>
             ))}

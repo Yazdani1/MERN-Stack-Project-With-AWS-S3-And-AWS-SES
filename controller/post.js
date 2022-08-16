@@ -70,8 +70,8 @@ exports.deletePost = async (req, res) => {
 
 exports.getpostBycategory = async (req, res) => {
   try {
-    const categoryInfo = await Category.findOne({ _id: req.params.id });
-    const postsData = await Post.find({ categoryBy: req.params.id }).populate(
+    const categoryInfo = await Category.findOne({ slug: req.params.slug });
+    const postsData = await Post.find({ categoryBy: categoryInfo._id }).populate(
       "categoryBy",
       "_id categoryName "
     );
@@ -140,7 +140,7 @@ exports.postrandomWinner = async (req, res) => {
 
     res.json(savewinner);
   } catch (error) {
-    res.status(400).json({ error: "Something went wrong" });
+    res.status(400).json({ error: "Something went wrong cant generate" });
   }
 };
 
@@ -150,6 +150,6 @@ exports.getrandomWinner = async (req, res) => {
 
     res.json(winnerlist);
   } catch (error) {
-    res.status(400).json({ error: "Something went wrong" });
+    res.status(400).json({ error: "Something went wrong. cant load winner" });
   }
 };
