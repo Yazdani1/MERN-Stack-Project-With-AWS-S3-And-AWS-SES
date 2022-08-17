@@ -20,10 +20,13 @@ const Home = () => {
   const [allcategory, setAllcategory] = useState([]);
   const [categoryPost, setCategoryPost] = useState([]);
 
+  console.log("To test"+categoryPost)
+
   const loadallPosts = async () => {
     try {
       const response = await getAllpost();
-      // setPosts(response.data);
+      setPosts(response.data);
+
     } catch (error) {
       console.log(error.response && error.response.data.error);
     }
@@ -112,6 +115,7 @@ const Home = () => {
         }}
       >
         <h4>Home Page</h4>
+        {categoryPost ? "Category":"Normal post"}
       </div>
 
       <div className="row">
@@ -140,6 +144,8 @@ const Home = () => {
               {winner.winnername}
             </h1>
           </div> */}
+
+
 
           {allposts.map((item, index) => (
             <div className="card post-items" key={item._id}>
@@ -194,6 +200,8 @@ const Home = () => {
               </div>
             </>
           ))}
+
+
         </div>
         <div className="col-xl-4 col-lg-4">
           <div
