@@ -21,21 +21,6 @@ const Home = () => {
     }
   };
 
-  // const loadallPosts = () => {
-  //   fetch(`/api/getposts`, {
-  //     method: "GET",
-  //   })
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       if (result) {
-  //         setPosts(result);
-  //         console.log(result);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
 
   const deletePost = async (id) => {
     try {
@@ -53,25 +38,7 @@ const Home = () => {
     }
   };
 
-  // const deletePost = (id) => {
-  //   fetch("/api/delete/" + id, {
-  //     method: "DELETE",
-  //   })
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       if (result) {
-  //         console.log("post deleted success");
-  //         toast.info("Post Deleted Successfully!", {
-  //           position: toast.POSITION.TOP_RIGHT,
-  //         });
-  //         loadallPosts();
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
+ 
   const loadallCategory = async () => {
     try {
       const response = await getallCategory();
@@ -81,21 +48,7 @@ const Home = () => {
     }
   };
 
-  // const loadallCategory = () => {
-  //   fetch(`/api/getall-category`, {
-  //     method: "GET",
-  //   })
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       if (result) {
-  //         setAllcategory(result);
-  //         console.log(result);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+
 
   useEffect(() => {
     loadallPosts();
@@ -120,20 +73,7 @@ const Home = () => {
 
     }
 
-    // fetch("/api/postrandom-winner", {
-    //   method: "POST",
-    // })
-    //   .then((res) => res.json())
-    //   .then((result) => {
-    //     console.log("From backend" + result.winnername);
-    //     getrandomWinner();
-    //   })
-    //   .catch((err) => {});
-
-    // let lottarywinner = allposts[Math.floor(Math.random() * allposts.length)];
-    // setWinner(lottarywinner);
-
-    // console.log("Resulkt" + lottarywinner.des);
+  
   };
 
   const getrandomWinner = async() => {
@@ -145,12 +85,6 @@ const Home = () => {
       console.log(error.response && error.response.data.error);
     }
 
-
-
-    // let lottarywinner = allposts[Math.floor(Math.random() * allposts.length)];
-    // setWinner(lottarywinner);
-
-    // console.log("Resulkt" + lottarywinner.des);
   };
 
   return (
