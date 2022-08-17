@@ -3,8 +3,15 @@ import "./App.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CardLayout from "./Components/CardLayout";
+import { Link, useHistory, useParams } from "react-router-dom";
+
 const axios = require("axios");
-const { getallCategory, deleteSingleCategory, postCategory } = require("./API");
+const {
+  getallCategory,
+  deleteSingleCategory,
+  postCategory,
+  editCategory,
+} = require("./API");
 
 const CreateCategory = () => {
   const [error, setError] = useState(false);
@@ -12,6 +19,21 @@ const CreateCategory = () => {
 
   const [categoryName, setCatagoryName] = useState("");
   const [allcategory, setAllcategory] = useState([]);
+
+  // to show and hide edit field
+
+  const [selected, setSelected] = useState(null);
+  const toggle = (i) => {
+    if (selected == i) {
+      return setSelected(null);
+    }
+
+    setSelected(i);
+  };
+
+  // to show edit data to input field
+
+  const [editName, setEditName] = useState("");
 
   const handleChange = (e) => {
     setError("");
@@ -80,6 +102,7 @@ const CreateCategory = () => {
     try {
       const response = await getallCategory();
       setAllcategory(response.data);
+      setEditName(response.data.categoryName);
     } catch (error) {
       setError(error.response && error.response.data.err);
     }
@@ -131,6 +154,18 @@ const CreateCategory = () => {
     </div>
   );
 
+  // to edit category
+
+  const editCategoryInfo = async (id) => {
+    try {
+      const response = await editCategory(id, editName);
+      // setEditName(response.data.categoryName);
+      console.log(response.data._id);
+    } catch (error) {
+      setError(error.response && error.response.data.err);
+    }
+  };
+
   const deleteCategory = async (id) => {
     try {
       const response = await deleteSingleCategory(id);
@@ -163,26 +198,9 @@ const CreateCategory = () => {
   //   }
   // };
 
-  // const deleteCategory = (id) => {
-  //   fetch("/api/category-delete/" + id, {
-  //     method: "DELETE",
-  //   })
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       if (result) {
-  //         toast.info("Post Deleted Successfully!", {
-  //           position: toast.POSITION.TOP_RIGHT,
-  //         });
-  //         loadallCategory();
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
   useEffect(() => {
     loadallCategory();
+    editCategoryInfo();
   }, []);
 
   const lotarydata = [
@@ -265,6 +283,7 @@ const CreateCategory = () => {
           </CardLayout>
           {allcategory.catecoryList?.map((c, index) => (
             <div
+              key={index}
               style={{
                 border: "1px solid black",
                 margin: "10px",
@@ -273,13 +292,28 @@ const CreateCategory = () => {
                 display: "flex",
               }}
             >
-              <h5>{c.categoryName}</h5>
-              <button
-                className="btn btn-danger"
-                onClick={() => deleteCategory(c._id)}
-              >
-                Delete
-              </button>
+              <>
+                <h5>{c.categoryName}</h5>
+
+                <button
+                  className="btn btn-info"
+                  
+                >
+                  <Link
+                    to={"/edit-category/" + c._id}
+                    style={{ textDecoration: "none" }}
+                  >
+                    Edit
+                  </Link>
+                </button>
+
+                <button
+                  className="btn btn-danger"
+                  onClick={() => deleteCategory(c._id)}
+                >
+                  Delete
+                </button>
+              </>
             </div>
           ))}
         </div>

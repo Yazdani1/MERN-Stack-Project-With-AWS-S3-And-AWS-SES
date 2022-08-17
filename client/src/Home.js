@@ -49,7 +49,6 @@ const Home = () => {
   };
 
 
-
   useEffect(() => {
     loadallPosts();
     loadallCategory();

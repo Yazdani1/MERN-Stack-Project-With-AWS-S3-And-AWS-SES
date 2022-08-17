@@ -35,6 +35,17 @@ const getpostByCategory = async(id)=>{
 }
 
 
+// to edit category
+
+
+const editCategory = async(id,payload)=>{
+
+  const response = await axios.put("/api/category-edit/"+id,payload);
+  return response;
+
+}
+
+
 
 
 /***********/ ////////////////////////////////////**********/
@@ -91,5 +102,6 @@ module.exports = {
   deleteSinglePost,
   getRandomWinner,
   postRandomWinner,
-  getpostByCategory
+  getpostByCategory,
+  editCategory
 };
