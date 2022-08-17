@@ -56,39 +56,7 @@ const Post = ({ totalpost }) => {
     }
   };
 
-  // const submitData = (e) => {
-  //   e.preventDefault();
-
-  //   setError("");
-  //   setSuccess(false);
-
-  //   fetch("/api/post", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json",
-  //     },
-  //     body: JSON.stringify({ title, des, categoryBy: choseCategory }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       if (result.error) {
-  //         setError(result.error);
-  //         console.log(result.error);
-  //       } else {
-  //         setError("");
-  //         setSuccess(true);
-  //         setTitle("");
-  //         setChooseCategory("");
-  //         setDes("");
-
-  //         toast.success("Post created Successfully!", {
-  //           position: toast.POSITION.TOP_RIGHT,
-  //         });
-  //       }
-  //     });
-  // };
-
+ 
   const showError = () => (
     <div
       className="alert alert-danger"

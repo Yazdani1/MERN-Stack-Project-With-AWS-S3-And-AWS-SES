@@ -77,6 +77,8 @@ const getAllpost = async () => {
   return response;
 };
 
+// delete single post
+
 const deleteSinglePost = async (id) => {
   const response = await axios.delete("/api/delete/" + id);
   return response;
