@@ -35,7 +35,7 @@ const getpostByCategory = async(id)=>{
 }
 
 
-// to get single to category to sho data into update field
+// to get single category to show data into update field
 
 
 const getSingleCategorytoShowUpdateField = async(id)=>{

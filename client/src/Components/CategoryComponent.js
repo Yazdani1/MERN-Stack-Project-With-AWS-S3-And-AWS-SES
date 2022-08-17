@@ -8,42 +8,38 @@ const { editCategory, getSingleCategorytoShowUpdateField } = require("../API");
 const axios = require("axios");
 
 
-const CategoryComponent = ({ id, categoryName, deleteCategory }) => {
+const CategoryComponent = ({ id, categoryName, deleteCategory,loadallCategory }) => {
   // to show and hide edit field
 
   const [isShowing, setIsShowing] = useState(false);
-
-
   const [editname,setUpdatedName] = useState();
+
+
+  // to edit category
 
   const editCategoryInfo = async (e) => {
     e.preventDefault();
 
     try {
       const response = await editCategory(id, { categoryName: editname });
-      setUpdatedName(response.data.name);
-      
       if(response){
         setIsShowing(false);
+        loadallCategory();
       }
-
     } catch (error) {
       console.log(error.response && error.response.data.err);
     }
   };
 
+  // to show single cate to edit field
+
   const loadSingleCategory = async()=>{
-
     try {
-
         const response = await getSingleCategorytoShowUpdateField(id);
         setUpdatedName(response.data.categoryName);
-
     } catch(error){
         console.log(error.response && error.response.data.err);
-
     }
-
   }
 
 
@@ -79,8 +75,10 @@ const CategoryComponent = ({ id, categoryName, deleteCategory }) => {
           Delete
         </button>
 
-        {isShowing ? (
-          <CardLayout title="Category">
+       
+      </div>
+      {isShowing ? (
+          <CardLayout title="Update Category Name" cardHeight="200px">
             <div className="form-design">
               <form>
                 <div className="text-center"></div>
@@ -103,12 +101,20 @@ const CategoryComponent = ({ id, categoryName, deleteCategory }) => {
                   >
                     Update Category
                   </button>
+
+                  <button
+                    type="submit"
+                    name="btnSubmit"
+                    className="btn btn-danger"
+                    onClick={() => setIsShowing(false)}
+                  >
+                    Close
+                  </button>
                 </div>
               </form>
             </div>
           </CardLayout>
         ) : null}
-      </div>
     </div>
   );
 };

@@ -278,44 +278,8 @@ const CreateCategory = () => {
           </CardLayout>
           {allcategory.catecoryList?.map((c, index) => (
 
-            <CategoryComponent categoryName={c.categoryName} id={c._id} deleteCategory={deleteCategory} key={index}/>
+            <CategoryComponent loadallCategory={loadallCategory} categoryName={c.categoryName} id={c._id} deleteCategory={deleteCategory} key={index}/>
 
-            // <div
-            //   key={index}
-            //   style={{
-            //     border: "1px solid black",
-            //     margin: "10px",
-            //     padding: "10px",
-            //     borderRadius: "10px",
-            //     display: "flex",
-            //   }}
-            //   onClick={() => setIsShowing(index)}
-            // >
-            //   <>
-            //     <h5>{c.categoryName}</h5>
-
-            //     <button
-            //       className="btn btn-info"
-                  
-            //     >
-            //       <Link
-            //         to={"/edit-category/" + c._id}
-            //         style={{ textDecoration: "none" }}
-            //       >
-            //         Edit
-            //       </Link>
-            //     </button>
-
-            //     <button
-            //       className="btn btn-danger"
-            //       onClick={() => deleteCategory(c._id)}
-            //     >
-            //       Delete
-            //     </button>
-
-            //     {isShowing ? <p>This one has selected</p>:null}
-            //   </>
-            // </div>
           ))}
         </div>
       </div>

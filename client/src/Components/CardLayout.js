@@ -1,9 +1,9 @@
 import React from 'react'
 import "./cardlayout.css";
 
-const CardLayout = ({children, title}) => {
+const CardLayout = ({children, title,cardHeight}) => {
   return (
-    <div className='card-layout-design'>
+    <div className='card-layout-design' style={{height:cardHeight}}>
         <h5>{title}</h5>
         {children}
     </div>
