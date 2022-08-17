@@ -69,6 +69,20 @@ exports.getCategory = async (req, res) => {
   }
 };
 
+// to get single category to update
+
+exports.getSingleCategory = async(req,res)=>{
+
+  try {
+    const single_category_query = { _id: req.params.id };
+    const sinlgecategory = await Category.findOne(single_category_query);
+    res.status(200).json(sinlgecategory);
+  } catch (err) {
+    res.status(404).json({ err: "Something went wrong.Could find category" });
+  }
+}
+
+
 // to update category name
 
 exports.editCategory = async (req, res) => {

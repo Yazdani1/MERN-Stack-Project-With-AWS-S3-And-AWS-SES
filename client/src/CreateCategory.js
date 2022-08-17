@@ -156,15 +156,7 @@ const CreateCategory = () => {
 
   // to edit category
 
-  const editCategoryInfo = async (id) => {
-    try {
-      const response = await editCategory(id, editName);
-      // setEditName(response.data.categoryName);
-      console.log(response.data._id);
-    } catch (error) {
-      setError(error.response && error.response.data.err);
-    }
-  };
+
 
   const deleteCategory = async (id) => {
     try {
@@ -200,7 +192,6 @@ const CreateCategory = () => {
 
   useEffect(() => {
     loadallCategory();
-    editCategoryInfo();
   }, []);
 
   const lotarydata = [

@@ -35,6 +35,17 @@ const getpostByCategory = async(id)=>{
 }
 
 
+// to get single to category to sho data into update field
+
+
+const getSingleCategorytoShowUpdateField = async(id)=>{
+
+  const response = await axios.get("/api/getsingle-category/"+id);
+  return response;
+
+}
+
+
 // to edit category
 
 
@@ -103,5 +114,6 @@ module.exports = {
   getRandomWinner,
   postRandomWinner,
   getpostByCategory,
-  editCategory
+  editCategory,
+  getSingleCategorytoShowUpdateField
 };
