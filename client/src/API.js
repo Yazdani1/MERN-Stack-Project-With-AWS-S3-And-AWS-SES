@@ -24,6 +24,19 @@ const postCategory = async (payload) => {
   return response;
 };
 
+
+// to get category post
+
+const getpostByCategory = async(id)=>{
+
+  const response = await axios.get("/api/getpostsbycategory/"+id);
+  return response;
+
+}
+
+
+
+
 /***********/ ////////////////////////////////////**********/
 /************************* Post ***********************/
 /***********/ ////////////////////////////////////**********/
@@ -77,5 +90,6 @@ module.exports = {
   getAllpost,
   deleteSinglePost,
   getRandomWinner,
-  postRandomWinner
+  postRandomWinner,
+  getpostByCategory
 };

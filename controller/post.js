@@ -35,7 +35,7 @@ exports.getPosts = async (req, res) => {
   try {
     const allpostlist = await Post.find({})
       .sort({ date: "DESC" })
-      .populate("categoryBy", "_id categoryName date");
+      .populate("categoryBy", "_id categoryName date slug");
 
     res.json(allpostlist);
   } catch (err) {
@@ -66,7 +66,7 @@ exports.deletePost = async (req, res) => {
 
 
 
-//get post by category
+// get post by category
 
 exports.getpostBycategory = async (req, res) => {
   try {
@@ -78,7 +78,7 @@ exports.getpostBycategory = async (req, res) => {
 
     res.json({ categoryInfo, postsData });
   } catch (err) {
-    console.log(err);
+    res.status(404).json({error:"Category Could not found"})
   }
 };
 

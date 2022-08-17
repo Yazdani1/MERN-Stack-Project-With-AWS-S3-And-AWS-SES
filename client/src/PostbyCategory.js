@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
+const { getpostByCategory } = require("./API");
+
 const PostbyCategory = () => {
   const { id } = useParams();
 
   const [categoryPost, setCategoryPost] = useState([]);
 
-  const loadpostByCategory = () => {
-    fetch(`/api/getpostsbycategory/` + id, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result) {
-          setCategoryPost(result);
-          console.log(result);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const loadpostByCategory = async() => {
+
+    try {
+
+      const response = await getpostByCategory(id);
+
+      if(response){
+        setCategoryPost(response.data);
+      }
+
+    } catch(error){
+      console.log(error.response && error.response.data.error);
+    }
+
   };
 
   useEffect(() => {

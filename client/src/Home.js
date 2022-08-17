@@ -158,7 +158,7 @@ const Home = () => {
       <div
         className="home_header"
         style={{
-          height: "300px",
+          height: "100px",
           backgroundColor: "red",
           borderRadius: "10px",
           border: "1px solid black",
@@ -169,10 +169,12 @@ const Home = () => {
       </div>
 
       <div className="row">
-        <div className="col-xl-6 col-lg-6">
-          <ShowCharts allposts={allposts} />
+        <div className="col-xl-8 col-lg-8">
+          {/* <ShowCharts allposts={allposts} /> */}
 
-          <div
+  {/* to show random winner result */}
+
+          {/* <div
             style={{
               backgroundColor: "orangered",
               height: "250px",
@@ -191,7 +193,7 @@ const Home = () => {
               {" "}
               {winner.winnername}
             </h1>
-          </div>
+          </div> */}
 
           {allposts.map((item, index) => (
             <div className="card post-items" key={item._id}>
@@ -207,7 +209,7 @@ const Home = () => {
                 {/* <p>{item.date}</p> */}
 
                 <Link
-                  to={"/category/" + item.categoryBy?._id}
+                  to={"/category/" + item.categoryBy?.slug}
                   style={{ textDecoration: "none" }}
                 >
                   <h6>{item.categoryBy?.categoryName}</h6>
