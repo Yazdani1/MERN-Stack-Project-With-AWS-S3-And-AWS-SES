@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CardLayout from "./Components/CardLayout";
 import { Link, useHistory, useParams } from "react-router-dom";
-
+import CategoryComponent from "./Components/CategoryComponent";
 const axios = require("axios");
 const {
   getallCategory,
@@ -22,11 +22,15 @@ const CreateCategory = () => {
 
   // to show and hide edit field
 
+  const [isShowing, setIsShowing] = useState(-1);
+
   const [selected, setSelected] = useState(null);
   const toggle = (i) => {
     if (selected == i) {
       return setSelected(null);
     }
+
+    console.log(selected);
 
     setSelected(i);
   };
@@ -273,44 +277,50 @@ const CreateCategory = () => {
             </div>
           </CardLayout>
           {allcategory.catecoryList?.map((c, index) => (
-            <div
-              key={index}
-              style={{
-                border: "1px solid black",
-                margin: "10px",
-                padding: "10px",
-                borderRadius: "10px",
-                display: "flex",
-              }}
-            >
-              <>
-                <h5>{c.categoryName}</h5>
 
-                <button
-                  className="btn btn-info"
+            <CategoryComponent categoryName={c.categoryName} id={c._id} deleteCategory={deleteCategory} key={index}/>
+
+            // <div
+            //   key={index}
+            //   style={{
+            //     border: "1px solid black",
+            //     margin: "10px",
+            //     padding: "10px",
+            //     borderRadius: "10px",
+            //     display: "flex",
+            //   }}
+            //   onClick={() => setIsShowing(index)}
+            // >
+            //   <>
+            //     <h5>{c.categoryName}</h5>
+
+            //     <button
+            //       className="btn btn-info"
                   
-                >
-                  <Link
-                    to={"/edit-category/" + c._id}
-                    style={{ textDecoration: "none" }}
-                  >
-                    Edit
-                  </Link>
-                </button>
+            //     >
+            //       <Link
+            //         to={"/edit-category/" + c._id}
+            //         style={{ textDecoration: "none" }}
+            //       >
+            //         Edit
+            //       </Link>
+            //     </button>
 
-                <button
-                  className="btn btn-danger"
-                  onClick={() => deleteCategory(c._id)}
-                >
-                  Delete
-                </button>
-              </>
-            </div>
+            //     <button
+            //       className="btn btn-danger"
+            //       onClick={() => deleteCategory(c._id)}
+            //     >
+            //       Delete
+            //     </button>
+
+            //     {isShowing ? <p>This one has selected</p>:null}
+            //   </>
+            // </div>
           ))}
         </div>
       </div>
 
-      <div
+      {/* <div
         style={{
           backgroundColor: "red",
           color: "white",
@@ -321,7 +331,7 @@ const CreateCategory = () => {
         <h1>Lottery Winner</h1>
 
         <h1>Name: {lottarywinner.name}</h1>
-      </div>
+      </div> */}
 
       <ToastContainer autoClose={8000} />
     </div>

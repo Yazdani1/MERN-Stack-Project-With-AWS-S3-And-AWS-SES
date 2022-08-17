@@ -188,6 +188,20 @@ const Post = ({ totalpost }) => {
           </div>
         </div>
       </CardLayout>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginLeft: "10px",
+        }}
+      >
+        <p>gfdgf</p>
+        <p>gfdgf</p>
+
+        <p>gfdgf</p>
+      </div>
+
       <ToastContainer autoClose={8000} />
     </div>
   );
