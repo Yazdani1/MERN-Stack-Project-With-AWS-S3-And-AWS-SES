@@ -24,13 +24,6 @@ exports.createCategory = async (req, res) => {
     return res.status(400).json({ error: "Could not create a category" });
   }
 
-  // Category.create(categgoryData)
-  //   .then((result) => {
-  //     res.json(result);
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
 };
 
 //to get all the category list

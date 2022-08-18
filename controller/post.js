@@ -41,16 +41,6 @@ exports.getPosts = async (req, res) => {
   } catch (err) {
     res.status(400).json({ err: "Something went wrong.. Could not get Post" });
   }
-
-  // Post.find({})
-  //   .sort({ date: "DESC" })
-  //   .populate("categoryBy", "_id categoryName date")
-  //   .then((result) => {
-  //     res.json(result);
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
 };
 
 exports.deletePost = async (req, res) => {
