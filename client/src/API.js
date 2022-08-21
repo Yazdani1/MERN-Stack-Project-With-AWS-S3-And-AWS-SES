@@ -1,5 +1,30 @@
 const axios = require("axios");
 
+
+
+/***********/////////////////////////////////////**********/
+/******         User Authentication              **********/
+/***********/////////////////////////////////////**********/
+
+const userRegistration = async(payload)=>{
+
+  const response = await axios.post("/api/registration",payload);
+  return response;
+
+}
+
+
+const userLogin = async(payload)=>{
+
+  const response = await axios.post("/api/login",payload);
+  return response;
+
+}
+
+
+
+
+
 /***********/ ////////////////////////////////////**********/
 /************************* Category ***********************/
 /***********/ ////////////////////////////////////**********/
@@ -117,5 +142,7 @@ module.exports = {
   postRandomWinner,
   getpostByCategory,
   editCategory,
-  getSingleCategorytoShowUpdateField
+  getSingleCategorytoShowUpdateField,
+  userRegistration,
+  userLogin
 };

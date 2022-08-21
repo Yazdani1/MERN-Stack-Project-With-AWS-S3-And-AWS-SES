@@ -13,7 +13,7 @@ exports.userRegistration = async (req, res) => {
     if (!email) {
       return res
         .status(400)
-        .json({ errort: "Please Add Your valid E-mail Address" });
+        .json({ error: "Please Add Your valid E-mail Address" });
     }
     if (!password) {
       return res.status(400).json({ error: "Please Add Your Password" });
@@ -41,7 +41,6 @@ exports.userRegistration = async (req, res) => {
 
 
 exports.userLogIn = async(req,res)=>{
-
 
   try {
 

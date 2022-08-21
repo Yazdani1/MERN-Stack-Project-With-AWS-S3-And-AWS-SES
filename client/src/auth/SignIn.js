@@ -1,8 +1,54 @@
-import React from 'react'
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink,useHistory } from "react-router-dom";
+import React, { useState, useContext, useRef, useEffect } from "react";
+import { UserContext } from "../UserContext";
 import { ToastContainer, toast } from "react-toastify";
+import { userLogin } from "../API";
+const axios = require("axios");
 
 const SignIn = () => {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [state, setState] = useContext(UserContext);
+
+
+  const signIn = async (e) => {
+    e.preventDefault();
+
+    try {
+
+      const res = await userLogin({ email,password });
+
+      if (res) {
+        toast.success("Log In Successfully", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+        setEmail("");
+        setPassword("");
+
+          // update user information
+          setState({
+            user: res.user,
+            token: res.token
+          });
+
+          // save user info in local storage
+          window.localStorage.setItem("tokenLogin", JSON.stringify(res));
+          localStorage.setItem("token", res.token);
+
+
+
+      }
+    } catch (error) {
+      toast.error(error.response && error.response.data.error, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+
+      // setError(error.response && error.response.data.error);
+    }
+  };
+
+
   return (
     <div className="container">
     <div className="row justify-content-center align-items-center">
@@ -24,8 +70,8 @@ const SignIn = () => {
                 name="name"
                 className="form-control"
                 placeholder="Your Email *"
-                // value={name}
-                // onChange={handleChange}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="form-group">
@@ -34,6 +80,8 @@ const SignIn = () => {
                 name="name"
                 className="form-control"
                 placeholder="Password*"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
@@ -42,9 +90,9 @@ const SignIn = () => {
                 type="submit"
                 className="btnContact"
                 value="Sign In"
-                // onClick={(e) => {
-                //   dataSubmit(e);
-                // }}
+                onClick={(e) => {
+                  signIn(e);
+                }}
               >
                 Sign In
               </button>
