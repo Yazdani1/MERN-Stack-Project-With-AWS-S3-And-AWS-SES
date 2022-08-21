@@ -82,10 +82,13 @@ exports.editCategory = async (req, res) => {
   try {
     const { categoryName } = req.body;
 
+    const slug = slugify(categoryName);
+
+
     const edit_query = { _id: req.params.id };
 
     const editcategory = await Category.findByIdAndUpdate(edit_query, {
-      $set: { categoryName },
+      $set: { categoryName,slug },
     });
 
     res.status(200).json(editcategory);

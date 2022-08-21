@@ -11,6 +11,8 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [state, setState] = useContext(UserContext);
 
+  const history = useHistory();
+
 
   const signIn = async (e) => {
     e.preventDefault();
@@ -28,15 +30,14 @@ const SignIn = () => {
 
           // update user information
           setState({
-            user: res.user,
-            token: res.token
+            user: res.data.user,
+            token: res.data.token
           });
-
+          
           // save user info in local storage
-          window.localStorage.setItem("tokenLogin", JSON.stringify(res));
-          localStorage.setItem("token", res.token);
-
-
+          window.localStorage.setItem("tokenLogin", JSON.stringify(res.data));
+          window.localStorage.setItem("token", res.data.token);
+          history.push("/");
 
       }
     } catch (error) {
