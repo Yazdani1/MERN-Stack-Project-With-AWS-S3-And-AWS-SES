@@ -64,6 +64,7 @@ const CategoryComponent = ({ id, categoryName, deleteCategory,loadallCategory })
         onClick={() => setIsShowing(true)}
       >
         <h5>{categoryName}</h5>
+        <h5>{id}</h5>
 
         <button className="btn btn-info">
           <Link to={"/edit-category/" + id} style={{ textDecoration: "none" }}>

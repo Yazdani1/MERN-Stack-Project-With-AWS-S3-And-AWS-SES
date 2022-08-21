@@ -51,7 +51,7 @@ const getSingleCategorytoShowUpdateField = async(id)=>{
 
 const editCategory = async(id,payload)=>{
 
-  const response = await axios.put("/api/category-edit/"+id,payload);
+  const response = await axios.patch("/api/category-edit/"+id,payload);
   return response;
 
 }
