@@ -21,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api",require("./router/post"));
 app.use("/api",require("./router/category"));
+app.use("/api",require("./router/user"));
 
 
 // Serve static assets if in production

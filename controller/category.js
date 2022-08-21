@@ -1,6 +1,6 @@
 const Category = require("../model/Category");
 const Post = require("../model/Post");
-var slugify = require('slugify')
+var slugify = require('slugify');
 
 exports.createCategory = async (req, res) => {
   try {

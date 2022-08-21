@@ -16,6 +16,8 @@ var userSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  resetToken: String,
+  expireToken: Date,
 });
 
 module.exports = mongoose.model("User", userSchema);
