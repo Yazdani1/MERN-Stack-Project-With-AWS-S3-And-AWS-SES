@@ -9,6 +9,8 @@ import PostbyCategory from "./PostbyCategory";
 import Detailspost from "./Detailspost";
 import Pagenotfound from "./Pagenotfound";
 import EditCategory from "./EditCategory";
+import SignUp from "./auth/SignUp";
+import SignIn from "./auth/SignIn";
 
 const App = () => {
   return (
@@ -34,6 +36,17 @@ const App = () => {
 
         <Route path="/edit-category/:id" exact>
           <PageLayout FrontProtected={EditCategory} />
+        </Route>
+
+
+ {/* auth route */}
+        
+        <Route path="/signup" exact>
+          <PageLayout FrontProtected={SignUp} />
+        </Route>
+
+        <Route path="/signin" exact>
+          <PageLayout FrontProtected={SignIn} />
         </Route>
 
         <Route path="*" exact component={Pagenotfound} />

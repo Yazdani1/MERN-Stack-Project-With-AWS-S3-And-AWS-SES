@@ -16,6 +16,19 @@ const Navbar = () => {
         <Link to={"/create-category"} style={{ textDecoration: "none" }}>
           <li className="nav-item">Create Category</li>
         </Link>
+
+
+        <Link to={"/signup"} style={{ textDecoration: "none" }}>
+          <li className="nav-item">Sign Up</li>
+        </Link>
+
+        <Link to={"/signin"} style={{ textDecoration: "none" }}>
+          <li className="nav-item">Sign In</li>
+        </Link>
+
+
+        
+
       </ul>
     </nav>
   );
