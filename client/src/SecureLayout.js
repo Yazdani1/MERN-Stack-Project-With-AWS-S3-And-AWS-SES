@@ -23,9 +23,7 @@ const SecureLayout = ({ children }) => {
   // return auth?.user ? children : <Navigate to="/signin" replace state={{ from: location }}/>;
 
   return userstate?.user ? (
-    <>
-      {children}
-    </>
+    <> {children}</>
   ) : (
     <Navigate to="/signin" replace state={{ from: location }} />
   );
