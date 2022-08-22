@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
+import PageLayout from "./PageLayout";
+
 const axios = require("axios");
 
 const Detailspost = () => {
@@ -15,14 +17,12 @@ const Detailspost = () => {
 
       console.log(response);
     } catch (error) {
-
       // if(error.response){
       //   setError(error.response.data.err);
 
       // }
 
       setError(error.response && error.response.data.err);
-
     }
   };
 
@@ -49,58 +49,63 @@ const Detailspost = () => {
   }, []);
 
   return (
-    <div className="container">
-      {/* header section */}
+    <PageLayout>
+      <div className="container">
+        {/* header section */}
 
-      <div
-        className="header-section"
-        style={{
-          height: "300px",
-          backgroundColor: "orangered",
-          textAlign: "center",
-        }}
-      >
-        <h5>Category Page</h5>
-      </div>
+        <div
+          className="header-section"
+          style={{
+            height: "300px",
+            backgroundColor: "orangered",
+            textAlign: "center",
+          }}
+        >
+          <h5>Category Page</h5>
+        </div>
 
-      <div
-        className="details-post"
-        style={{
-          backgroundColor: "green",
-          marginTop: "20px",
-          color: "white",
-          padding: "20px",
-        }}
-      >
-        <h1>{error}</h1>
-        <h1>Title: {singlepost.detailspost?.title}</h1>
-        <h4>Des: {singlepost.detailspost?.des}</h4>
-        <h5>{singlepost.detailspost?.categoryBy.categoryName}</h5>
-      </div>
+        <div
+          className="details-post"
+          style={{
+            backgroundColor: "green",
+            marginTop: "20px",
+            color: "white",
+            padding: "20px",
+          }}
+        >
+          <h1>{error}</h1>
+          <h1>Title: {singlepost.detailspost?.title}</h1>
+          <h4>Des: {singlepost.detailspost?.des}</h4>
+          <h5>{singlepost.detailspost?.categoryBy.categoryName}</h5>
+        </div>
 
-      <div className="related-posts">
-        <h4>Related Post : {singlepost.relatedpost?.length}</h4>
-        <div className="row">
-          {singlepost.relatedpost &&
-            singlepost.relatedpost.map((item, index) => (
-              <div className="col-xl-4 col-lg-4 col-md-6 col-sm-12" key={index}>
+        <div className="related-posts">
+          <h4>Related Post : {singlepost.relatedpost?.length}</h4>
+          <div className="row">
+            {singlepost.relatedpost &&
+              singlepost.relatedpost.map((item, index) => (
                 <div
-                  className="card"
-                  style={{
-                    marginTop: "20px",
-                    color: "black",
-                    padding: "20px",
-                  }}
+                  className="col-xl-4 col-lg-4 col-md-6 col-sm-12"
+                  key={index}
                 >
-                  <h1>{item.title}</h1>
-                  <h4>{item.des}</h4>
-                  <h5>{item.categoryBy && item.categoryBy?.categoryName}</h5>
+                  <div
+                    className="card"
+                    style={{
+                      marginTop: "20px",
+                      color: "black",
+                      padding: "20px",
+                    }}
+                  >
+                    <h1>{item.title}</h1>
+                    <h4>{item.des}</h4>
+                    <h5>{item.categoryBy && item.categoryBy?.categoryName}</h5>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+          </div>
         </div>
       </div>
-    </div>
+    </PageLayout>
   );
 };
 

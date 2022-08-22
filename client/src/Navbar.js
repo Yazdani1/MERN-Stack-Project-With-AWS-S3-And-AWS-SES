@@ -8,29 +8,42 @@ const Navbar = () => {
 
   return (
     <nav className="navbar-main">
-      <ul>
-        <li>gdfgdffd{state && state.user && state.user.name}</li>
-        <li>Token{state && state.token && state.token}</li>
+      {state && state.token && state.token ? (
+        <ul>
+          <li>{state && state.user && state.user.name}</li>
 
+          <Link to={"/"} style={{ textDecoration: "none" }}>
+            <li className="nav-item">Home</li>
+          </Link>
+          <Link to={"/post"} style={{ textDecoration: "none" }}>
+            <li className="nav-item">Post</li>
+          </Link>
+          <Link to={"/create-category"} style={{ textDecoration: "none" }}>
+            <li className="nav-item">Create Category</li>
+          </Link>
 
-        <Link to={"/"} style={{ textDecoration: "none" }}>
-          <li className="nav-item">Home</li>
-        </Link>
-        <Link to={"/post"} style={{ textDecoration: "none" }}>
-          <li className="nav-item">Post</li>
-        </Link>
-        <Link to={"/create-category"} style={{ textDecoration: "none" }}>
-          <li className="nav-item">Create Category</li>
-        </Link>
+          <Link to={"/signout"} style={{ textDecoration: "none" }}>
+            <li className="nav-item">Sign Out</li>
+          </Link>
 
-        <Link to={"/signup"} style={{ textDecoration: "none" }}>
-          <li className="nav-item">Sign Up</li>
-        </Link>
+       
+        </ul>
+      ) : (
+        <ul>
 
-        <Link to={"/signin"} style={{ textDecoration: "none" }}>
-          <li className="nav-item">Sign In</li>
-        </Link>
-      </ul>
+          <Link to={"/"} style={{ textDecoration: "none" }}>
+            <li className="nav-item">Home</li>
+          </Link>
+      
+          <Link to={"/signup"} style={{ textDecoration: "none" }}>
+            <li className="nav-item">Sign Up</li>
+          </Link>
+
+          <Link to={"/signin"} style={{ textDecoration: "none" }}>
+            <li className="nav-item">Sign In</li>
+          </Link>
+        </ul>
+      )}
     </nav>
   );
 };

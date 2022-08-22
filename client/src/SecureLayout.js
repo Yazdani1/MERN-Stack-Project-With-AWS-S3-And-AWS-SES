@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { UserContext } from "./UserContext";
 import { Navigate, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
@@ -6,32 +6,28 @@ import Navbar from "./Navbar";
 const SecureLayout = ({ children }) => {
   let location = useLocation();
 
-  const [state, setState] = useContext(UserContext);
+  const [userstate, setState] = useContext(UserContext);
 
-//   const auth = JSON.parse(localStorage.getItem('token'));
+  //   const auth = JSON.parse(localStorage.getItem('tokenLogin'));
 
+  //   useEffect(() => {
 
-  useEffect(() => {
-    if (!state && state.token && state.token) {
-        return <Navigate to="/signin" state={{ from: location }}  />;
-      }
-  });
+  //   });
 
+  //   if (!userstate && userstate.token && userstate.token) {
+  //     return <Navigate to="/signin" state={{ from: location }} replace />;
+  //   }
 
+  //   const auth = JSON.parse(localStorage.getItem("tokenLogin"));
 
+  // return auth?.user ? children : <Navigate to="/signin" replace state={{ from: location }}/>;
 
-  return (
+  return userstate?.user ? (
     <>
-      <Navbar />
-
-      return <Navigate to="/signin" state={{ from: location }}  replace/>;
-
-
-      {/* return auth?.user ? children : <Navigate to="/signin" />; */}
-
-
       {children}
     </>
+  ) : (
+    <Navigate to="/signin" replace state={{ from: location }} />
   );
 };
 

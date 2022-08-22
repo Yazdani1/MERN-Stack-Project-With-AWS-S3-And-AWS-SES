@@ -6,6 +6,8 @@ import { ShowCharts } from "./charts/ShowCharts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const axios = require("axios");
+import PageLayout from "./PageLayout";
+
 const {
   getallCategory,
   getRandomWinner,
@@ -20,13 +22,12 @@ const Home = () => {
   const [allcategory, setAllcategory] = useState([]);
   const [categoryPost, setCategoryPost] = useState([]);
 
-  console.log("To test"+categoryPost)
+  console.log("To test" + categoryPost);
 
   const loadallPosts = async () => {
     try {
       const response = await getAllpost();
       setPosts(response.data);
-
     } catch (error) {
       console.log(error.response && error.response.data.error);
     }
@@ -103,28 +104,29 @@ const Home = () => {
   };
 
   return (
-    <div className="container">
-      <div
-        className="home_header"
-        style={{
-          height: "100px",
-          backgroundColor: "red",
-          borderRadius: "10px",
-          border: "1px solid black",
-          marginTop: "30px",
-        }}
-      >
-        <h4>Home Page</h4>
-        {categoryPost ? "Category":"Normal post"}
-      </div>
+    <PageLayout>
+      <div className="container">
+        <div
+          className="home_header"
+          style={{
+            height: "100px",
+            backgroundColor: "red",
+            borderRadius: "10px",
+            border: "1px solid black",
+            marginTop: "30px",
+          }}
+        >
+          <h4>Home Page</h4>
+          {categoryPost ? "Category" : "Normal post"}
+        </div>
 
-      <div className="row">
-        <div className="col-xl-8 col-lg-8">
-          {/* <ShowCharts allposts={allposts} /> */}
+        <div className="row">
+          <div className="col-xl-8 col-lg-8">
+            {/* <ShowCharts allposts={allposts} /> */}
 
-          {/* to show random winner result */}
+            {/* to show random winner result */}
 
-          {/* <div
+            {/* <div
             style={{
               backgroundColor: "orangered",
               height: "250px",
@@ -145,122 +147,119 @@ const Home = () => {
             </h1>
           </div> */}
 
-
-
-          {allposts.map((item, index) => (
-            <div className="card post-items" key={item._id}>
-              <div>
-                <Link
-                  to={"/details-post/" + item._id}
-                  style={{ textDecoration: "none" }}
-                >
-                  <p className="postinfo">Income: {item.title}</p>
-                </Link>
-
-                <p className="postinfo">Expense: {item.des}</p>
-
-                <Link
-                  to={"/category/" + item.categoryBy?.slug}
-                  style={{ textDecoration: "none" }}
-                >
-                  <h6>{item.categoryBy?.categoryName}</h6>
-                </Link>
-              </div>
-              <button
-                className="btn btn-delete"
-                onClick={() => deletePost(item._id)}
-              >
-                Delete
-              </button>
-            </div>
-          ))}
-
-          {categoryPost?.postsData?.map((item, index) => (
-            <>
+            {allposts.map((item, index) => (
               <div className="card post-items" key={item._id}>
-                <h1>Posts By Category</h1>
                 <div>
-                  <p className="postinfo">Income: {item.title}</p>
+                  <Link
+                    to={"/details-post/" + item._id}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <p className="postinfo">Income: {item.title}</p>
+                  </Link>
+
                   <p className="postinfo">Expense: {item.des}</p>
 
                   <Link
-                    to={"/category/" + item.categoryBy?._id}
+                    to={"/category/" + item.categoryBy?.slug}
                     style={{ textDecoration: "none" }}
                   >
                     <h6>{item.categoryBy?.categoryName}</h6>
                   </Link>
-                  {/* <p className="postinfo">{item.date}</p> */}
                 </div>
-                {/* <button
+                <button
+                  className="btn btn-delete"
+                  onClick={() => deletePost(item._id)}
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+
+            {categoryPost?.postsData?.map((item, index) => (
+              <>
+                <div className="card post-items" key={item._id}>
+                  <h1>Posts By Category</h1>
+                  <div>
+                    <p className="postinfo">Income: {item.title}</p>
+                    <p className="postinfo">Expense: {item.des}</p>
+
+                    <Link
+                      to={"/category/" + item.categoryBy?._id}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <h6>{item.categoryBy?.categoryName}</h6>
+                    </Link>
+                    {/* <p className="postinfo">{item.date}</p> */}
+                  </div>
+                  {/* <button
                 className="btn-delete"
                 onClick={() => deletePost(item._id)}
               >
                 Delete
               </button> */}
-              </div>
-            </>
-          ))}
-
-
-        </div>
-        <div className="col-xl-4 col-lg-4">
-          <div
-            className="category-section"
-            style={{
-              backgroundColor: "orangered",
-              color: "white",
-              margin: "10px",
-              padding: "20px",
-            }}
-          >
-            {allcategory.catecoryList?.map((c, index) => (
-              <div
-                style={{
-                  border: "1px solid yellow",
-                  margin: "10px",
-                  padding: "10px",
-                  borderRadius: "10px",
-                }}
-              >
-                <Link
-                  to={"/category/" + c.slug}
-                  style={{ textDecoration: "none", color: "White" }}
+                </div>
+              </>
+            ))}
+          </div>
+          <div className="col-xl-4 col-lg-4">
+            <div
+              className="category-section"
+              style={{
+                backgroundColor: "orangered",
+                color: "white",
+                margin: "10px",
+                padding: "20px",
+              }}
+            >
+              {allcategory.catecoryList?.map((c, index) => (
+                <div
+                  style={{
+                    border: "1px solid yellow",
+                    margin: "10px",
+                    padding: "10px",
+                    borderRadius: "10px",
+                  }}
                 >
-                  <h5>{c.categoryName} </h5>
-                </Link>
-              </div>
-            ))}
-          </div>
+                  <Link
+                    to={"/category/" + c.slug}
+                    style={{ textDecoration: "none", color: "White" }}
+                  >
+                    <h5>{c.categoryName} </h5>
+                  </Link>
+                </div>
+              ))}
+            </div>
 
-          <div
-            className="category-section"
-            style={{
-              backgroundColor: "Black",
-              color: "white",
-              margin: "10px",
-              padding: "20px",
-            }}
-          >
-            {allcategory.catecoryList?.map((c, index) => (
-              <div
-                style={{
-                  border: "1px solid yellow",
-                  margin: "10px",
-                  padding: "10px",
-                  borderRadius: "10px",
-                  cursor: "pointer",
-                }}
-              >
-                <h5 onClick={() => loadpostByCategory(c.slug)}>
-                  {c.categoryName}{" "}
-                </h5>
-              </div>
-            ))}
+            <div
+              className="category-section"
+              style={{
+                backgroundColor: "Black",
+                color: "white",
+                margin: "10px",
+                padding: "20px",
+              }}
+            >
+              {allcategory.catecoryList?.map((c, index) => (
+                <div
+                  style={{
+                    border: "1px solid yellow",
+                    margin: "10px",
+                    padding: "10px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <h5 onClick={() => loadpostByCategory(c.slug)}>
+                    {c.categoryName}{" "}
+                  </h5>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
+        <ToastContainer autoClose={8000} />
       </div>
-      <ToastContainer autoClose={8000} />
-    </div>
+    </PageLayout>
   );
 };
 

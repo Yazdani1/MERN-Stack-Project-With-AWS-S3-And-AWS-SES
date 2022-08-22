@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CardLayout from "./Components/CardLayout";
 const axios = require("axios");
+import PageLayout from "./PageLayout";
 const { getallCategory, createPost } = require("./API");
 
 const Post = ({ totalpost }) => {
@@ -56,7 +57,6 @@ const Post = ({ totalpost }) => {
     }
   };
 
- 
   const showError = () => (
     <div
       className="alert alert-danger"
@@ -89,89 +89,91 @@ const Post = ({ totalpost }) => {
   }, []);
 
   return (
-    <div className="container">
-      <CardLayout title="Create new post">
-        <div className="row">
-          <div className="col-lg-12 col-md-12 col-sm-12">
-            <div className="form-design ">
-              <form>
-                <div className="text-center">
-                  {showError()}
-                  {showSuccess()}
-                </div>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    value={title}
-                    onChange={handleChange}
-                    className="form-control"
-                    placeholder="Income..."
-                  />
-                </div>
+    <PageLayout>
+      <div className="container">
+        <CardLayout title="Create new post">
+          <div className="row">
+            <div className="col-lg-12 col-md-12 col-sm-12">
+              <div className="form-design ">
+                <form>
+                  <div className="text-center">
+                    {showError()}
+                    {showSuccess()}
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      value={title}
+                      onChange={handleChange}
+                      className="form-control"
+                      placeholder="Income..."
+                    />
+                  </div>
 
-                <div className="event-form">
-                  <label for="exampleInputEmail1" className="form-label">
-                    Select Category
-                  </label>
-                  <select
-                    className="custom-select"
-                    value={choseCategory}
-                    onChange={(e) => setChooseCategory(e.target.value)}
-                  >
-                    {allcategory.catecoryList?.map((c, index) => (
-                      <option key={index} value={c._id}>
-                        {c.categoryName}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                  <div className="event-form">
+                    <label for="exampleInputEmail1" className="form-label">
+                      Select Category
+                    </label>
+                    <select
+                      className="custom-select"
+                      value={choseCategory}
+                      onChange={(e) => setChooseCategory(e.target.value)}
+                    >
+                      {allcategory.catecoryList?.map((c, index) => (
+                        <option key={index} value={c._id}>
+                          {c.categoryName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-                <div className="form-group">
-                  <textarea
-                    value={des}
-                    onChange={handleChangedes}
-                    className="form-control"
-                    rows="5"
-                    placeholder="Expense..."
-                  />
-                </div>
+                  <div className="form-group">
+                    <textarea
+                      value={des}
+                      onChange={handleChangedes}
+                      className="form-control"
+                      rows="5"
+                      placeholder="Expense..."
+                    />
+                  </div>
 
-                <div class="form-group justify-content-center align-items-center">
-                  <button
-                    type="submit"
-                    // onKeyDown={buttonKeyDown}
+                  <div class="form-group justify-content-center align-items-center">
+                    <button
+                      type="submit"
+                      // onKeyDown={buttonKeyDown}
 
-                    name="btnSubmit"
-                    className="btnContact"
-                    value="Sign In"
-                    onClick={(e) => {
-                      submitData(e);
-                    }}
-                  >
-                    Submit
-                  </button>
-                </div>
-              </form>
+                      name="btnSubmit"
+                      className="btnContact"
+                      value="Sign In"
+                      onClick={(e) => {
+                        submitData(e);
+                      }}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
+        </CardLayout>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginLeft: "10px",
+          }}
+        >
+          <p>gfdgf</p>
+          <p>gfdgf</p>
+
+          <p>gfdgf</p>
         </div>
-      </CardLayout>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginLeft: "10px",
-        }}
-      >
-        <p>gfdgf</p>
-        <p>gfdgf</p>
-
-        <p>gfdgf</p>
+        <ToastContainer autoClose={8000} />
       </div>
-
-      <ToastContainer autoClose={8000} />
-    </div>
+    </PageLayout>
   );
 };
 
