@@ -13,6 +13,7 @@ import SignUp from "./auth/SignUp";
 import SignIn from "./auth/SignIn";
 import { UserProvider } from "./UserContext";
 import SecureLayout from "./SecureLayout";
+import News from "./News/News";
 
 const App = () => {
   return (
@@ -22,11 +23,8 @@ const App = () => {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Home />} />
-          
           <Route path="/category/:id" element={<PostbyCategory />} />
-
           <Route path="/details-post/:id" element={<Detailspost />} />
-
 
           <Route
             path="/post"
@@ -42,6 +40,15 @@ const App = () => {
             element={
               <SecureLayout>
                 <CreateCategory />
+              </SecureLayout>
+            }
+          />
+
+          <Route
+            path="/create-news"
+            element={
+              <SecureLayout>
+                <News />
               </SecureLayout>
             }
           />
@@ -95,7 +102,6 @@ const App = () => {
     //     </Switch>
     //   </BrowserRouter>
     // </UserProvider>
-    
   );
 };
 

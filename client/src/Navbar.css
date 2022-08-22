@@ -17,6 +17,10 @@
     top: 0;
     z-index: 1;
   }
+
+  .navbar-main-admin{
+    background-color: #38004c;
+  }
   
   .navbar-main-bg {
     background-color: #38004c;

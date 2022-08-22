@@ -17,7 +17,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar-main">
+    <nav className={state && state.user && state.user.name ? "navbar-main navbar-main-admin" : "navbar-main"}>
       {state && state.token && state.token ? (
         <ul>
           <li>{state && state.user && state.user.name}</li>
@@ -30,6 +30,9 @@ const Navbar = () => {
           </Link>
           <Link to={"/create-category"} style={{ textDecoration: "none" }}>
             <li className="nav-item">Create Category</li>
+          </Link>
+          <Link to={"/create-news"} style={{ textDecoration: "none" }}>
+            <li className="nav-item">Create News</li>
           </Link>
 
           <Link to={"/signin"} style={{ textDecoration: "none" }} onClick={logOut}>

@@ -3,9 +3,9 @@ import "./App.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CardLayout from "./Components/CardLayout";
-const axios = require("axios");
 import PageLayout from "./PageLayout";
 const { getallCategory, createPost } = require("./API");
+const axios = require("axios");
 
 const Post = ({ totalpost }) => {
   const [title, setTitle] = useState("");

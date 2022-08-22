@@ -5,8 +5,9 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import { ShowCharts } from "./charts/ShowCharts";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const axios = require("axios");
 import PageLayout from "./PageLayout";
+
+const axios = require("axios");
 
 const {
   getallCategory,
