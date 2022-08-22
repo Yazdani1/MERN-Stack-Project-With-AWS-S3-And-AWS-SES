@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import CardLayout from "./Components/CardLayout";
 const axios = require("axios");
 
@@ -11,7 +11,7 @@ const {
 const EditCategory = () => {
   const { id } = useParams();
 
-  const history = useHistory();
+  // const history = useHistory();
 
   const [editname,setUpdatedName] = useState();
 
@@ -39,7 +39,7 @@ const EditCategory = () => {
       const response = await editCategory(id,{categoryName:editname});
 
       if(response){
-        history.push("/create-category");
+        // history.push("/create-category");
       }
 
     } catch (error) {

@@ -1,4 +1,4 @@
-import { Link, NavLink,useHistory } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { UserContext } from "../UserContext";
 import { ToastContainer, toast } from "react-toastify";
@@ -11,7 +11,7 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [state, setState] = useContext(UserContext);
 
-  const history = useHistory();
+  // const history = useHistory();
 
 
   const signIn = async (e) => {
@@ -37,7 +37,7 @@ const SignIn = () => {
           // save user info in local storage
           window.localStorage.setItem("tokenLogin", JSON.stringify(res.data));
           window.localStorage.setItem("token", res.data.token);
-          history.push("/");
+          // history.push("/");
 
       }
     } catch (error) {

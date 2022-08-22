@@ -10,6 +10,8 @@ const Navbar = () => {
     <nav className="navbar-main">
       <ul>
         <li>gdfgdffd{state && state.user && state.user.name}</li>
+        <li>Token{state && state.token && state.token}</li>
+
 
         <Link to={"/"} style={{ textDecoration: "none" }}>
           <li className="nav-item">Home</li>

@@ -1,7 +1,7 @@
 import React from "react";
 import Home from "./Home";
 import Navbar from "./Navbar";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PageLayout from "./PageLayout";
 import Post from "./Post";
 import CreateCategory from "./CreateCategory";
@@ -12,48 +12,88 @@ import EditCategory from "./EditCategory";
 import SignUp from "./auth/SignUp";
 import SignIn from "./auth/SignIn";
 import { UserProvider } from "./UserContext";
+import SecureLayout from "./SecureLayout";
 
 const App = () => {
   return (
     <UserProvider>
       <BrowserRouter>
-        <Switch>
-          <Route path="/" exact>
-            <PageLayout FrontProtected={Home} />
-          </Route>
+        <Routes>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<Home />} />
+          
+          <Route path="/category/:id" element={<PostbyCategory />} />
 
-          <Route path="/post" exact>
-            <PageLayout FrontProtected={Post} />
-          </Route>
-          <Route path="/create-category" exact>
-            <PageLayout FrontProtected={CreateCategory} />
-          </Route>
+          <Route path="/details-post/:id" element={<Detailspost />} />
 
-          <Route path="/category/:id" exact>
-            <PageLayout FrontProtected={PostbyCategory} />
-          </Route>
-          <Route path="/details-post/:id" exact>
-            <PageLayout FrontProtected={Detailspost} />
-          </Route>
 
-          <Route path="/edit-category/:id" exact>
-            <PageLayout FrontProtected={EditCategory} />
-          </Route>
+          <Route
+            path="/post"
+            element={
+              <SecureLayout>
+                <Post />
+              </SecureLayout>
+            }
+          />
 
-          {/* auth route */}
+          <Route
+            path="/create-category"
+            element={
+              <SecureLayout>
+                <CreateCategory />
+              </SecureLayout>
+            }
+          />
 
-          <Route path="/signup" exact>
-            <PageLayout FrontProtected={SignUp} />
-          </Route>
-
-          <Route path="/signin" exact>
-            <PageLayout FrontProtected={SignIn} />
-          </Route>
-
-          <Route path="*" exact component={Pagenotfound} />
-        </Switch>
+          <Route
+            path="/edit-category/:id"
+            element={
+              <SecureLayout>
+                <EditCategory />
+              </SecureLayout>
+            }
+          />
+        </Routes>
       </BrowserRouter>
     </UserProvider>
+    // <UserProvider>
+    //   <BrowserRouter>
+    //     <Switch>
+    //       <Route path="/" exact>
+    //         <PageLayout FrontProtected={Home} />
+    //       </Route>
+
+    //       <Route path="/post" exact>
+    //         <PageLayout FrontProtected={Post} />
+    //       </Route>
+    //       <Route path="/create-category" exact>
+    //         <PageLayout FrontProtected={CreateCategory} />
+    //       </Route>
+
+    //       <Route path="/category/:id" exact>
+    //         <PageLayout FrontProtected={PostbyCategory} />
+    //       </Route>
+    //       <Route path="/details-post/:id" exact>
+    //         <PageLayout FrontProtected={Detailspost} />
+    //       </Route>
+
+    //       <Route path="/edit-category/:id" exact>
+    //         <PageLayout FrontProtected={EditCategory} />
+    //       </Route>
+
+    //       <Route path="/signup" exact>
+    //         <PageLayout FrontProtected={SignUp} />
+    //       </Route>
+
+    //       <Route path="/signin" exact>
+    //         <PageLayout FrontProtected={SignIn} />
+    //       </Route>
+
+    //       <Route path="*" exact component={Pagenotfound} />
+    //     </Switch>
+    //   </BrowserRouter>
+    // </UserProvider>
   );
 };
 
