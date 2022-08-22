@@ -2,9 +2,19 @@ import React, { useState, useContext } from "react";
 import "./Navbar.css";
 import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "./UserContext";
+import { Navigate, useLocation,useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [state, setState] = useContext(UserContext);
+
+  const navigate = useNavigate();
+
+  const logOut = () => {
+    window.localStorage.removeItem("tokenLogin");
+    window.localStorage.removeItem("token");
+    setState(null);
+    navigate("/signin");
+  };
 
   return (
     <nav className="navbar-main">
@@ -22,7 +32,7 @@ const Navbar = () => {
             <li className="nav-item">Create Category</li>
           </Link>
 
-          <Link to={"/signout"} style={{ textDecoration: "none" }}>
+          <Link to={"/signin"} style={{ textDecoration: "none" }} onClick={logOut}>
             <li className="nav-item">Sign Out</li>
           </Link>
 

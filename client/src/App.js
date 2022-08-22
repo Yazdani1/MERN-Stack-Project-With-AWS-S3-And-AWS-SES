@@ -57,7 +57,7 @@ const App = () => {
         </Routes>
       </BrowserRouter>
     </UserProvider>
-    
+
     // <UserProvider>
     //   <BrowserRouter>
     //     <Switch>
@@ -95,6 +95,7 @@ const App = () => {
     //     </Switch>
     //   </BrowserRouter>
     // </UserProvider>
+    
   );
 };
 

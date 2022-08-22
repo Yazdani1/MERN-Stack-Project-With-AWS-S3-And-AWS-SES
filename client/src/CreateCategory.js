@@ -5,6 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import CardLayout from "./Components/CardLayout";
 import { Link, useHistory, useParams } from "react-router-dom";
 import CategoryComponent from "./Components/CategoryComponent";
+import PageLayout from "./PageLayout";
+
 const axios = require("axios");
 const {
   getallCategory,
@@ -160,8 +162,6 @@ const CreateCategory = () => {
 
   // to edit category
 
-
-
   const deleteCategory = async (id) => {
     try {
       const response = await deleteSingleCategory(id);
@@ -228,63 +228,68 @@ const CreateCategory = () => {
   var lottarywinner = lotarydata[Math.floor(Math.random() * lotarydata.length)];
 
   return (
-    <div className="container">
-      <div
-        className="category-header"
-        style={{
-          height: "300px",
-          backgroundColor: "orangered",
-          color: "white",
-        }}
-      >
-        <h1>Category Page</h1>
-      </div>
-
-      <div className="row">
-        <div className="col-lg-12 col-md-12 col-sm-12">
-          <CardLayout title="Category">
-            <div className="form-design">
-              <form>
-                <div className="text-center">
-                  {/* <h5 className="text-center">Notebook app</h5>
-                  <h5 className="text-center">Create Category</h5> */}
-                  {showError()}
-                  {showSuccess()}
-                </div>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    value={categoryName}
-                    onChange={handleChange}
-                    className="form-control"
-                    placeholder="Income..."
-                  />
-                </div>
-
-                <div class="form-group justify-content-center align-items-center">
-                  <button
-                    type="submit"
-                    name="btnSubmit"
-                    className="btnContact"
-                    onClick={(e) => {
-                      submitData(e);
-                    }}
-                  >
-                    Create Category
-                  </button>
-                </div>
-              </form>
-            </div>
-          </CardLayout>
-          {allcategory.catecoryList?.map((c, index) => (
-
-            <CategoryComponent loadallCategory={loadallCategory} categoryName={c.categoryName} id={c._id} deleteCategory={deleteCategory} key={index}/>
-
-          ))}
+    <PageLayout>
+      <div className="container">
+        <div
+          className="category-header"
+          style={{
+            height: "300px",
+            backgroundColor: "orangered",
+            color: "white",
+          }}
+        >
+          <h1>Category Page</h1>
         </div>
-      </div>
 
-      {/* <div
+        <div className="row">
+          <div className="col-lg-12 col-md-12 col-sm-12">
+            <CardLayout title="Category">
+              <div className="form-design">
+                <form>
+                  <div className="text-center">
+                    {/* <h5 className="text-center">Notebook app</h5>
+                  <h5 className="text-center">Create Category</h5> */}
+                    {showError()}
+                    {showSuccess()}
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      value={categoryName}
+                      onChange={handleChange}
+                      className="form-control"
+                      placeholder="Income..."
+                    />
+                  </div>
+
+                  <div class="form-group justify-content-center align-items-center">
+                    <button
+                      type="submit"
+                      name="btnSubmit"
+                      className="btnContact"
+                      onClick={(e) => {
+                        submitData(e);
+                      }}
+                    >
+                      Create Category
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </CardLayout>
+            {allcategory.catecoryList?.map((c, index) => (
+              <CategoryComponent
+                loadallCategory={loadallCategory}
+                categoryName={c.categoryName}
+                id={c._id}
+                deleteCategory={deleteCategory}
+                key={index}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* <div
         style={{
           backgroundColor: "red",
           color: "white",
@@ -297,8 +302,9 @@ const CreateCategory = () => {
         <h1>Name: {lottarywinner.name}</h1>
       </div> */}
 
-      <ToastContainer autoClose={8000} />
-    </div>
+        <ToastContainer autoClose={8000} />
+      </div>
+    </PageLayout>
   );
 };
 
