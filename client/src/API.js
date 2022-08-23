@@ -1,15 +1,24 @@
+
 const axios = require("axios");
+
+const headerConfig = () => {
+  return {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
+};
 
 /***********/ ////////////////////////////////////**********/
 /******         User Authentication              **********/
 /***********/ ////////////////////////////////////**********/
 
-const userRegistration = async (payload) => {
+ const userRegistration = async (payload) => {
   const response = await axios.post("/api/registration", payload);
   return response;
 };
 
-const userLogin = async (payload) => {
+ const userLogin = async (payload) => {
   const response = await axios.post("/api/login", payload);
   return response;
 };
@@ -66,26 +75,14 @@ const editCategory = async (id, payload) => {
 // to create post
 
 const createPost = async (payload) => {
-  const response = await axios.post("/api/post", payload, {
-    headers: {
-      // "Content-Type": "application/json",
-      // Accept: "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
+  const response = await axios.post("/api/post", payload, headerConfig());
   return response;
 };
 
 // to get all the post
 
 const getAllpost = async () => {
-  const response = await axios.get("/api/getposts",{
-    headers: {
-      // "Content-Type": "application/json",
-      // Accept: "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
+  const response = await axios.get("/api/getposts", headerConfig());
   return response;
 };
 
