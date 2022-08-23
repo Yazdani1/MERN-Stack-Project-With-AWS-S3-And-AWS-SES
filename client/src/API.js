@@ -27,41 +27,35 @@ const headerConfig = () => {
 /************************* Category ***********************/
 /***********/ ////////////////////////////////////**********/
 
-// to load all the category
 const getallCategory = async () => {
   const response = await axios.get("/api/getall-category");
   return response;
 };
 
-// to delete category
 
 const deleteSingleCategory = async (id) => {
   const response = await axios.delete(`/api/category-delete/${id}`);
   return response;
 };
 
-// to post category
 
 const postCategory = async (payload) => {
   const response = await axios.post("/api/categoryceate", payload);
   return response;
 };
 
-// to get category post
 
 const getpostByCategory = async (id) => {
   const response = await axios.get("/api/getpostsbycategory/" + id);
   return response;
 };
 
-// to get single category to show data into update field
 
 const getSingleCategorytoShowUpdateField = async (id) => {
   const response = await axios.get("/api/getsingle-category/" + id);
   return response;
 };
 
-// to edit category
 
 const editCategory = async (id, payload) => {
   const response = await axios.patch("/api/category-edit/" + id, payload);
@@ -72,21 +66,18 @@ const editCategory = async (id, payload) => {
 /************************* Post ***********************/
 /***********/ ////////////////////////////////////**********/
 
-// to create post
 
 const createPost = async (payload) => {
   const response = await axios.post("/api/post", payload, headerConfig());
   return response;
 };
 
-// to get all the post
 
 const getAllpost = async () => {
   const response = await axios.get("/api/getposts", headerConfig());
   return response;
 };
 
-// delete single post
 
 const deleteSinglePost = async (id) => {
   const response = await axios.delete("/api/delete/" + id);
