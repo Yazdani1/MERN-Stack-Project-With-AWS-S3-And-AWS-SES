@@ -18,6 +18,11 @@ var postSchema = mongoose.Schema({
     ref: "Category",
   },
 
+  postedBy: {
+    type: ObjectId,
+    ref: "User",
+  },
+
 
 });
 

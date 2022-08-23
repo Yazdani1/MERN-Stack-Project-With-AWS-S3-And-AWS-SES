@@ -33,6 +33,7 @@ const SignIn = () => {
         setEmail("");
         setPassword("");
 
+    
         // update user information
         setState({
           user: res.data.user,

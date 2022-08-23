@@ -6,7 +6,9 @@ const News = () => {
   return (
     <PageLayout>
       <div className="container">
-        <CardLayout title="Create News">
+        <CardLayout title="Create News"
+        
+        >
           <div className="form-design">
             <form>
               <div className="text-center"></div>
@@ -20,8 +22,9 @@ const News = () => {
               </div>
 
               <div className="form-group">
-                <input
+                <textarea
                   type="text"
+                  rows="5"
                   className="form-control"
                   placeholder="news description.."
                 />
@@ -34,17 +37,10 @@ const News = () => {
                   className="btnContact"
                 //   onClick={(e) => editCategoryInfo(e)}
                 >
-                  Update Category
+                  Create News
                 </button>
 
-                <button
-                  type="submit"
-                  name="btnSubmit"
-                  className="btn btn-danger"
-                //   onClick={() => setIsShowing(false)}
-                >
-                  Close
-                </button>
+              
               </div>
             </form>
           </div>

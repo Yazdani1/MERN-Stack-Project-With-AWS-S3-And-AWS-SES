@@ -1,26 +1,38 @@
 const router = require("express").Router();
+
 const Post = require("../model/Post");
+const {
+  createPost,
+  getPosts,
+  getpostBycategory,
+  getrelatedPostbyCategory,
+  deletePost,
+  postrandomWinner,
+  getrandomWinner,
+} = require("../controller/post");
 
-const postController = require("../controller/post");
+require("dotenv").config();
 
-router.post("/post", postController.createPost);
 
-router.get("/getposts", postController.getPosts);
+const { requireLogin } = require("../middleware/auth");
+
+router.post("/post", requireLogin, createPost);
+
+router.get("/getposts",requireLogin, getPosts);
 
 // post get by category
 
-router.get("/getpostsbycategory/:slug", postController.getpostBycategory);
+router.get("/getpostsbycategory/:slug", getpostBycategory);
 
 // related post by category
 
-router.get("/details-post/:id", postController.getrelatedPostbyCategory);
+router.get("/details-post/:id", getrelatedPostbyCategory);
 
-
-router.delete("/delete/:id", postController.deletePost);
+router.delete("/delete/:id",requireLogin, deletePost);
 
 // get random post selection
 
-router.post("/postrandom-winner",postController.postrandomWinner)
-router.get("/getrandom-winner",postController.getrandomWinner)
+router.post("/postrandom-winner", postrandomWinner);
+router.get("/getrandom-winner", getrandomWinner);
 
 module.exports = router;

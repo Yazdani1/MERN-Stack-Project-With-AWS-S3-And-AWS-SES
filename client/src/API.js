@@ -1,29 +1,18 @@
 const axios = require("axios");
 
-
-
-/***********/////////////////////////////////////**********/
+/***********/ ////////////////////////////////////**********/
 /******         User Authentication              **********/
-/***********/////////////////////////////////////**********/
+/***********/ ////////////////////////////////////**********/
 
-const userRegistration = async(payload)=>{
-
-  const response = await axios.post("/api/registration",payload);
+const userRegistration = async (payload) => {
+  const response = await axios.post("/api/registration", payload);
   return response;
+};
 
-}
-
-
-const userLogin = async(payload)=>{
-
-  const response = await axios.post("/api/login",payload);
+const userLogin = async (payload) => {
+  const response = await axios.post("/api/login", payload);
   return response;
-
-}
-
-
-
-
+};
 
 /***********/ ////////////////////////////////////**********/
 /************************* Category ***********************/
@@ -49,40 +38,26 @@ const postCategory = async (payload) => {
   return response;
 };
 
-
 // to get category post
 
-const getpostByCategory = async(id)=>{
-
-  const response = await axios.get("/api/getpostsbycategory/"+id);
+const getpostByCategory = async (id) => {
+  const response = await axios.get("/api/getpostsbycategory/" + id);
   return response;
-
-}
-
+};
 
 // to get single category to show data into update field
 
-
-const getSingleCategorytoShowUpdateField = async(id)=>{
-
-  const response = await axios.get("/api/getsingle-category/"+id);
+const getSingleCategorytoShowUpdateField = async (id) => {
+  const response = await axios.get("/api/getsingle-category/" + id);
   return response;
-
-}
-
+};
 
 // to edit category
 
-
-const editCategory = async(id,payload)=>{
-
-  const response = await axios.patch("/api/category-edit/"+id,payload);
+const editCategory = async (id, payload) => {
+  const response = await axios.patch("/api/category-edit/" + id, payload);
   return response;
-
-}
-
-
-
+};
 
 /***********/ ////////////////////////////////////**********/
 /************************* Post ***********************/
@@ -91,14 +66,26 @@ const editCategory = async(id,payload)=>{
 // to create post
 
 const createPost = async (payload) => {
-  const response = await axios.post("/api/post", payload);
+  const response = await axios.post("/api/post", payload, {
+    headers: {
+      // "Content-Type": "application/json",
+      // Accept: "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
   return response;
 };
 
 // to get all the post
 
 const getAllpost = async () => {
-  const response = await axios.get("/api/getposts");
+  const response = await axios.get("/api/getposts",{
+    headers: {
+      // "Content-Type": "application/json",
+      // Accept: "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
   return response;
 };
 
@@ -113,23 +100,15 @@ const deleteSinglePost = async (id) => {
 /************************* Random Winner *******************/
 /***********/ ////////////////////////////////////**********/
 
-const getRandomWinner = async()=>{
+const getRandomWinner = async () => {
+  const response = await axios.get("/api/getrandom-winner");
+  return response;
+};
 
-    const response = await axios.get("/api/getrandom-winner");
-    return response;
-
-}
-
-
-const postRandomWinner = async()=>{
-
-    const response = await axios.post("/api/postrandom-winner");
-    return response;
-
-}
-
-
-
+const postRandomWinner = async () => {
+  const response = await axios.post("/api/postrandom-winner");
+  return response;
+};
 
 module.exports = {
   getallCategory,
@@ -144,5 +123,5 @@ module.exports = {
   editCategory,
   getSingleCategorytoShowUpdateField,
   userRegistration,
-  userLogin
+  userLogin,
 };

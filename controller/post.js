@@ -20,6 +20,7 @@ exports.createPost = (req, res) => {
     title,
     des,
     categoryBy,
+    postedBy: req.user
   });
 
   Post.create(postdata)
@@ -33,9 +34,11 @@ exports.createPost = (req, res) => {
 
 exports.getPosts = async (req, res) => {
   try {
-    const allpostlist = await Post.find({})
+    const allpostlist = await Post.find({postedBy: req.user})
       .sort({ date: "DESC" })
-      .populate("categoryBy", "_id categoryName date slug");
+      .populate("categoryBy", "_id categoryName date slug")
+      .populate("postedBy", "name");
+
 
     res.json(allpostlist);
   } catch (err) {

@@ -159,6 +159,7 @@ const Home = () => {
                   </Link>
 
                   <p className="postinfo">Expense: {item.des}</p>
+                  <h1>{item.postedBy?.name}</h1>
 
                   <Link
                     to={"/category/" + item.categoryBy?.slug}
