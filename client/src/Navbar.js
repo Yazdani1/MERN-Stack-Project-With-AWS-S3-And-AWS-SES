@@ -35,6 +35,10 @@ const Navbar = () => {
             <li className="nav-item">Create News</li>
           </Link>
 
+          <Link to={"/video"} style={{ textDecoration: "none" }}>
+            <li className="nav-item">Video</li>
+          </Link>
+
           <Link to={"/signin"} style={{ textDecoration: "none" }} onClick={logOut}>
             <li className="nav-item">Sign Out</li>
           </Link>

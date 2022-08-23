@@ -14,6 +14,7 @@ import SignIn from "./auth/SignIn";
 import { UserProvider } from "./UserContext";
 import SecureLayout from "./SecureLayout";
 import News from "./News/News";
+import Video from "./Videos/Video";
 
 const App = () => {
   return (
@@ -58,6 +59,15 @@ const App = () => {
             element={
               <SecureLayout>
                 <EditCategory />
+              </SecureLayout>
+            }
+          />
+
+          <Route
+            path="/video"
+            element={
+              <SecureLayout>
+                <Video />
               </SecureLayout>
             }
           />

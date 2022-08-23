@@ -49,6 +49,7 @@ const News = () => {
         setTitle("");
         setDes("");
         setImage("");
+        setPreview("");
       }
     } catch (error) {
       toast.error(error.response && error.response.data.error, {
