@@ -35,7 +35,7 @@ exports.uploadImagetoAWS = async (req, res) => {
 
     const params = {
       Bucket: "news-note",
-      Key: `${uuid()}.${typess}}`,
+      Key: `${uuid()}.${typess}`,
 
       // Key: `category/${uuid()}`, to create a folder in s3 and then store image there
       Body: base64Data,
@@ -80,3 +80,20 @@ exports.createNews = async (req, res) => {
     return res.status(400).json({ error: "Could not ceate news" });
   }
 };
+
+// to get all the news
+
+
+exports.getAllnews = async (req,res)=>{
+
+    try {
+
+        const newsList = await News.find({}).sort({date:"DESC"});
+
+        return res.status(200).json(newsList);
+
+    } catch(error){
+        return res.status(400).json({error:"Could not load news"})
+    }
+
+}

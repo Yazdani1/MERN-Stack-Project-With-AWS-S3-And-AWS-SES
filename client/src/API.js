@@ -1,4 +1,3 @@
-
 const axios = require("axios");
 
 const headerConfig = () => {
@@ -13,12 +12,12 @@ const headerConfig = () => {
 /******         User Authentication              **********/
 /***********/ ////////////////////////////////////**********/
 
- const userRegistration = async (payload) => {
+const userRegistration = async (payload) => {
   const response = await axios.post("/api/registration", payload);
   return response;
 };
 
- const userLogin = async (payload) => {
+const userLogin = async (payload) => {
   const response = await axios.post("/api/login", payload);
   return response;
 };
@@ -32,30 +31,25 @@ const getallCategory = async () => {
   return response;
 };
 
-
 const deleteSingleCategory = async (id) => {
   const response = await axios.delete(`/api/category-delete/${id}`);
   return response;
 };
-
 
 const postCategory = async (payload) => {
   const response = await axios.post("/api/categoryceate", payload);
   return response;
 };
 
-
 const getpostByCategory = async (id) => {
   const response = await axios.get("/api/getpostsbycategory/" + id);
   return response;
 };
 
-
 const getSingleCategorytoShowUpdateField = async (id) => {
   const response = await axios.get("/api/getsingle-category/" + id);
   return response;
 };
-
 
 const editCategory = async (id, payload) => {
   const response = await axios.patch("/api/category-edit/" + id, payload);
@@ -66,18 +60,15 @@ const editCategory = async (id, payload) => {
 /************************* Post ***********************/
 /***********/ ////////////////////////////////////**********/
 
-
 const createPost = async (payload) => {
   const response = await axios.post("/api/post", payload, headerConfig());
   return response;
 };
 
-
 const getAllpost = async () => {
   const response = await axios.get("/api/getposts", headerConfig());
   return response;
 };
-
 
 const deleteSinglePost = async (id) => {
   const response = await axios.delete("/api/delete/" + id);
@@ -98,6 +89,23 @@ const postRandomWinner = async () => {
   return response;
 };
 
+/***********/ ////////////////////////////////////**********/
+/************************* News *******************/
+/***********/ ////////////////////////////////////**********/
+
+const createNews = async (payload) => {
+  const res = await axios.post("/api/create-news", payload);
+  return res;
+};
+
+
+const getAllNews = async ()=>{
+
+  const res = await axios.get("/api/getall-news");
+  return res;
+
+}
+
 module.exports = {
   getallCategory,
   deleteSingleCategory,
@@ -112,4 +120,6 @@ module.exports = {
   getSingleCategorytoShowUpdateField,
   userRegistration,
   userLogin,
+  createNews,
+  getAllNews
 };
