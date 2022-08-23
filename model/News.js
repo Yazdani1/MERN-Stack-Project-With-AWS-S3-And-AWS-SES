@@ -8,14 +8,11 @@ var newsSchema = mongoose.Schema({
   des: {
     type: String,
   },
+  image: {},
   date: {
     type: Date,
     default: Date.now,
   },
-
-
-
-
 });
 
 module.exports = mongoose.model("News", newsSchema);
