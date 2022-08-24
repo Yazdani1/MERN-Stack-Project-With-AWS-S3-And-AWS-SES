@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { UserContext } from "../UserContext";
 import { ToastContainer, toast } from "react-toastify";
-import { userLogin } from "../API";
+import { userLoginDetails } from "../API";
 import PageLayout from "../PageLayout";
 import { Navigate, useLocation,useNavigate } from "react-router-dom";
 
@@ -24,7 +24,7 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      const res = await userLogin({ email, password });
+      const res = await userLoginDetails({ email, password });
 
       if (res) {
         toast.success("Log In Successfully", {
