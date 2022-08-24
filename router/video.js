@@ -9,10 +9,13 @@ const router = require("express").Router();
 const formidableMiddleware = require('express-formidable');
 
 
-const {uploadVideo} = require("../controller/video");
+const {uploadVideo,createVideoPost,getAllvideos} = require("../controller/video");
 
 
 router.post("/upload-video",formidableMiddleware(),uploadVideo);
+router.post("/create-video",createVideoPost);
+
+router.get("/get-all-video",getAllvideos);
 
 
 

@@ -106,6 +106,31 @@ const getAllNews = async ()=>{
 
 }
 
+
+/***********/ ////////////////////////////////////**********/
+/************************* Videos *******************/
+/***********/ ////////////////////////////////////**********/
+
+
+const createVideo = async (payload)=>{
+
+  const res = await axios.post("/api/create-video",payload);
+  return res;
+
+}
+
+
+const getAllVideo = async ()=>{
+
+  const res = await axios.get("/api/get-all-video");
+  return res;
+
+}
+
+
+
+
+
 module.exports = {
   getallCategory,
   deleteSingleCategory,
@@ -121,5 +146,7 @@ module.exports = {
   userRegistration,
   userLogin,
   createNews,
-  getAllNews
+  getAllNews,
+  createVideo,
+  getAllVideo
 };

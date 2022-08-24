@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import PageLayout from "../PageLayout";
 import CardLayout from "../Components/CardLayout";
 import { ToastContainer, toast } from "react-toastify";
+const { createVideo, getAllVideo } = require("../API");
+
 const axios = require("axios");
 
 const Video = () => {
@@ -24,19 +26,16 @@ const Video = () => {
 
       // save progress bar
 
-      const {result} = await axios.post("/api/upload-video",videoData,{
+      const {data} = await axios.post("/api/upload-video",videoData,{
 
         onUploadProgress: (e)=>{
           setProgress(Math.round((100 * e.loaded) / e.total))
         }
 
       });
-      // setVideo(data);
+      setVideo(data.Location);
 
-
-      console.log(result.Location);
-
-
+      console.log(data);
 
 
     } catch (error) {
@@ -48,8 +47,23 @@ const Video = () => {
     }
   };
 
-  const onSubmit = (e)=>{
+  const onSubmit = async (e)=>{
     e.preventDefault();
+
+
+    const res = await createVideo({title,video});
+
+    if(res){
+
+
+      toast.success("Video Upload Failed", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+
+      setTitle("");
+      setVideo("");
+
+    }
 
     console.log("Video Post");
 
@@ -59,6 +73,8 @@ const Video = () => {
     <PageLayout>
       <div className="container">
         <CardLayout title="Create Video Post">
+
+          <h1>Video Link: {video}</h1>
           <div className="form-design">
             <form>
               <div className="text-center"></div>
