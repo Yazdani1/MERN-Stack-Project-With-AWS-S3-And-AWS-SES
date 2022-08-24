@@ -173,6 +173,7 @@ const Video = () => {
                     height="250px"
                     width="330px"
                     url={v.video_link}
+                    previewTabIndex={10}
                   />
                   <h6>{v.title}</h6>
 
