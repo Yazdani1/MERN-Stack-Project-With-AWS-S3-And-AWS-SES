@@ -31,6 +31,8 @@ const News = () => {
         console.log(error);
       }
     });
+
+    console.log("fgdfgfdgfdgfdgdfgd")
   };
 
   const onSubmit = async (e) => {
