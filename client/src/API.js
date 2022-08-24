@@ -128,6 +128,14 @@ const getAllVideo = async ()=>{
 }
 
 
+const deleteVideo = async (id)=>{
+
+  const res = await axios.delete("/api/delete-video/"+id);
+  return res;
+
+}
+
+
 
 
 
@@ -148,5 +156,6 @@ module.exports = {
   createNews,
   getAllNews,
   createVideo,
-  getAllVideo
+  getAllVideo,
+  deleteVideo
 };
