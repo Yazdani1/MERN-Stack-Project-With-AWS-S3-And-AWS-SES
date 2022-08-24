@@ -104,13 +104,18 @@ const News = () => {
               </div>
 
               <div className="form-group">
-                <input
-                  type="file"
-                  className="form-control"
-                  placeholder="Upload Image"
-                  onChange={handleImage}
-                  accept="image/*"
-                />
+                <label className="form-control">
+                 
+                  Upload Image
+                  <input
+                    type="file"
+                    className="form-control"
+                    placeholder="Upload Image"
+                    onChange={handleImage}
+                    accept="image/*"
+                    hidden
+                  />
+                </label>
                 {preview && (
                   <img
                     src={preview}
@@ -140,9 +145,17 @@ const News = () => {
         <div className="row">
           {newsList &&
             newsList.map((item, index) => (
-              <div className="card col-xl-4 col-lg-4" key={index}>
+              <div
+                className="card col-xl-4 col-lg-4"
+                key={index}
+                style={{ margin: "5px" }}
+              >
                 <h5>{item.title}</h5>
-                <img src={item.image} />
+                <img
+                  src={item.image}
+                  height="300px"
+                  style={{ objectFit: "cover" }}
+                />
                 <p>{item.des}</p>
               </div>
             ))}

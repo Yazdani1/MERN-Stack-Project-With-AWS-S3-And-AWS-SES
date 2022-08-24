@@ -23,6 +23,7 @@ app.use("/api",require("./router/post"));
 app.use("/api",require("./router/category"));
 app.use("/api",require("./router/user"));
 app.use("/api",require("./router/news"));
+app.use("/api",require("./router/video"));
 
 // Serve static assets if in production
 
