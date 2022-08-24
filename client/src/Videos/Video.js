@@ -32,6 +32,7 @@ const Video = () => {
       const { data } = await axios.post("/api/upload-video", videoData, {
         onUploadProgress: (e) => {
           setProgress(Math.round((100 * e.loaded) / e.total));
+          console.log(Math.round((100 * e.loaded) / e.total));
         },
       });
       setVideo(data.Location);
@@ -129,6 +130,17 @@ const Video = () => {
                     hidden
                   />
                 </label>
+                <div className="progress-bar"
+                role="progressbar"
+                aria-valuenow={progress}
+                aria-valuemin="0"
+                aria-valuemax="100"
+                style={{width:`${progress}%`}}
+                >
+
+                  {progress}
+
+                </div>
               </div>
 
               {progress > 0 && <p>Progress..</p>}
