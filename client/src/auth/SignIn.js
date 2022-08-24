@@ -1,15 +1,13 @@
-import { Link, NavLink } from "react-router-dom";
 import React, { useState, useContext, useRef, useEffect } from "react";
-import { UserContext } from "../UserContext";
 import { ToastContainer, toast } from "react-toastify";
-import { userLoginDetails } from "../API";
+import { Navigate, useLocation, useNavigate, Link } from "react-router-dom";
+// import { userLoginDetails } from "../API";
 import PageLayout from "../PageLayout";
-import { Navigate, useLocation,useNavigate } from "react-router-dom";
+import { UserContext } from "../UserContext";
 
 const axios = require("axios");
 
 const SignIn = () => {
-
   let location = useLocation();
 
   let navigate = useNavigate();
@@ -24,7 +22,8 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      const res = await userLoginDetails({ email, password });
+      // const res = await userLoginDetails({ email, password });
+      const res = await axios.post("/api/login", { email, password });
 
       if (res) {
         toast.success("Log In Successfully", {
@@ -33,7 +32,6 @@ const SignIn = () => {
         setEmail("");
         setPassword("");
 
-    
         // update user information
         setState({
           user: res.data.user,

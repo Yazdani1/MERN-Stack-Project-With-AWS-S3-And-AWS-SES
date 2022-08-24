@@ -17,10 +17,10 @@ const userRegistration = async (payload) => {
   return response;
 };
 
-const userLoginDetails = async (payload) => {
-  const response = await axios.post("/api/login", payload);
-  return response;
-};
+// const userLoginDetails = async (payload) => {
+//   const response = await axios.post("/api/login", payload);
+//   return response;
+// };
 
 /***********/ ////////////////////////////////////**********/
 /************************* Category ***********************/
@@ -143,7 +143,7 @@ module.exports = {
   editCategory,
   getSingleCategorytoShowUpdateField,
   userRegistration,
-  userLoginDetails,
+  // userLoginDetails,
   createNews,
   getAllNews,
   createVideo,
