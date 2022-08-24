@@ -1,12 +1,12 @@
 const axios = require("axios");
 
-const headerConfig = () => {
-  return {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  };
-};
+// const headerConfig = () => {
+//   return {
+//     headers: {
+//       Authorization: `Bearer ${localStorage.getItem("token")}`,
+//     },
+//   };
+// };
 
 /***********/ ////////////////////////////////////**********/
 /******         User Authentication              **********/
@@ -61,12 +61,20 @@ const editCategory = async (id, payload) => {
 /***********/ ////////////////////////////////////**********/
 
 const createPost = async (payload) => {
-  const response = await axios.post("/api/post", payload, headerConfig());
+  const response = await axios.post("/api/post", payload, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
   return response;
 };
 
 const getAllpost = async () => {
-  const response = await axios.get("/api/getposts", headerConfig());
+  const response = await axios.get("/api/getposts", {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
   return response;
 };
 
@@ -98,46 +106,29 @@ const createNews = async (payload) => {
   return res;
 };
 
-
-const getAllNews = async ()=>{
-
+const getAllNews = async () => {
   const res = await axios.get("/api/getall-news");
   return res;
-
-}
-
+};
 
 /***********/ ////////////////////////////////////**********/
 /************************* Videos *******************/
 /***********/ ////////////////////////////////////**********/
 
-
-const createVideo = async (payload)=>{
-
-  const res = await axios.post("/api/create-video",payload);
+const createVideo = async (payload) => {
+  const res = await axios.post("/api/create-video", payload);
   return res;
+};
 
-}
-
-
-const getAllVideo = async ()=>{
-
+const getAllVideo = async () => {
   const res = await axios.get("/api/get-all-video");
   return res;
+};
 
-}
-
-
-const deleteVideo = async (id)=>{
-
-  const res = await axios.delete("/api/delete-video/"+id);
+const deleteVideo = async (id) => {
+  const res = await axios.delete("/api/delete-video/" + id);
   return res;
-
-}
-
-
-
-
+};
 
 module.exports = {
   getallCategory,
@@ -157,5 +148,5 @@ module.exports = {
   getAllNews,
   createVideo,
   getAllVideo,
-  deleteVideo
+  deleteVideo,
 };
