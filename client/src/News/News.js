@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Resizer from "react-image-file-resizer";
 import { ToastContainer, toast } from "react-toastify";
+const axios = require("axios");
 import CardLayout from "../Components/CardLayout";
 import PageLayout from "../PageLayout";
-const { createNews, getAllNews } = require("../API");
-
-const axios = require("axios");
+const { createNews, getAllNews, deleteSingleNews } = require("../API");
 
 const News = () => {
   const [preview, setPreview] = useState("");
@@ -32,7 +31,7 @@ const News = () => {
       }
     });
 
-    console.log("fgdfgfdgfdgfdgdfgd")
+    console.log("fgdfgfdgfdgfdgdfgd");
   };
 
   const onSubmit = async (e) => {
@@ -67,6 +66,26 @@ const News = () => {
       setNewsList(res.data);
     } catch (error) {
       console.log(error.response && error.response.data.error);
+    }
+  };
+
+  // to delete a single news
+
+  const deleteNews = async (id) => {
+    try {
+      const res = await deleteSingleNews(id);
+
+      if (res) {
+        toast.success("News Deleted Successfully!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+
+        getallNews();
+      }
+    } catch (error) {
+      toast.error(error.response && error.response.data.error, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     }
   };
 
@@ -107,7 +126,6 @@ const News = () => {
 
               <div className="form-group">
                 <label className="form-control">
-                 
                   Upload Image
                   <input
                     type="file"
