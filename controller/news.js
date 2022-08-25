@@ -83,17 +83,25 @@ exports.createNews = async (req, res) => {
 
 // to get all the news
 
+exports.getAllnews = async (req, res) => {
+  try {
+    const newsList = await News.find({}).sort({ date: "DESC" });
 
-exports.getAllnews = async (req,res)=>{
+    return res.status(200).json(newsList);
+  } catch (error) {
+    return res.status(400).json({ error: "Could not load news" });
+  }
+};
 
-    try {
+// to delete news
 
-        const newsList = await News.find({}).sort({date:"DESC"});
+exports.deleteNews = async (req, res) => {
+  try {
+    var deleteQuery = { _id: req.params.id };
 
-        return res.status(200).json(newsList);
-
-    } catch(error){
-        return res.status(400).json({error:"Could not load news"})
-    }
-
-}
+    const delete_news = await News.findByIdAndDelete(deleteQuery);
+    res.status(200).json({ message: "News Deleted Successfully" });
+  } catch (error) {
+    res.status(404).json({ error: "News id could not found" });
+  }
+};
