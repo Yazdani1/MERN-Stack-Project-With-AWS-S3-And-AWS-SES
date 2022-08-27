@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Resizer from "react-image-file-resizer";
 import { ToastContainer, toast } from "react-toastify";
-const axios = require("axios");
 import CardLayout from "../Components/CardLayout";
 import PageLayout from "../PageLayout";
+const axios = require("axios");
+
 const { createNews, getAllNews, deleteSingleNews } = require("../API");
 
 const News = () => {
@@ -24,14 +25,11 @@ const News = () => {
     Resizer.imageFileResizer(file, 720, 500, "JPEG", 100, 0, async (uri) => {
       try {
         const { data } = await axios.post("/api/upload-image", { image: uri });
-        console.log("Image upload", data);
         setImage(data.Location);
       } catch (error) {
         console.log(error);
       }
     });
-
-    console.log("fgdfgfdgfdgfdgdfgd");
   };
 
   const onSubmit = async (e) => {
@@ -51,6 +49,8 @@ const News = () => {
         setDes("");
         setImage("");
         setPreview("");
+
+        getallNews();
       }
     } catch (error) {
       toast.error(error.response && error.response.data.error, {
@@ -177,6 +177,12 @@ const News = () => {
                   style={{ objectFit: "cover" }}
                 />
                 <p>{item.des}</p>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => deleteNews(item._id)}
+                >
+                  Delete
+                </button>
               </div>
             ))}
         </div>
