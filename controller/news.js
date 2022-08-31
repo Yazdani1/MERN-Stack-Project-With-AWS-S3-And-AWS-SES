@@ -17,6 +17,8 @@ const S3 = new AWS.S3(awsConfig);
 // to upload image to the AWS S3
 
 exports.uploadImagetoAWS = async (req, res) => {
+
+  
   try {
     const { image } = req.body;
 

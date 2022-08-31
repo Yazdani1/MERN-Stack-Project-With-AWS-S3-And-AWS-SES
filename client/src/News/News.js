@@ -24,7 +24,7 @@ const News = () => {
 
     Resizer.imageFileResizer(file, 720, 500, "JPEG", 100, 0, async (uri) => {
       try {
-        const { data } = await axios.post("/api/upload-image", { image: uri });
+        const { data } = await axios.post("http://localhost:5000/api/upload-image", { image: uri });
         setImage(data.Location);
       } catch (error) {
         console.log(error);

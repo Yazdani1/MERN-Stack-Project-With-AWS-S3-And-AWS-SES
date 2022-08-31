@@ -4,7 +4,7 @@ var slugify = require('slugify');
 
 exports.createCategory = async (req, res) => {
   try {
-    const { categoryName } = req.body;
+    const { categorySchema } = req.body;
 
     const slug = slugify(categoryName);
 

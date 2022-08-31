@@ -13,7 +13,7 @@ const axios = require("axios");
 /***********/ ////////////////////////////////////**********/
 
 const userRegistration = async (payload) => {
-  const response = await axios.post("/api/registration", payload);
+  const response = await axios.post("http://localhost:5000/api/registration", payload);
   return response;
 };
 
@@ -27,32 +27,32 @@ const userRegistration = async (payload) => {
 /***********/ ////////////////////////////////////**********/
 
 const getallCategory = async () => {
-  const response = await axios.get("/api/getall-category");
+  const response = await axios.get("http://localhost:5000/api/getall-category");
   return response;
 };
 
 const deleteSingleCategory = async (id) => {
-  const response = await axios.delete(`/api/category-delete/${id}`);
+  const response = await axios.delete(`http://localhost:5000/api/category-delete/${id}`);
   return response;
 };
 
 const postCategory = async (payload) => {
-  const response = await axios.post("/api/categoryceate", payload);
+  const response = await axios.post("http://localhost:5000/api/categoryceate", payload);
   return response;
 };
 
 const getpostByCategory = async (id) => {
-  const response = await axios.get("/api/getpostsbycategory/" + id);
+  const response = await axios.get("http://localhost:5000/api/getpostsbycategory/" + id);
   return response;
 };
 
 const getSingleCategorytoShowUpdateField = async (id) => {
-  const response = await axios.get("/api/getsingle-category/" + id);
+  const response = await axios.get("http://localhost:5000/api/getsingle-category/" + id);
   return response;
 };
 
 const editCategory = async (id, payload) => {
-  const response = await axios.patch("/api/category-edit/" + id, payload);
+  const response = await axios.patch("http://localhost:5000/api/category-edit/" + id, payload);
   return response;
 };
 
@@ -61,7 +61,7 @@ const editCategory = async (id, payload) => {
 /***********/ ////////////////////////////////////**********/
 
 const createPost = async (payload) => {
-  const response = await axios.post("/api/post", payload, {
+  const response = await axios.post("http://localhost:5000/api/post", payload, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
@@ -70,7 +70,7 @@ const createPost = async (payload) => {
 };
 
 const getAllpost = async () => {
-  const response = await axios.get("/api/getposts", {
+  const response = await axios.get("http://localhost:5000/api/getposts", {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
@@ -79,7 +79,7 @@ const getAllpost = async () => {
 };
 
 const deleteSinglePost = async (id) => {
-  const response = await axios.delete("/api/delete/" + id);
+  const response = await axios.delete("http://localhost:5000/api/delete/" + id);
   return response;
 };
 
@@ -88,12 +88,12 @@ const deleteSinglePost = async (id) => {
 /***********/ ////////////////////////////////////**********/
 
 const getRandomWinner = async () => {
-  const response = await axios.get("/api/getrandom-winner");
+  const response = await axios.get("http://localhost:5000/api/getrandom-winner");
   return response;
 };
 
 const postRandomWinner = async () => {
-  const response = await axios.post("/api/postrandom-winner");
+  const response = await axios.post("http://localhost:5000/api/postrandom-winner");
   return response;
 };
 
@@ -102,17 +102,17 @@ const postRandomWinner = async () => {
 /***********/ ////////////////////////////////////**********/
 
 const createNews = async (payload) => {
-  const res = await axios.post("/api/create-news", payload);
+  const res = await axios.post("http://localhost:5000/api/create-news", payload);
   return res;
 };
 
 const getAllNews = async () => {
-  const res = await axios.get("/api/getall-news");
+  const res = await axios.get("http://localhost:5000/api/getall-news");
   return res;
 };
 
 const deleteSingleNews = async (id) => {
-  const res = await axios.delete("/api/delete-news/" + id);
+  const res = await axios.delete("http://localhost:5000/api/delete-news/" + id);
   return res;
 };
 
@@ -121,17 +121,17 @@ const deleteSingleNews = async (id) => {
 /***********/ ////////////////////////////////////**********/
 
 const createVideo = async (payload) => {
-  const res = await axios.post("/api/create-video", payload);
+  const res = await axios.post("http://localhost:5000/api/create-video", payload);
   return res;
 };
 
 const getAllVideo = async () => {
-  const res = await axios.get("/api/get-all-video");
+  const res = await axios.get("http://localhost:5000/api/get-all-video");
   return res;
 };
 
 const deleteVideo = async (id) => {
-  const res = await axios.delete("/api/delete-video/" + id);
+  const res = await axios.delete("http://localhost:5000/api/delete-video/" + id);
   return res;
 };
 

@@ -29,7 +29,7 @@ const Video = () => {
 
       // save progress bar
 
-      const { data } = await axios.post("/api/upload-video", videoData, {
+      const { data } = await axios.post("http://localhost:5000/api/upload-video", videoData, {
         onUploadProgress: (e) => {
           setProgress(Math.round((100 * e.loaded) / e.total));
           console.log(Math.round((100 * e.loaded) / e.total));

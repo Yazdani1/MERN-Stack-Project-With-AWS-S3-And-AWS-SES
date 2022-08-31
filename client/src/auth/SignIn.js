@@ -23,7 +23,7 @@ const SignIn = () => {
 
     try {
       // const res = await userLoginDetails({ email, password });
-      const res = await axios.post("/api/login", { email, password });
+      const res = await axios.post("http://localhost:5000/api/login", { email, password });
 
       if (res) {
         toast.success("Log In Successfully", {

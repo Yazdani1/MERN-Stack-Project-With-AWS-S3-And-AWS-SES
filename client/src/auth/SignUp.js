@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-const axios = require("axios");
 
 import { userRegistration } from "../API";
 import PageLayout from "../PageLayout";
+const axios = require("axios");
 
 const SignUp = () => {
   const [name, setName] = useState("");
