@@ -72,6 +72,15 @@ const App = () => {
               </SecureLayout>
             }
           />
+
+          <Route
+            path="/audio"
+            element={
+              <SecureLayout>
+                <Audio />
+              </SecureLayout>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </UserProvider>
