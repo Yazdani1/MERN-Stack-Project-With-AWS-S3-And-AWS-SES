@@ -15,6 +15,7 @@ import { UserProvider } from "./UserContext";
 import SecureLayout from "./SecureLayout";
 import News from "./News/News";
 import Video from "./Videos/Video";
+import Audio from "./Audio/Audio";
 
 const App = () => {
   return (
