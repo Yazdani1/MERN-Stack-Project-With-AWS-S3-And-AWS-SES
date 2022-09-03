@@ -16,6 +16,7 @@ import SecureLayout from "./SecureLayout";
 import News from "./News/News";
 import Video from "./Videos/Video";
 import Audio from "./Audio/Audio";
+import PDFFeatures from "./PDFFeatures/PDFFeatures";
 
 const App = () => {
   return (
@@ -78,6 +79,14 @@ const App = () => {
             element={
               <SecureLayout>
                 <Audio />
+              </SecureLayout>
+            }
+          />
+          <Route
+            path="/pdffile"
+            element={
+              <SecureLayout>
+                <PDFFeatures />
               </SecureLayout>
             }
           />
