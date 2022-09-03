@@ -41,6 +41,9 @@ const Navbar = () => {
           <Link to={"/audio"} style={{ textDecoration: "none" }}>
             <li className="nav-item">Audio</li>
           </Link>
+          <Link to={"/pdffile"} style={{ textDecoration: "none" }}>
+            <li className="nav-item">PDF File</li>
+          </Link>
 
           <Link to={"/signin"} style={{ textDecoration: "none" }} onClick={logOut}>
             <li className="nav-item">Sign Out</li>
