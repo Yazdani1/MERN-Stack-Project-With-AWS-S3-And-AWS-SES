@@ -1,16 +1,60 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PageLayout from "../PageLayout";
+import CardLayout from "../Components/CardLayout";
+import { ToastContainer, toast } from "react-toastify";
+const { createPdfPost, getPdfPost } = require("../API");
+
+const axios = require("axios");
 
 const Audio = () => {
+
+  const [title, setTitle] = useState("");
+  const [audioButtonName, setAudioPdfButtonName] = useState("");
+  const [audioFile, setAudioFile] = useState("");
+
+  // to load all the pdf
+
+  const [allPdfPosts, setAllPdfPosts] = useState([]);
+
+
+  const handleAudioUpload = async (e) => {
+    try {
+      const file = e.target.files[0];
+      setAudioPdfButtonName(file.name);
+
+      const audioData = new FormData();
+
+      audioData.append("audio", file);
+
+      // save progress bar
+
+      const { data } = await axios.post(
+        "http://localhost:5000/api/upload-audio",
+        audioData
+      );
+      setAudioFile(data.Location);
+
+    } catch (error) {
+      console.log(error);
+      toast.error("Audio Upload Failed", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
+
+
+
+
   return (
     <PageLayout>
      <div className="container">
-        {/* <CardLayout title="Create Video Post">
-          <h1>Video Link: {video}</h1>
+        <CardLayout title="Create Audi Post">
+          <h1>Audio Link: {video}</h1>
           <div className="form-design">
             <form>
-              <div className="text-center"></div>
 
+              <h1>Audio File:{audioFile}</h1>
+              
               <div className="form-group">
                 <input
                   type="text"
@@ -23,39 +67,27 @@ const Audio = () => {
 
               <div className="form-group">
                 <label className="form-control">
-                  {videoButtonName ? videoButtonName : "Upload Video"}
+                  {audioButtonName ? audioButtonName : "Upload Audio wav"}
                   <input
                     type="file"
                     className="form-control"
-                    onChange={handleVideo}
-                    placeholder="Upload Video"
+                    onChange={handleAudioUpload}
+                    placeholder="Upload Audio"
                     accept="video/*"
                     hidden
                   />
                 </label>
-                <div className="progress-bar"
-                role="progressbar"
-                aria-valuenow={progress}
-                aria-valuemin="0"
-                aria-valuemax="100"
-                style={{width:`${progress}%`}}
-                >
-
-                  {progress}
-
-                </div>
+             
               </div>
-
-              {progress > 0 && <p>Progress..</p>}
 
               <div class="form-group justify-content-center align-items-center">
                 <button
                   type="submit"
                   name="btnSubmit"
                   className="btnContact"
-                  onClick={(e) => {
-                    onSubmit(e);
-                  }}
+                  // onClick={(e) => {
+                  //   onSubmit(e);
+                  // }}
                 >
                   Publish Audio
                 </button>
@@ -65,7 +97,7 @@ const Audio = () => {
         </CardLayout>
 
     
-        <ToastContainer autoClose={8000} /> */}
+        <ToastContainer autoClose={8000} />
       </div>
     </PageLayout>
   );
