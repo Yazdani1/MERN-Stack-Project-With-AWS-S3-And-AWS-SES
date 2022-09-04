@@ -24,6 +24,7 @@ app.use("/api", require("./router/user"));
 app.use("/api", require("./router/news"));
 app.use("/api", require("./router/video"));
 app.use("/api", require("./router/pdffile"));
+app.use("/api", require("./router/audio"));
 
 
 // Serve static assets if in production
