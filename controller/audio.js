@@ -15,7 +15,6 @@ const awsConfig = {
 
 const S3 = new AWS.S3(awsConfig);
 
-
 exports.uploadAudioFile = async (req, res) => {
   try {
     const { audio } = req.files;
@@ -26,7 +25,7 @@ exports.uploadAudioFile = async (req, res) => {
       Bucket: "news-note",
       Key: `${uuid()}.${audio.type.split("/")[1]}`,
       Body: readFileSync(audio.path),
-      ContentType: ";audio/wav",
+      ContentType: "audio/wav",
       ACL: "public-read",
     };
 
@@ -37,6 +36,30 @@ exports.uploadAudioFile = async (req, res) => {
       res.send(data);
       console.log(data);
     });
+  } catch (error) {
+    return res.status(400).json({ error: "Something went wrong" });
+  }
+};
+
+// to create post with audio
+
+exports.createAudioPost = async (req, res) => {
+  try {
+    const { title, audiofile } = req.body;
+
+    if (!title) {
+      return res.status(422).json({ error: "Please add Title" });
+    }
+
+    if (!audiofile) {
+      return res.status(422).json({ error: "Please add Audio File" });
+    }
+
+    const audioDetails = Audio({ title, audiofile });
+
+    const createAudioPost = await Audio.create(audioDetails);
+
+    res.status(201).json(createAudioPost);
   } catch (error) {
     return res.status(400).json({ error: "Something went wrong" });
   }

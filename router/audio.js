@@ -3,9 +3,11 @@ const router = require("express").Router();
 const formidableMiddleware = require('express-formidable');
 
 
-const {uploadAudioFile} = require("../controller/audio");
+const {uploadAudioFile,createAudioPost} = require("../controller/audio");
 
 router.post("/upload-audio",formidableMiddleware(),uploadAudioFile);
+
+router.post("/create-audio-post",createAudioPost);
 
 
 // to get allthe post with pdf file

@@ -49,7 +49,6 @@ const Audio = () => {
     <PageLayout>
      <div className="container">
         <CardLayout title="Create Audi Post">
-          <h1>Audio Link: {video}</h1>
           <div className="form-design">
             <form>
 
@@ -73,7 +72,7 @@ const Audio = () => {
                     className="form-control"
                     onChange={handleAudioUpload}
                     placeholder="Upload Audio"
-                    accept="video/*"
+                    accept="audio/*"
                     hidden
                   />
                 </label>
