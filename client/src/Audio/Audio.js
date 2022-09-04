@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactAudioPlayer from "react-audio-player";
 import PageLayout from "../PageLayout";
 import CardLayout from "../Components/CardLayout";
 import { ToastContainer, toast } from "react-toastify";
@@ -11,12 +12,15 @@ const Audio = () => {
   const [audioButtonName, setAudioPdfButtonName] = useState("");
   const [audioFile, setAudioFile] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   // to load all the pdf
 
   const [allAudioPosts, setAllAudioPosts] = useState([]);
 
   const handleAudioUpload = async (e) => {
     try {
+      setLoading(true);
       const file = e.target.files[0];
       setAudioPdfButtonName(file.name);
 
@@ -30,13 +34,18 @@ const Audio = () => {
         "http://localhost:5000/api/upload-audio",
         audioData
       );
-      console.log(data);
-      setAudioFile(data.Location);
+
+      if (data) {
+        console.log(data);
+        setAudioFile(data.Location);
+        setLoading(false);
+      }
     } catch (error) {
       console.log(error);
       toast.error("Audio Upload Failed", {
         position: toast.POSITION.TOP_RIGHT,
       });
+      setLoading(false);
     }
   };
 
@@ -61,6 +70,7 @@ const Audio = () => {
         setTitle("");
         setAudioPdfButtonName("");
         setAudioFile("");
+        loadAllAudioPost();
       }
     } catch (error) {
       toast.error(error.response && error.response.data.error, {
@@ -128,7 +138,7 @@ const Audio = () => {
                     onSubmitAudioFile(e);
                   }}
                 >
-                  Publish Audio
+                  {loading ? "Uploading.." : "Publish Audio"}
                 </button>
               </div>
             </form>
@@ -136,20 +146,23 @@ const Audio = () => {
         </CardLayout>
 
         <div className="row">
-
-            {allAudioPosts && allAudioPosts.map((item,index)=>(
+          {allAudioPosts &&
+            allAudioPosts.map((item, index) => (
               <div className="col-xl-4 col-lg-4">
-
-                <div className="card" style={{margin:"10px",padding:"15px"}}>
+                <div
+                  className="card"
+                  style={{ margin: "10px", padding: "15px" }}
+                >
                   <h6>{item.title}</h6>
-                  <p>{item.audiofile}</p>
+                  <ReactAudioPlayer
+                    src={item.audiofile}
+                    controls
+                    style={{ color: "red" }}
+                  />
                 </div>
-
               </div>
             ))}
-
         </div>
-
 
         <ToastContainer autoClose={8000} />
       </div>
