@@ -64,3 +64,15 @@ exports.createAudioPost = async (req, res) => {
     return res.status(400).json({ error: "Something went wrong" });
   }
 };
+
+// to get all the post with audio
+
+exports.getAllAudioPost = async (req, res) => {
+  try {
+    const allaudiopost = await Audio.find({}).sort({ date: "DESC" });
+
+    res.status(200).json(allaudiopost);
+  } catch (error) {
+    return res.status(400).json({ error: "Something Went Wrong" });
+  }
+};

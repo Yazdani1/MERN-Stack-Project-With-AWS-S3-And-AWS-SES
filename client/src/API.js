@@ -179,6 +179,27 @@ const getPdfPost = async () => {
   return res;
 };
 
+
+/***********/ ////////////////////////////////////**********/
+/************************* Audio File      *******************/
+/***********/ ////////////////////////////////////**********/
+
+const createAudioPost = async(payload)=>{
+
+  const res = await axios.post("http://localhost:5000/api/create-audio-post",payload);
+  return res;
+
+}
+
+const getAllAudioPost = async()=>{
+
+  const res = await axios.get("http://localhost:5000/api/get-all-audiopost");
+  return res;
+
+}
+
+
+
 module.exports = {
   getallCategory,
   deleteSingleCategory,
@@ -200,5 +221,7 @@ module.exports = {
   deleteVideo,
   deleteSingleNews,
   createPdfPost,
-  getPdfPost
+  getPdfPost,
+  createAudioPost,
+  getAllAudioPost
 };

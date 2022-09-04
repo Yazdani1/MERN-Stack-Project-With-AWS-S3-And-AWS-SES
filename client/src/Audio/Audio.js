@@ -2,20 +2,18 @@ import React, { useState, useEffect } from "react";
 import PageLayout from "../PageLayout";
 import CardLayout from "../Components/CardLayout";
 import { ToastContainer, toast } from "react-toastify";
-const { createPdfPost, getPdfPost } = require("../API");
+const { createAudioPost, getAllAudioPost } = require("../API");
 
 const axios = require("axios");
 
 const Audio = () => {
-
   const [title, setTitle] = useState("");
   const [audioButtonName, setAudioPdfButtonName] = useState("");
   const [audioFile, setAudioFile] = useState("");
 
   // to load all the pdf
 
-  const [allPdfPosts, setAllPdfPosts] = useState([]);
-
+  const [allAudioPosts, setAllAudioPosts] = useState([]);
 
   const handleAudioUpload = async (e) => {
     try {
@@ -32,8 +30,8 @@ const Audio = () => {
         "http://localhost:5000/api/upload-audio",
         audioData
       );
+      console.log(data);
       setAudioFile(data.Location);
-
     } catch (error) {
       console.log(error);
       toast.error("Audio Upload Failed", {
@@ -42,18 +40,61 @@ const Audio = () => {
     }
   };
 
+  // to create audio post
 
+  const onSubmitAudioFile = async (e) => {
+    e.preventDefault();
 
+    try {
+      const payload = {
+        title: title,
+        audiofile: audioFile,
+      };
+
+      const res = await createAudioPost(payload);
+
+      if (res) {
+        toast.success("Post created successfully", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+
+        setTitle("");
+        setAudioPdfButtonName("");
+        setAudioFile("");
+      }
+    } catch (error) {
+      toast.error(error.response && error.response.data.error, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
+
+  // to load all audio posts
+
+  const loadAllAudioPost = async () => {
+    try {
+      const res = await getAllAudioPost();
+
+      setAllAudioPosts(res.data);
+    } catch (error) {
+      toast.error(error.response && error.response.data.error, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
+
+  useEffect(() => {
+    loadAllAudioPost();
+  }, []);
 
   return (
     <PageLayout>
-     <div className="container">
+      <div className="container">
         <CardLayout title="Create Audi Post">
           <div className="form-design">
             <form>
-
               <h1>Audio File:{audioFile}</h1>
-              
+
               <div className="form-group">
                 <input
                   type="text"
@@ -76,7 +117,6 @@ const Audio = () => {
                     hidden
                   />
                 </label>
-             
               </div>
 
               <div class="form-group justify-content-center align-items-center">
@@ -84,9 +124,9 @@ const Audio = () => {
                   type="submit"
                   name="btnSubmit"
                   className="btnContact"
-                  // onClick={(e) => {
-                  //   onSubmit(e);
-                  // }}
+                  onClick={(e) => {
+                    onSubmitAudioFile(e);
+                  }}
                 >
                   Publish Audio
                 </button>
@@ -95,7 +135,22 @@ const Audio = () => {
           </div>
         </CardLayout>
 
-    
+        <div className="row">
+
+            {allAudioPosts && allAudioPosts.map((item,index)=>(
+              <div className="col-xl-4 col-lg-4">
+
+                <div className="card" style={{margin:"10px",padding:"15px"}}>
+                  <h6>{item.title}</h6>
+                  <p>{item.audiofile}</p>
+                </div>
+
+              </div>
+            ))}
+
+        </div>
+
+
         <ToastContainer autoClose={8000} />
       </div>
     </PageLayout>
