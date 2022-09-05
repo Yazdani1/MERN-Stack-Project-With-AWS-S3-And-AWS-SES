@@ -11,11 +11,15 @@ const PDFFeatures = () => {
   const [pdfButtonName, setPdfButtonName] = useState("");
   const [pdfFile, setPdfFile] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   // to load all the pdf
 
   const [allPdfPosts, setAllPdfPosts] = useState([]);
 
   const handlePdfUpload = async (e) => {
+    setLoading(true);
+
     try {
       const file = e.target.files[0];
       setPdfButtonName(file.name);
@@ -38,6 +42,8 @@ const PDFFeatures = () => {
       toast.error("PDF Upload Failed", {
         position: toast.POSITION.TOP_RIGHT,
       });
+      setLoading(false);
+
     }
   };
 
