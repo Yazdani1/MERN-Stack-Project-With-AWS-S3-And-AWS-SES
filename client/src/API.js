@@ -1,12 +1,12 @@
 const axios = require("axios");
 
-// const headerConfig = () => {
-//   return {
-//     headers: {
-//       Authorization: `Bearer ${localStorage.getItem("token")}`,
-//     },
-//   };
-// };
+const headerConfig = () => {
+  return {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
+};
 
 /***********/ ////////////////////////////////////**********/
 /******         User Authentication              **********/
@@ -94,7 +94,7 @@ const getAllpost = async () => {
 };
 
 const deleteSinglePost = async (id) => {
-  const response = await axios.delete("http://localhost:5000/api/delete/" + id);
+  const response = await axios.delete("http://localhost:5000/api/delete/" + id,headerConfig());
   return response;
 };
 

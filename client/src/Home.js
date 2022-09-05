@@ -54,6 +54,7 @@ const Home = () => {
     try {
       const response = await getallCategory();
       setAllcategory(response.data);
+      console.log(allcategory)
     } catch (error) {
       console.log(error.response && error.response.data.error);
     }
