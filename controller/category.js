@@ -4,7 +4,7 @@ var slugify = require('slugify');
 
 exports.createCategory = async (req, res) => {
   try {
-    const { categorySchema } = req.body;
+    const { categoryName } = req.body;
 
     const slug = slugify(categoryName);
 
@@ -93,13 +93,4 @@ exports.deleteCategory = async (req, res) => {
   }
 };
 
-// exports.getCategory = (req, res) => {
-//   Category.find({})
-//     .sort({ date: "DESC" })
-//     .then((result) => {
-//       res.json(result);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// };
+
