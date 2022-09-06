@@ -133,7 +133,7 @@ const PDFFeatures = () => {
                     onSubmitPdfPost(e);
                   }}
                 >
-                  Publish PDF
+                  {loading? "Uploading..":"Publish PDF"}
                 </button>
               </div>
             </form>

@@ -100,7 +100,7 @@ const Audio = () => {
   return (
     <PageLayout>
       <div className="container">
-        <CardLayout title="Create Audi Post">
+        <CardLayout title="Create Audio Post">
           <div className="form-design">
             <form>
               <h1>Audio File:{audioFile}</h1>
@@ -109,7 +109,7 @@ const Audio = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Vide title.."
+                  placeholder="Audio name.."
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                 />
