@@ -105,7 +105,6 @@ const CategoryComponent = ({ id, categoryName, deleteCategory,loadallCategory })
 
                   <button
                     type="submit"
-                    name="btnSubmit"
                     className="btn btn-danger"
                     onClick={() => setIsShowing(false)}
                   >
