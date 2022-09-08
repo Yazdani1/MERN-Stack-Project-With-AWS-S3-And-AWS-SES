@@ -120,8 +120,7 @@ exports.editNews = async (req, res) => {
       $set: payload,
     });
 
-    
-
+    res.status(200).json(editDetails);
   } catch (error) {
     return res.status(400).json({ error: "Something went wrong" });
   }
