@@ -107,3 +107,16 @@ exports.deleteNews = async (req, res) => {
     res.status(404).json({ error: "News id could not found" });
   }
 };
+
+// to edit news
+
+exports.editNews = async(req,res)=>{
+
+  try {
+
+  } catch(error){
+    
+  }
+
+
+}
