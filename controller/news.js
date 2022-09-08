@@ -17,8 +17,6 @@ const S3 = new AWS.S3(awsConfig);
 // to upload image to the AWS S3
 
 exports.uploadImagetoAWS = async (req, res) => {
-
-  
   try {
     const { image } = req.body;
 
@@ -110,13 +108,21 @@ exports.deleteNews = async (req, res) => {
 
 // to edit news
 
-exports.editNews = async(req,res)=>{
-
+exports.editNews = async (req, res) => {
   try {
+    const { title, des, image } = req.body;
 
-  } catch(error){
+    const editQuery = { _id: req.params.id };
+
+    const payload = { title, des, image };
+
+    const editDetails = await News.findByIdAndUpdate(editQuery, {
+      $set: payload,
+    });
+
     
+
+  } catch (error) {
+    return res.status(400).json({ error: "Something went wrong" });
   }
-
-
-}
+};

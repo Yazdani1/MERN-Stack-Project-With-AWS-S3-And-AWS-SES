@@ -20,6 +20,6 @@ router.delete("/delete-news/:id", deleteNews);
 
 // to edit news
 
-router.patch("/edit-news", editNews);
+router.patch("/edit-news/:id", editNews);
 
 module.exports = router;
