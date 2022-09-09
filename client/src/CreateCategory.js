@@ -286,20 +286,6 @@ const CreateCategory = () => {
             ))}
           </div>
         </div>
-
-        {/* <div
-        style={{
-          backgroundColor: "red",
-          color: "white",
-          height: "250px",
-          border: "1px solid black",
-        }}
-      >
-        <h1>Lottery Winner</h1>
-
-        <h1>Name: {lottarywinner.name}</h1>
-      </div> */}
-
         <ToastContainer autoClose={8000} />
       </div>
     </PageLayout>
