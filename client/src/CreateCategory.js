@@ -56,8 +56,6 @@ const CreateCategory = () => {
       const payload = { categoryName };
       const response = await postCategory(payload);
 
-      // const response = await axios.post("/api/categoryceate", payload);
-
       if (response) {
         toast.success("Category created Successfully!", {
           position: toast.POSITION.TOP_RIGHT,
