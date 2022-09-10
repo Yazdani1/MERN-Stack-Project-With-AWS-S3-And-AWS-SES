@@ -175,22 +175,6 @@ const CreateCategory = () => {
     }
   };
 
-  // to delete using axios
-
-  // const deleteCategory = async (id) => {
-  //   try {
-  //     const response = await axios.delete("/api/category-delete/" + id);
-
-  //     if (response) {
-  //       toast.info("Post Deleted Successfully!", {
-  //         position: toast.POSITION.TOP_RIGHT,
-  //       });
-  //       loadallCategory();
-  //     }
-  //   } catch (error) {
-  //     setError(error.response && error.response.data.err);
-  //   }
-  // };
 
   useEffect(() => {
     loadallCategory();
