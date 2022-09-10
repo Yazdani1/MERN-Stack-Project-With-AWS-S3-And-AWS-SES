@@ -245,8 +245,7 @@ const CreateCategory = () => {
               <div className="form-design">
                 <form>
                   <div className="text-center">
-                    {/* <h5 className="text-center">Notebook app</h5>
-                  <h5 className="text-center">Create Category</h5> */}
+                   
                     {showError()}
                     {showSuccess()}
                   </div>
@@ -287,6 +286,12 @@ const CreateCategory = () => {
           </div>
         </div>
         <ToastContainer autoClose={8000} />
+
+
+
+
+
+
       </div>
     </PageLayout>
   );
