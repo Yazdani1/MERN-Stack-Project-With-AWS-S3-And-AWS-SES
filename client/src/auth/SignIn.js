@@ -16,7 +16,6 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [state, setState] = useContext(UserContext);
 
-  // const history = useHistory();
 
   const signIn = async (e) => {
     e.preventDefault();
@@ -49,7 +48,6 @@ const SignIn = () => {
         position: toast.POSITION.TOP_RIGHT,
       });
 
-      // setError(error.response && error.response.data.error);
     }
   };
 
