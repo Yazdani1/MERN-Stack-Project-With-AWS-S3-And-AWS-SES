@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { UserContext } from "./UserContext";
 import { Navigate, useLocation } from "react-router-dom";
-import Navbar from "./Navbar";
 
 const SecureLayout = ({ children }) => {
   let location = useLocation();
