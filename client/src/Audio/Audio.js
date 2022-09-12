@@ -3,7 +3,9 @@ import ReactAudioPlayer from "react-audio-player";
 import PageLayout from "../PageLayout";
 import CardLayout from "../Components/CardLayout";
 import { ToastContainer, toast } from "react-toastify";
+import "./Audio.css";
 const { createAudioPost, getAllAudioPost } = require("../API");
+
 
 const axios = require("axios");
 
