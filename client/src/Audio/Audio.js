@@ -101,7 +101,7 @@ const Audio = () => {
 
   return (
     <PageLayout>
-      <div className="container">
+      <div className="container audio-design">
         <CardLayout title="Create Audio Post">
           <div className="form-design">
             <form>
