@@ -78,3 +78,15 @@ exports.getAllPDFFile = async (req, res) => {
     return res.status(400).json({ error: "something went wrong" });
   }
 };
+
+// to delete pdf file
+
+exports.deletePdfPost = async()=>{
+
+  try {
+
+  } catch(error){
+    
+  }
+
+}
