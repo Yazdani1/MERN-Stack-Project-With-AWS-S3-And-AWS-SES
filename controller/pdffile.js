@@ -19,7 +19,6 @@ const S3 = new AWS.S3(awsConfig);
 
 exports.uploadPdfFile = async (req, res) => {
   try {
-    
     const { pdffile } = req.files;
 
     // console.log(video);
@@ -81,12 +80,16 @@ exports.getAllPDFFile = async (req, res) => {
 
 // to delete pdf file
 
-exports.deletePdfPost = async()=>{
-
+exports.deletePdfPost = async () => {
   try {
+    const delete_Query = { _id: req.params.id };
 
-  } catch(error){
-    
+    const deletePdf = await PDFFile.findByIdAndDelete(delete_Query);
+
+    res.status(200).json(deletePdf);
+  } catch (error) {
+    return res
+      .status(404)
+      .json({ error: "Something went worng, could not found Id" });
   }
-
-}
+};
