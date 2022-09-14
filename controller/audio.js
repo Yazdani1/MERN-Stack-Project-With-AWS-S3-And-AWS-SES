@@ -77,15 +77,16 @@ exports.getAllAudioPost = async (req, res) => {
   }
 };
 
-
 // to delete audio post
 
-exports.deleteAudio = async(req,res)=>{
-
+exports.deleteAudio = async (req, res) => {
   try {
+    const deleteQuery = { _id: req.params.id };
 
-  } catch(error){
-    
+    const deleteAudioPost = await Audio.findByIdAndDelete(deleteQuery);
+
+    res.status(200).json(deleteAudioPost);
+  } catch (error) {
+    res.status(404).json({ error: "something went wrong" });
   }
-
-}
+};
