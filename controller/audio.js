@@ -76,3 +76,16 @@ exports.getAllAudioPost = async (req, res) => {
     return res.status(400).json({ error: "Something Went Wrong" });
   }
 };
+
+
+// to delete audio post
+
+exports.deleteAudio = async(req,res)=>{
+
+  try {
+
+  } catch(error){
+    
+  }
+
+}
