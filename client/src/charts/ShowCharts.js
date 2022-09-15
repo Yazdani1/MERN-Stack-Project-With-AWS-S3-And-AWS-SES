@@ -16,7 +16,6 @@ export const ShowCharts = ({ allposts }) => {
 
 
   function formatXAxis(tickItem) {
-    // If using moment.js
     return moment(tickItem).format("MMM Do YY");
 
 
@@ -38,7 +37,6 @@ export const ShowCharts = ({ allposts }) => {
           <XAxis dataKey="date" tickFormatter={formatXAxis} />
           <YAxis />
 
-          {/* <YAxis domain={[0, 'dataMax + 500']} allowDataOverflow={true} /> */}
           <Tooltip />
           <Legend />
           <Line
