@@ -3,6 +3,7 @@ import PageLayout from "../PageLayout";
 import CardLayout from "../Components/CardLayout";
 import { ToastContainer, toast } from "react-toastify";
 import ReactPlayer from "react-player";
+import "./Videos.css";
 const { createVideo, getAllVideo, deleteVideo } = require("../API");
 
 const axios = require("axios");
