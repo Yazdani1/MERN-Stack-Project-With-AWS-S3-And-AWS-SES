@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import "./Navbar.css";
 import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "./UserContext";
-import { Navigate, useLocation,useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [state, setState] = useContext(UserContext);
