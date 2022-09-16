@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+
 import PageLayout from "../PageLayout";
 import CardLayout from "../Components/CardLayout";
 import { ToastContainer, toast } from "react-toastify";
@@ -30,12 +31,16 @@ const Video = () => {
 
       // save progress bar
 
-      const { data } = await axios.post("http://localhost:5000/api/upload-video", videoData, {
-        onUploadProgress: (e) => {
-          setProgress(Math.round((100 * e.loaded) / e.total));
-          console.log(Math.round((100 * e.loaded) / e.total));
-        },
-      });
+      const { data } = await axios.post(
+        "http://localhost:5000/api/upload-video",
+        videoData,
+        {
+          onUploadProgress: (e) => {
+            setProgress(Math.round((100 * e.loaded) / e.total));
+            console.log(Math.round((100 * e.loaded) / e.total));
+          },
+        }
+      );
       setVideo(data.Location);
 
       console.log(data);
@@ -58,7 +63,6 @@ const Video = () => {
         setTitle("");
         setVideo("");
         loadVideoPost();
-
       }
     } catch (error) {
       toast.error(error.response && error.response.data.error, {
@@ -87,7 +91,6 @@ const Video = () => {
           position: toast.POSITION.TOP_RIGHT,
         });
         loadVideoPost();
-
       }
     } catch (error) {
       toast.error(error.response && error.response.data.error, {
@@ -95,6 +98,19 @@ const Video = () => {
       });
     }
   };
+  const videoEl = useRef(null);
+
+  const handleLoadedMetadata = (videoSrc) => {
+    const videoUrl = videoSrc.current;
+    if (!videoUrl) return;
+    console.log(`The video is ${videoUrl.duration} seconds long.`);
+  };
+
+  // const loadVideoDuration = (videoSrc) => {
+  //   getVideoDurationInSeconds(videoSrc).then((duration) => {
+  //     console.log(duration);
+  //   });
+  // };
 
   useEffect(() => {
     loadVideoPost();
@@ -131,16 +147,15 @@ const Video = () => {
                     hidden
                   />
                 </label>
-                <div className="progress-bar"
-                role="progressbar"
-                aria-valuenow={progress}
-                aria-valuemin="0"
-                aria-valuemax="100"
-                style={{width:`${progress}%`}}
+                <div
+                  className="progress-bar"
+                  role="progressbar"
+                  aria-valuenow={progress}
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  style={{ width: `${progress}%` }}
                 >
-
                   {progress}
-
                 </div>
               </div>
 
@@ -166,7 +181,13 @@ const Video = () => {
           {allVideos &&
             allVideos.map((v, index) => (
               <div className="col-xl-4 col-lg-4" key={index}>
-                <div className="card ">
+                <div
+                  className="card"
+                  style={{ padding: "15px" }}
+                  // ref={videoEl}
+                  // type="video/mp4"
+                  onLoadedMetadata={handleLoadedMetadata(v.video_link)}
+                >
                   <ReactPlayer
                     loop={true}
                     playing={false}
@@ -176,7 +197,7 @@ const Video = () => {
                     url={v.video_link}
                     previewTabIndex={10}
                   />
-                  <h6>{v.title}</h6>
+                  <h6 style={{ padding: "15px" }}>{v.title}</h6>
 
                   <button
                     className="btn btn-danger"
