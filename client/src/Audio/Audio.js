@@ -87,6 +87,8 @@ const Audio = () => {
     try {
       const res = await getAllAudioPost();
 
+      console.log(res.data);
+
       setAllAudioPosts(res.data);
     } catch (error) {
       toast.error(error.response && error.response.data.error, {
@@ -173,3 +175,12 @@ const Audio = () => {
 };
 
 export default Audio;
+
+
+{/* <audio controls>
+<source
+  src="https://news-note.s3.amazonaws.com/a4ff2a92-da1b-473c-ad1f-d6fec0339f48.wav"
+  type="audio/mpeg"
+/>
+</audio> */}
+

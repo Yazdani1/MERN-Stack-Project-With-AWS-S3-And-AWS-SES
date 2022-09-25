@@ -2,10 +2,16 @@ import React, { useState, useContext } from "react";
 import "./Navbar.css";
 import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "./UserContext";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  // to use context api
   const [state, setState] = useContext(UserContext);
+
+  // to use redux-toolkit
+
+  const userInfo = useSelector((state) => state.user.currentUser);
 
   const navigate = useNavigate();
 
@@ -17,10 +23,17 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={state && state.user && state.user.name ? "navbar-main navbar-main-admin" : "navbar-main"}>
+    <nav
+      className={
+        state && state.user && state.user.name
+          ? "navbar-main navbar-main-admin"
+          : "navbar-main"
+      }
+    >
       {state && state.token && state.token ? (
         <ul>
           <li>{state && state.user && state.user.name}</li>
+          <li>From Redux-{userInfo?.user.email}</li>
 
           <Link to={"/"} style={{ textDecoration: "none" }}>
             <li className="nav-item">Home</li>
@@ -45,19 +58,20 @@ const Navbar = () => {
             <li className="nav-item">PDF File</li>
           </Link>
 
-          <Link to={"/signin"} style={{ textDecoration: "none" }} onClick={logOut}>
+          <Link
+            to={"/signin"}
+            style={{ textDecoration: "none" }}
+            onClick={logOut}
+          >
             <li className="nav-item">Sign Out</li>
           </Link>
-
-       
         </ul>
       ) : (
         <ul>
-
           <Link to={"/"} style={{ textDecoration: "none" }}>
             <li className="nav-item">Home</li>
           </Link>
-      
+
           <Link to={"/signup"} style={{ textDecoration: "none" }}>
             <li className="nav-item">Sign Up</li>
           </Link>

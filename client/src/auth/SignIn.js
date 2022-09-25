@@ -2,8 +2,15 @@ import React, { useState, useContext, useRef, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Navigate, useLocation, useNavigate, Link } from "react-router-dom";
 // import { userLoginDetails } from "../API";
+import { useDispatch } from "react-redux";
 import PageLayout from "../PageLayout";
 import { UserContext } from "../UserContext";
+import {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+  logOut,
+} from "../redux/userSlice";
 
 const axios = require("axios");
 
@@ -14,15 +21,24 @@ const SignIn = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // to use contextApi
   const [state, setState] = useContext(UserContext);
 
+  // to use redux-toolkit
+
+  const dispatch = useDispatch();
 
   const signIn = async (e) => {
     e.preventDefault();
 
+    dispatch(loginStart());
+
     try {
-      // const res = await userLoginDetails({ email, password });
-      const res = await axios.post("http://localhost:5000/api/login", { email, password });
+      const res = await axios.post("http://localhost:5000/api/login", {
+        email,
+        password,
+      });
 
       if (res) {
         toast.success("Log In Successfully", {
@@ -31,11 +47,15 @@ const SignIn = () => {
         setEmail("");
         setPassword("");
 
-        // update user information
+        // update user information into context api
         setState({
           user: res.data.user,
           token: res.data.token,
         });
+
+        //to add user information in redux
+
+        dispatch(loginSuccess(res.data));
 
         // save user info in local storage
         window.localStorage.setItem("tokenLogin", JSON.stringify(res.data));
@@ -47,7 +67,7 @@ const SignIn = () => {
       toast.error(error.response && error.response.data.error, {
         position: toast.POSITION.TOP_RIGHT,
       });
-
+      dispatch(loginFailure());
     }
   };
 
