@@ -34,6 +34,8 @@ const Navbar = () => {
         <ul>
           <li>{state && state.user && state.user.name}</li>
           <li>From Redux-{userInfo?.user.email}</li>
+        
+
 
           <Link to={"/"} style={{ textDecoration: "none" }}>
             <li className="nav-item">Home</li>
@@ -65,6 +67,7 @@ const Navbar = () => {
           >
             <li className="nav-item">Sign Out</li>
           </Link>
+
         </ul>
       ) : (
         <ul>

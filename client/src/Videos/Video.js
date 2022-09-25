@@ -4,6 +4,8 @@ import PageLayout from "../PageLayout";
 import CardLayout from "../Components/CardLayout";
 import { ToastContainer, toast } from "react-toastify";
 import ReactPlayer from "react-player";
+import { useSelector } from "react-redux";
+
 import "./Videos.css";
 const { createVideo, getAllVideo, deleteVideo } = require("../API");
 
@@ -15,6 +17,11 @@ const Video = () => {
   const [video, setVideo] = useState("");
 
   const [allVideos, setAllVideos] = useState([]);
+
+   // to use redux-toolkit
+
+   const userInfo = useSelector((state) => state.user.currentUser);
+
 
   // to progress bar while upload video
 
@@ -120,6 +127,9 @@ const Video = () => {
     <PageLayout>
       <div className="container">
         <CardLayout title="Create Video Post">
+          <h2>{userInfo?.user.name}</h2>
+          <h2>{userInfo?.user.email}</h2>
+
           <h1>Video Link: {video}</h1>
           <div className="form-design">
             <form>
