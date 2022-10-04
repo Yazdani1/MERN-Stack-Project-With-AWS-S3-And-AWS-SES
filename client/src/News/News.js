@@ -22,14 +22,25 @@ const News = () => {
 
     setPreview(window.URL.createObjectURL(file));
 
-    Resizer.imageFileResizer(file, 720, 500, "JPEG", 100, 0, async (uri) => {
-      try {
-        const { data } = await axios.post("http://localhost:5000/api/upload-image", { image: uri });
-        setImage(data.Location);
-      } catch (error) {
-        console.log(error);
-      }
-    });
+    Resizer.imageFileResizer(
+      file,
+      200,
+      200,
+      "JPEG",
+      100,
+      0,
+      async (uri) => {
+        try {
+          const { data } = await axios.post(
+            "http://localhost:5000/api/upload-image",
+            { image: uri }
+          );
+          setImage(data.Location);
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    );
   };
 
   const onSubmit = async (e) => {
@@ -168,7 +179,7 @@ const News = () => {
               <div
                 className="card col-xl-4 col-lg-4"
                 key={index}
-                style={{ margin: "5px" }}
+                style={{ margin: "5px", padding: "10px" }}
               >
                 <h5>{item.title}</h5>
                 <img
