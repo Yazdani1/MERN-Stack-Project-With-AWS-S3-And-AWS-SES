@@ -1,5 +1,9 @@
+import got from 'got';
 const AWS = require("aws-sdk");
 const { uuid } = require("uuidv4");
+
+// const got = require("got");
+const sharp = require("sharp");
 const News = require("../model/News");
 
 require("dotenv").config();
@@ -52,6 +56,43 @@ exports.uploadImagetoAWS = async (req, res) => {
       res.send(data);
     });
   } catch (error) {}
+};
+
+// to reduce image size
+
+exports.reduceImageSize = async (req, res) => {
+  try {
+    const { url } = req.body;
+
+    const body = await got(url).buffer();
+
+    const data = await sharp(body)
+      .resize({ width: 100 })
+      .jpeg({ quality: 70 })
+      .toBuffer();
+
+    const params = {
+      Bucket: "news-note",
+      Key: `${uuid()}`,
+
+      // Key: `category/${uuid()}`, to create a folder in s3 and then store image there
+      Body: data,
+      ACL: "public-read",
+      ContentEncoding: "base64",
+      ContentType: `image/jpeg`,
+    };
+
+    S3.upload(params, (err, data) => {
+      if (err) {
+        console.log(err);
+        return res.sendStatus(400);
+      }
+      res.send(data);
+      res.json(data);
+    });
+  } catch (error) {
+    res.status(400).json({ error: "Something Went Wrong" });
+  }
 };
 
 // to post news with aws image to database

@@ -6,7 +6,8 @@ const {
   createNews,
   getAllnews,
   deleteNews,
-  editNews
+  editNews,
+  reduceImageSize
 } = require("../controller/news");
 
 require("dotenv").config();
@@ -21,5 +22,9 @@ router.delete("/delete-news/:id", deleteNews);
 // to edit news
 
 router.patch("/edit-news/:id", editNews);
+
+// to resize image
+
+router.post("/reduce-image-size",reduceImageSize);
 
 module.exports = router;
