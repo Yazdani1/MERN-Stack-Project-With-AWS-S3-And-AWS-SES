@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-  "type": "module",
   "scripts": {
     "start": "node app.js",
     "server": "nodemon app.js",
@@ -29,6 +28,8 @@
     "nodemon": "^2.0.15",
     "sharp": "^0.31.1",
     "slugify": "^1.6.5",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.5.0",
     "uuidv4": "^6.2.13"
   }
 }
