@@ -53,6 +53,7 @@ router.post("/create-news", createNews);
  *      '400':
  *        description: A bad response
  */
+
 /**
  * @swagger
  * components:
