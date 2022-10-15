@@ -147,29 +147,25 @@ exports.deleteNews = async (req, res) => {
   }
 };
 
-
 // to delte multiple news
 
-
-exports.delteMultipleNews = async(req,res)=>{
-
+exports.delteMultipleNews = async (req, res) => {
   try {
-
     const { id } = req.body;
 
     const deleteQuery = [id];
 
-    res.status(200).json("Many post deleted")
+    const delete_news = await News.deleteMany({ _id: { $in: id } });
 
-  } catch(error){
+    console.log(deleteQuery);
 
-    res.status(400).json({error:"Soething went wrog"})
+    console.log(delete_news);
 
+    res.status(200).json("Many post deleted");
+  } catch (error) {
+    res.status(400).json({ error: "Soething went wrog" });
   }
-
-}
-
-
+};
 
 // to edit news
 
