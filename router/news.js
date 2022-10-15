@@ -7,7 +7,8 @@ const {
   getAllnews,
   deleteNews,
   editNews,
-  reduceImageSize
+  reduceImageSize,
+  delteMultipleNews
 } = require("../controller/news");
 
 require("dotenv").config();
@@ -18,6 +19,10 @@ router.post("/upload-image", uploadImagetoAWS);
 router.post("/create-news", createNews);
 router.get("/getall-news", getAllnews);
 router.delete("/delete-news/:id", deleteNews);
+
+// to delte multiple news
+
+router.delete("/delte-multiple-news",delteMultipleNews);
 
 // to edit news
 

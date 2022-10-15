@@ -1,4 +1,4 @@
-import got from 'got';
+// import got from 'got';
 const AWS = require("aws-sdk");
 const { uuid } = require("uuidv4");
 
@@ -134,7 +134,7 @@ exports.getAllnews = async (req, res) => {
   }
 };
 
-// to delete news
+// to delete single news
 
 exports.deleteNews = async (req, res) => {
   try {
@@ -146,6 +146,30 @@ exports.deleteNews = async (req, res) => {
     res.status(404).json({ error: "News id could not found" });
   }
 };
+
+
+// to delte multiple news
+
+
+exports.delteMultipleNews = async(req,res)=>{
+
+  try {
+
+    const { id } = req.body;
+
+    const deleteQuery = [id];
+
+    res.status(200).json("Many post deleted")
+
+  } catch(error){
+
+    res.status(400).json({error:"Soething went wrog"})
+
+  }
+
+}
+
+
 
 // to edit news
 
