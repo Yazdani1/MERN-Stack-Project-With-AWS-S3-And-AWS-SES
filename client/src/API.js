@@ -94,7 +94,10 @@ const getAllpost = async () => {
 };
 
 const deleteSinglePost = async (id) => {
-  const response = await axios.delete("http://localhost:5000/api/delete/" + id,headerConfig());
+  const response = await axios.delete(
+    "http://localhost:5000/api/delete/" + id,
+    headerConfig()
+  );
   return response;
 };
 
@@ -135,6 +138,24 @@ const getAllNews = async () => {
 
 const deleteSingleNews = async (id) => {
   const res = await axios.delete("http://localhost:5000/api/delete-news/" + id);
+  return res;
+};
+
+// to delte  multiple news
+
+const deleteMultipleNews = async (payload) => {
+  const res = await axios.delete(
+    "http://localhost:5000/api/delte-multiple-news",
+    {
+      headers: {
+        Accept: "application/json; charset=utf-8",
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    },
+    payload
+    
+  );
   return res;
 };
 
@@ -179,26 +200,22 @@ const getPdfPost = async () => {
   return res;
 };
 
-
 /***********/ ////////////////////////////////////**********/
 /************************* Audio File      *******************/
 /***********/ ////////////////////////////////////**********/
 
-const createAudioPost = async(payload)=>{
-
-  const res = await axios.post("http://localhost:5000/api/create-audio-post",payload);
+const createAudioPost = async (payload) => {
+  const res = await axios.post(
+    "http://localhost:5000/api/create-audio-post",
+    payload
+  );
   return res;
+};
 
-}
-
-const getAllAudioPost = async()=>{
-
+const getAllAudioPost = async () => {
   const res = await axios.get("http://localhost:5000/api/get-all-audiopost");
   return res;
-
-}
-
-
+};
 
 module.exports = {
   getallCategory,
@@ -216,6 +233,7 @@ module.exports = {
   // userLoginDetails,
   createNews,
   getAllNews,
+  deleteMultipleNews,
   createVideo,
   getAllVideo,
   deleteVideo,
@@ -223,5 +241,5 @@ module.exports = {
   createPdfPost,
   getPdfPost,
   createAudioPost,
-  getAllAudioPost
+  getAllAudioPost,
 };

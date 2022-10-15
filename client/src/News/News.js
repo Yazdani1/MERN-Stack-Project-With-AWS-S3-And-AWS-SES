@@ -5,7 +5,12 @@ import CardLayout from "../Components/CardLayout";
 import PageLayout from "../PageLayout";
 const axios = require("axios");
 
-const { createNews, getAllNews, deleteSingleNews } = require("../API");
+const {
+  createNews,
+  getAllNews,
+  deleteSingleNews,
+  deleteMultipleNews,
+} = require("../API");
 
 const News = () => {
   const [preview, setPreview] = useState("");
@@ -22,25 +27,17 @@ const News = () => {
 
     setPreview(window.URL.createObjectURL(file));
 
-    Resizer.imageFileResizer(
-      file,
-      200,
-      200,
-      "JPEG",
-      100,
-      0,
-      async (uri) => {
-        try {
-          const { data } = await axios.post(
-            "http://localhost:5000/api/upload-image",
-            { image: uri }
-          );
-          setImage(data.Location);
-        } catch (error) {
-          console.log(error);
-        }
-      },
-    );
+    Resizer.imageFileResizer(file, 200, 200, "JPEG", 100, 0, async (uri) => {
+      try {
+        const { data } = await axios.post(
+          "http://localhost:5000/api/upload-image",
+          { image: uri }
+        );
+        setImage(data.Location);
+      } catch (error) {
+        console.log(error);
+      }
+    });
   };
 
   const onSubmit = async (e) => {
@@ -88,6 +85,41 @@ const News = () => {
 
       if (res) {
         toast.success("News Deleted Successfully!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+
+        getallNews();
+      }
+    } catch (error) {
+      toast.error(error.response && error.response.data.error, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+  };
+
+  // to delete multiple news all together
+
+  var allDeleteableNewsId = [];
+
+  const selectNewsPostId = async (id) => {
+    allDeleteableNewsId.push(id);
+    console.log(allDeleteableNewsId)
+  };
+
+  const deleteMultipleNewsItem = async () => {
+    try {
+      // const res = await deleteMultipleNews({postid:newspostid});
+
+      const res = await axios.delete(
+        "http://localhost:5000/api/delte-multiple-news",
+        { data: { postid: allDeleteableNewsId } }
+      );
+
+      console.log(res);
+      // console.log("post id:" + newspostid);
+
+      if (res) {
+        toast.success("Multiple News Deleted Successfully!", {
           position: toast.POSITION.TOP_RIGHT,
         });
 
@@ -173,6 +205,15 @@ const News = () => {
           </div>
         </CardLayout>
 
+        <CardLayout>
+          <button
+            className="btn btn-danger"
+            onClick={() => deleteMultipleNewsItem()}
+          >
+            Delete All
+          </button>
+        </CardLayout>
+
         <div className="row">
           {newsList &&
             newsList.map((item, index) => (
@@ -180,8 +221,10 @@ const News = () => {
                 className="card col-xl-4 col-lg-4"
                 key={index}
                 style={{ margin: "5px", padding: "10px" }}
+                onClick={() => selectNewsPostId(item._id)}
               >
                 <h5>{item.title}</h5>
+                <p>{item._id}</p>
                 <img
                   src={item.image}
                   height="300px"

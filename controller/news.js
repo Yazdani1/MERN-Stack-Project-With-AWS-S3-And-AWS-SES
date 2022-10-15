@@ -151,17 +151,14 @@ exports.deleteNews = async (req, res) => {
 
 exports.delteMultipleNews = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { postid } = req.body;
 
-    const deleteQuery = [id];
+    const delete_news = await News.deleteMany({ _id: { $in: postid } });
 
-    const delete_news = await News.deleteMany({ _id: { $in: id } });
-
-    console.log(deleteQuery);
 
     console.log(delete_news);
 
-    res.status(200).json("Many post deleted");
+    res.status(200).json({ message: "News Multiple Deleted Successfully",delete_news });
   } catch (error) {
     res.status(400).json({ error: "Soething went wrog" });
   }
