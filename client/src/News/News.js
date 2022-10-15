@@ -3,9 +3,8 @@ import Resizer from "react-image-file-resizer";
 import { ToastContainer, toast } from "react-toastify";
 import CardLayout from "../Components/CardLayout";
 import PageLayout from "../PageLayout";
-import "./News.css"
+import "./News.css";
 const axios = require("axios");
-
 
 const {
   createNews,
@@ -22,7 +21,7 @@ const News = () => {
 
   // to mark selected id
 
-  const [selected,setSelected] = useState(false);
+  const [selected, setSelected] = useState(false);
 
   // to load all the news
 
@@ -103,26 +102,25 @@ const News = () => {
     }
   };
 
-  // to show selected 
+  // to show selected
 
-  const postSelected = ()=>{
+  const postSelected = () => {
     setSelected(!selected);
-  }
-
+  };
 
   // to delete multiple news all together
-
 
   var allDeleteableNewsId = [];
 
   const selectNewsPostId = async (id) => {
     allDeleteableNewsId.push(id);
   };
-  
 
   const deleteMultipleNewsItem = async () => {
     try {
-      const res = await deleteMultipleNews({ data: { postid: allDeleteableNewsId }});
+      const res = await deleteMultipleNews({
+        data: { postid: allDeleteableNewsId },
+      });
 
       // const res = await axios.delete(
       //   "http://localhost:5000/api/delte-multiple-news",
@@ -171,6 +169,13 @@ const News = () => {
   //     });
   //   }
   // };
+
+
+  const [checked, setChecked] = useState(false);
+
+  const handleChange = () => {
+    setChecked(!checked);
+  };
 
   useEffect(() => {
     getallNews();
@@ -260,12 +265,16 @@ const News = () => {
               <div
                 className="card col-xl-4 col-lg-4"
                 key={index}
-                style={{ margin: "5px", padding: "10px" , }}
+                style={{ margin: "5px", padding: "10px" }}
                 onClick={() => selectNewsPostId(item._id)}
-                
               >
                 <h5>{item.title}</h5>
                 <p>{item._id}</p>
+
+                <label>
+                  <input type="checkbox" checked={checked} onChange={handleChange} />
+                  
+                </label>
                 <img
                   src={item.image}
                   height="300px"
