@@ -3,7 +3,9 @@ import Resizer from "react-image-file-resizer";
 import { ToastContainer, toast } from "react-toastify";
 import CardLayout from "../Components/CardLayout";
 import PageLayout from "../PageLayout";
+import "./News.css"
 const axios = require("axios");
+
 
 const {
   createNews,
@@ -17,6 +19,10 @@ const News = () => {
   const [image, setImage] = useState("");
   const [title, setTitle] = useState("");
   const [des, setDes] = useState("");
+
+  // to mark selected id
+
+  const [selected,setSelected] = useState(false);
 
   // to load all the news
 
@@ -97,23 +103,31 @@ const News = () => {
     }
   };
 
+  // to show selected 
+
+  const postSelected = ()=>{
+    setSelected(!selected);
+  }
+
+
   // to delete multiple news all together
+
 
   var allDeleteableNewsId = [];
 
   const selectNewsPostId = async (id) => {
     allDeleteableNewsId.push(id);
-    console.log(allDeleteableNewsId)
   };
+  
 
   const deleteMultipleNewsItem = async () => {
     try {
-      // const res = await deleteMultipleNews({postid:newspostid});
+      const res = await deleteMultipleNews({ data: { postid: allDeleteableNewsId }});
 
-      const res = await axios.delete(
-        "http://localhost:5000/api/delte-multiple-news",
-        { data: { postid: allDeleteableNewsId } }
-      );
+      // const res = await axios.delete(
+      //   "http://localhost:5000/api/delte-multiple-news",
+      //   { data: { postid: allDeleteableNewsId } }
+      // );
 
       console.log(res);
       // console.log("post id:" + newspostid);
@@ -131,6 +145,32 @@ const News = () => {
       });
     }
   };
+
+  // const deleteMultipleNewsItem = async () => {
+  //   try {
+  //     // const res = await deleteMultipleNews({postid:newspostid});
+
+  //     const res = await axios.delete(
+  //       "http://localhost:5000/api/delte-multiple-news",
+  //       { data: { postid: allDeleteableNewsId } }
+  //     );
+
+  //     console.log(res);
+  //     // console.log("post id:" + newspostid);
+
+  //     if (res) {
+  //       toast.success("Multiple News Deleted Successfully!", {
+  //         position: toast.POSITION.TOP_RIGHT,
+  //       });
+
+  //       getallNews();
+  //     }
+  //   } catch (error) {
+  //     toast.error(error.response && error.response.data.error, {
+  //       position: toast.POSITION.TOP_RIGHT,
+  //     });
+  //   }
+  // };
 
   useEffect(() => {
     getallNews();
@@ -210,7 +250,7 @@ const News = () => {
             className="btn btn-danger"
             onClick={() => deleteMultipleNewsItem()}
           >
-            Delete All
+            Delete All {allDeleteableNewsId.length}
           </button>
         </CardLayout>
 
@@ -220,8 +260,9 @@ const News = () => {
               <div
                 className="card col-xl-4 col-lg-4"
                 key={index}
-                style={{ margin: "5px", padding: "10px" }}
+                style={{ margin: "5px", padding: "10px" , }}
                 onClick={() => selectNewsPostId(item._id)}
+                
               >
                 <h5>{item.title}</h5>
                 <p>{item._id}</p>

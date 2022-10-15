@@ -144,18 +144,7 @@ const deleteSingleNews = async (id) => {
 // to delte  multiple news
 
 const deleteMultipleNews = async (payload) => {
-  const res = await axios.delete(
-    "http://localhost:5000/api/delte-multiple-news",
-    {
-      headers: {
-        Accept: "application/json; charset=utf-8",
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    },
-    payload
-    
-  );
+  const res = await axios.delete("http://localhost:5000/api/delte-multiple-news",payload);
   return res;
 };
 
