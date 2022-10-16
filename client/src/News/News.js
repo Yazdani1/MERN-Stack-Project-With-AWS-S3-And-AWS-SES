@@ -114,7 +114,25 @@ const News = () => {
 
   const selectNewsPostId = async (id) => {
     allDeleteableNewsId.push(id);
+    console.log('all >> categories', allDeleteableNewsId);
+
   };
+
+  // to toggle selected post in checkbox
+
+  
+  const handleToggle = c => () => {
+    const clickedCategory = allDeleteableNewsId.indexOf(c);
+
+    if (clickedCategory === -1) {
+      allDeleteableNewsId.push(c);
+    } else {
+      allDeleteableNewsId.splice(clickedCategory, 1);
+    }
+    console.log('all >> categories', allDeleteableNewsId);
+};
+
+
 
   const deleteMultipleNewsItem = async () => {
     try {
@@ -169,13 +187,6 @@ const News = () => {
   //     });
   //   }
   // };
-
-
-  const [checked, setChecked] = useState(false);
-
-  const handleChange = () => {
-    setChecked(!checked);
-  };
 
   useEffect(() => {
     getallNews();
@@ -259,6 +270,10 @@ const News = () => {
           </button>
         </CardLayout>
 
+        <CardLayout>
+         
+        </CardLayout>
+
         <div className="row">
           {newsList &&
             newsList.map((item, index) => (
@@ -266,15 +281,14 @@ const News = () => {
                 className="card col-xl-4 col-lg-4"
                 key={index}
                 style={{ margin: "5px", padding: "10px" }}
-                onClick={() => selectNewsPostId(item._id)}
+                // onClick={() => selectNewsPostId(item._id)}
               >
                 <h5>{item.title}</h5>
-                <p>{item._id}</p>
+                {/* <p>{item._id}</p> */}
 
-                <label>
-                  <input type="checkbox" checked={checked} onChange={handleChange} />
-                  
-                </label>
+                <li className="list-unstyled" key={item._id}>
+                    <input style={{height:"50px",width:"50px"}} type="checkbox" onChange={handleToggle(item._id)} className="mr-2" />
+                </li>
                 <img
                   src={item.image}
                   height="300px"
