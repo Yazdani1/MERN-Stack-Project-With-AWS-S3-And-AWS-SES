@@ -110,7 +110,6 @@ const News = () => {
 
   // to delete multiple news all together
 
-  var allDeleteableNewsId = [];
 
   const selectNewsPostId = async (id) => {
     allDeleteableNewsId.push(id);
@@ -136,6 +135,10 @@ const News = () => {
   //   console.log('all >> categories', allDeleteableNewsId);
   // };
 
+  var allDeleteableNewsId = [];
+
+
+
   const handleToggle = (c) => () => {
     const clickedCategory = allDeleteableNewsId.indexOf(c);
 
@@ -148,6 +151,7 @@ const News = () => {
     }
     console.log("all >> categories", allDeleteableNewsId);
     console.log("Total selected item" + allDeleteableNewsId.length);
+
   };
 
   const deleteMultipleNewsItem = async () => {
@@ -284,7 +288,7 @@ const News = () => {
             className="btn btn-danger"
             onClick={() => deleteMultipleNewsItem()}
           >
-            Delete All  {allDeleteableNewsId.length}
+            Delete All {allDeleteableNewsId.length}
           </button>
         </CardLayout>
 
