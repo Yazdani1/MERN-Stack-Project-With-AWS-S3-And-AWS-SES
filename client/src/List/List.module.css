@@ -1,6 +1,6 @@
 .mainCard{
 
-    height: 1100px;
+    height: 500px;
     width: 100%;
     background-color: rgb(227, 249, 194);
 }
@@ -13,5 +13,12 @@
     margin: 10px;
     color: aliceblue;
     cursor: pointer;
+    padding-top: 15px;
 
+}
+
+.targetCard{
+    height: 500px;
+    width: 100%;
+    background-color: rgb(225, 175, 24);
 }
