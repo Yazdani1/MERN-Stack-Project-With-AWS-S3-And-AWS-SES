@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Resizer from "react-image-file-resizer";
 import { ToastContainer, toast } from "react-toastify";
 import CardLayout from "../Components/CardLayout";
@@ -114,25 +114,41 @@ const News = () => {
 
   const selectNewsPostId = async (id) => {
     allDeleteableNewsId.push(id);
-    console.log('all >> categories', allDeleteableNewsId);
-
+    console.log("all >> categories", allDeleteableNewsId);
   };
 
   // to toggle selected post in checkbox
 
-  
-  const handleToggle = c => () => {
+  // to show number of selected post to delete ,, still need to solve it properly
+  // const [allDeleteableNewsId,setAllDeleteableNewsId] = useState([]);
+
+  // const handleToggle = c => () => {
+
+  //   const clickedCategory = allDeleteableNewsId.indexOf(c);
+
+  //   if (clickedCategory === -1) {
+  //     setAllDeleteableNewsId(oldArray => [...oldArray, c]);
+  //     // allDeleteableNewsId.push(c);
+  //   } else {
+  //     setAllDeleteableNewsId(currentImg => currentImg.filter((img, i) => img !== c));
+  //     // allDeleteableNewsId.splice(clickedCategory, 1);
+  //   }
+  //   console.log('all >> categories', allDeleteableNewsId);
+  // };
+
+  const handleToggle = (c) => () => {
     const clickedCategory = allDeleteableNewsId.indexOf(c);
 
     if (clickedCategory === -1) {
       allDeleteableNewsId.push(c);
+
     } else {
       allDeleteableNewsId.splice(clickedCategory, 1);
+
     }
-    console.log('all >> categories', allDeleteableNewsId);
-};
-
-
+    console.log("all >> categories", allDeleteableNewsId);
+    console.log("Total selected item" + allDeleteableNewsId.length);
+  };
 
   const deleteMultipleNewsItem = async () => {
     try {
@@ -190,6 +206,8 @@ const News = () => {
 
   useEffect(() => {
     getallNews();
+
+    
   }, []);
 
   return (
@@ -266,13 +284,11 @@ const News = () => {
             className="btn btn-danger"
             onClick={() => deleteMultipleNewsItem()}
           >
-            Delete All {allDeleteableNewsId.length}
+            Delete All  {allDeleteableNewsId.length}
           </button>
         </CardLayout>
 
-        <CardLayout>
-         
-        </CardLayout>
+        <CardLayout></CardLayout>
 
         <div className="row">
           {newsList &&
@@ -287,7 +303,12 @@ const News = () => {
                 {/* <p>{item._id}</p> */}
 
                 <li className="list-unstyled" key={item._id}>
-                    <input style={{height:"50px",width:"50px"}} type="checkbox" onChange={handleToggle(item._id)} className="mr-2" />
+                  <input
+                    style={{ height: "50px", width: "50px" }}
+                    type="checkbox"
+                    onChange={handleToggle(item._id)}
+                    className="mr-2"
+                  />
                 </li>
                 <img
                   src={item.image}
