@@ -1,0 +1,17 @@
+.mainCard{
+
+    height: 1100px;
+    width: 100%;
+    background-color: rgb(227, 249, 194);
+}
+
+.itemCard{
+
+    padding: 10px;
+    background-color: rebeccapurple;
+    border-radius: 10px;
+    margin: 10px;
+    color: aliceblue;
+    cursor: pointer;
+
+}

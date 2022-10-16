@@ -40,6 +40,9 @@ const Navbar = () => {
           <Link to={"/"} style={{ textDecoration: "none" }}>
             <li className="nav-item">Home</li>
           </Link>
+          <Link to={"/list"} style={{ textDecoration: "none" }}>
+            <li className="nav-item">List</li>
+          </Link>
           <Link to={"/post"} style={{ textDecoration: "none" }}>
             <li className="nav-item">Post</li>
           </Link>
@@ -73,6 +76,10 @@ const Navbar = () => {
         <ul>
           <Link to={"/"} style={{ textDecoration: "none" }}>
             <li className="nav-item">Home</li>
+          </Link>
+
+          <Link to={"/list"} style={{ textDecoration: "none" }}>
+            <li className="nav-item">List</li>
           </Link>
 
           <Link to={"/signup"} style={{ textDecoration: "none" }}>

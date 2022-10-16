@@ -6,3 +6,9 @@
     margin: 10px;
     padding: 10px;
 }
+
+.mainCard{
+    background-color: blueviolet;
+    height: 500px;
+    width: 100%;
+}

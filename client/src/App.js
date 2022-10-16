@@ -15,6 +15,7 @@ import News from "./News/News";
 import Video from "./Videos/Video";
 import Audio from "./Audio/Audio";
 import PDFFeatures from "./PDFFeatures/PDFFeatures";
+import List from "./List/List";
 
 const App = () => {
   return (
@@ -26,6 +27,10 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/category/:id" element={<PostbyCategory />} />
           <Route path="/details-post/:id" element={<Detailspost />} />
+
+
+          <Route path="/list" element={<List />} />
+
 
           <Route
             path="/post"
