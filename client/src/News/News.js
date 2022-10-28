@@ -110,7 +110,6 @@ const News = () => {
 
   // to delete multiple news all together
 
-
   const selectNewsPostId = async (id) => {
     allDeleteableNewsId.push(id);
     console.log("all >> categories", allDeleteableNewsId);
@@ -137,21 +136,16 @@ const News = () => {
 
   var allDeleteableNewsId = [];
 
-
-
   const handleToggle = (c) => () => {
     const clickedCategory = allDeleteableNewsId.indexOf(c);
 
     if (clickedCategory === -1) {
       allDeleteableNewsId.push(c);
-
     } else {
       allDeleteableNewsId.splice(clickedCategory, 1);
-
     }
     console.log("all >> categories", allDeleteableNewsId);
     console.log("Total selected item" + allDeleteableNewsId.length);
-
   };
 
   const deleteMultipleNewsItem = async () => {
@@ -210,8 +204,6 @@ const News = () => {
 
   useEffect(() => {
     getallNews();
-
-    
   }, []);
 
   return (
