@@ -1,8 +1,8 @@
 .audio-design{
     height: auto;
     width: auto;
-    background-color: grey;
-    border: 1px solid black;
+    background-color: rgb(236, 215, 18);
+    border: 1px solid rgb(207, 14, 14);
     margin: 10px;
     padding: 10px;
 }
