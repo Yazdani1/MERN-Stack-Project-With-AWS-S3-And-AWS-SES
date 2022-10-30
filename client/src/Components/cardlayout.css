@@ -12,3 +12,9 @@
     justify-content: center;
     padding-top: 4px;
 }
+
+.card-layout-design h6{
+    background-color: red;
+    color: white;
+    height: 100px;
+}
