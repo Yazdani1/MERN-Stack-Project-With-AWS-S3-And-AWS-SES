@@ -1,7 +1,6 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Navigate, useLocation, useNavigate, Link } from "react-router-dom";
-// import { userLoginDetails } from "../API";
 import { useDispatch } from "react-redux";
 import PageLayout from "../PageLayout";
 import { UserContext } from "../UserContext";
