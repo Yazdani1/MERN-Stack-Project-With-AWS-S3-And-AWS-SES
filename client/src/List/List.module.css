@@ -2,13 +2,13 @@
 
     height: 500px;
     width: 100%;
-    background-color: rgb(227, 249, 194);
+    background-color: rgb(221, 69, 66);
 }
 
 .itemCard{
 
     padding: 10px;
-    background-color: rebeccapurple;
+    background-color: rgb(204, 182, 18);
     border-radius: 10px;
     margin: 10px;
     color: aliceblue;
