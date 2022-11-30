@@ -1,6 +1,7 @@
 // import got from 'got';
 const AWS = require("aws-sdk");
 const { uuid } = require("uuidv4");
+const { readFileSync } = require("fs");
 
 // const got = require("got");
 const sharp = require("sharp");
@@ -183,3 +184,38 @@ exports.editNews = async (req, res) => {
     return res.status(400).json({ error: "Something went wrong" });
   }
 };
+
+
+// upload image with formidble package and this is the best way to do it,,
+
+exports.uploadImageWithFormidble = async(req,res)=>{
+
+  try {
+
+    const { imagefile } = req.files;
+
+    // console.log(video);
+
+    const params = {
+      Bucket: "news-note",
+      Key: `${uuid()}.${imagefile.type.split("/")[1]}`,
+      Body: readFileSync(imagefile.path),
+      ContentType: "image/png",
+      ACL: "public-read",
+    };
+
+    S3.upload(params, (err, data) => {
+      if (err) {
+        return res.sendStatus(400);
+      }
+      res.send(data);
+      console.log(data);
+    });
+
+  } catch(error){
+     res.status(400).json({ error: "Something went wrong" });
+
+  }
+
+
+}

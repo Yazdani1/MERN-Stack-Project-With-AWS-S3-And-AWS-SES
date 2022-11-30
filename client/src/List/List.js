@@ -31,12 +31,11 @@ const List = () => {
     { id: false, letter: "2" },
     { id: true, letter: "3" },
     { id: false, letter: "4" },
-    { id: true,  letter: "5" },
+    { id: true, letter: "5" },
     { id: false, letter: "6" },
   ];
 
-
-  const [targetDataItem,setTargetDataItem] = useState(targetData);
+  const [targetDataItem, setTargetDataItem] = useState(targetData);
 
   const targetReorder = (id) => {
     let firstItem;
@@ -49,7 +48,6 @@ const List = () => {
     });
     setTargetDataItem([...firstItem, ...filteredItems]);
   };
-
 
   return (
     <PageLayout>
@@ -74,6 +72,11 @@ const List = () => {
               {item.letter}
             </div>
           ))}
+        </div>
+
+        <div>
+          <h4>dgsdgdg</h4>
+          <p>dfgdg</p>
         </div>
       </div>
     </PageLayout>
