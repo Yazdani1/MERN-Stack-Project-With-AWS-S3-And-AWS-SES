@@ -12,11 +12,8 @@ const PDFFeatures = () => {
   const [pdfFile, setPdfFile] = useState("");
 
   const [loading, setLoading] = useState(false);
-
   // to load all the pdf
-
   const [allPdfPosts, setAllPdfPosts] = useState([]);
-
   const handlePdfUpload = async (e) => {
     setLoading(true);
 
@@ -46,7 +43,6 @@ const PDFFeatures = () => {
 
     }
   };
-
   const onSubmitPdfPost = async (e) => {
     e.preventDefault();
 
@@ -139,7 +135,6 @@ const PDFFeatures = () => {
             </form>
           </div>
         </CardLayout>
-
           <div className="row">
             {allPdfPosts &&
               allPdfPosts.map((item, index) => (
@@ -151,7 +146,6 @@ const PDFFeatures = () => {
                 </div>
               ))}
           </div>
-
         <ToastContainer autoClose={8000} />
       </div>
     </PageLayout>
