@@ -42,9 +42,7 @@ exports.uploadPdfFile = async (req, res) => {
     return res.status(400).json({ error: "Something went wrong" });
   }
 };
-
 // to upload pdf file with post to the server
-
 exports.createPdfPost = async (req, res) => {
   try {
     const { title, pdffile } = req.body;
@@ -77,9 +75,7 @@ exports.getAllPDFFile = async (req, res) => {
     return res.status(400).json({ error: "something went wrong" });
   }
 };
-
 // to delete pdf file
-
 exports.deletePdfPost = async () => {
   try {
     const delete_Query = { _id: req.params.id };
