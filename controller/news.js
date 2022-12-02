@@ -105,19 +105,15 @@ exports.createNews = async (req, res) => {
     if (!title) {
       return res.status(422).json({ error: "Title is required" });
     }
-
     if (!des) {
       return res.status(422).json({ error: "Description is required" });
     }
     if (!image) {
       return res.status(422).json({ error: "Image is required" });
     }
-
     const newsInfo = new News({ title, des, image });
-
     const newsDetails = await News.create(newsInfo);
-
-    return res.status(201).json(newsDetails);
+    res.status(201).json(newsDetails);
   } catch (error) {
     return res.status(400).json({ error: "Could not ceate news" });
   }
@@ -131,7 +127,7 @@ exports.getAllnews = async (req, res) => {
 
     return res.status(200).json(newsList);
   } catch (error) {
-    return res.status(400).json({ error: "Could not load news" });
+    res.status(400).json({ error: "Could not load news" });
   }
 };
 
@@ -152,7 +148,9 @@ exports.delteMultipleNews = async (req, res) => {
   try {
     const { postid } = req.body;
     const delete_news = await News.deleteMany({ _id: { $in: postid } });
-    res.status(200).json({ message: "News Multiple Deleted Successfully",delete_news });
+    res
+      .status(200)
+      .json({ message: "News Multiple Deleted Successfully", delete_news });
   } catch (error) {
     res.status(400).json({ error: "Soething went wrog" });
   }
@@ -174,16 +172,14 @@ exports.editNews = async (req, res) => {
 
     res.status(200).json(editDetails);
   } catch (error) {
-    return res.status(400).json({ error: "Something went wrong" });
+    res.status(400).json({ error: "Something went wrong" });
   }
 };
 
 // upload image with formidble package and this is the best way to do it,,
 
-exports.uploadImageWithFormidble = async(req,res)=>{
-
+exports.uploadImageWithFormidble = async (req, res) => {
   try {
-
     const { imagefile } = req.files;
 
     // console.log(video);
@@ -203,11 +199,7 @@ exports.uploadImageWithFormidble = async(req,res)=>{
       res.send(data);
       console.log(data);
     });
-
-  } catch(error){
-     res.status(400).json({ error: "Something went wrong" });
-
+  } catch (error) {
+    res.status(400).json({ error: "Something went wrong" });
   }
-
-
-}
+};
