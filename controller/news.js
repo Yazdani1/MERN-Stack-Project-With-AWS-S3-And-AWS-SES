@@ -147,18 +147,11 @@ exports.deleteNews = async (req, res) => {
     res.status(404).json({ error: "News id could not found" });
   }
 };
-
 // to delte multiple news
-
 exports.delteMultipleNews = async (req, res) => {
   try {
     const { postid } = req.body;
-
     const delete_news = await News.deleteMany({ _id: { $in: postid } });
-
-
-    console.log(delete_news);
-
     res.status(200).json({ message: "News Multiple Deleted Successfully",delete_news });
   } catch (error) {
     res.status(400).json({ error: "Soething went wrog" });
@@ -184,7 +177,6 @@ exports.editNews = async (req, res) => {
     return res.status(400).json({ error: "Something went wrong" });
   }
 };
-
 
 // upload image with formidble package and this is the best way to do it,,
 
