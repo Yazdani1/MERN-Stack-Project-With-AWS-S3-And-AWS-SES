@@ -18,9 +18,6 @@ const S3 = new AWS.S3(awsConfig);
 exports.uploadAudioFile = async (req, res) => {
   try {
     const { audio } = req.files;
-
-    // console.log(video);
-
     const params = {
       Bucket: "news-note",
       Key: `${uuid()}.${audio.type.split("/")[1]}`,
@@ -28,7 +25,6 @@ exports.uploadAudioFile = async (req, res) => {
       ContentType: "audio/wav",
       ACL: "public-read",
     };
-
     S3.upload(params, (err, data) => {
       if (err) {
         return res.sendStatus(400);
@@ -40,37 +36,27 @@ exports.uploadAudioFile = async (req, res) => {
     return res.status(400).json({ error: "Something went wrong" });
   }
 };
-
 // to create post with audio
-
 exports.createAudioPost = async (req, res) => {
   try {
     const { title, audiofile } = req.body;
-
     if (!title) {
       return res.status(422).json({ error: "Please add Title" });
     }
-
     if (!audiofile) {
       return res.status(422).json({ error: "Please add Audio File" });
     }
-
     const audioDetails = Audio({ title, audiofile });
-
     const createAudioPost = await Audio.create(audioDetails);
-
     res.status(201).json(createAudioPost);
   } catch (error) {
     return res.status(400).json({ error: "Something went wrong" });
   }
 };
-
 // to get all the post with audio
-
 exports.getAllAudioPost = async (req, res) => {
   try {
     const allaudiopost = await Audio.find({}).sort({ date: "DESC" });
-
     res.status(200).json(allaudiopost);
   } catch (error) {
     return res.status(400).json({ error: "Something Went Wrong" });
@@ -82,9 +68,7 @@ exports.getAllAudioPost = async (req, res) => {
 exports.deleteAudio = async (req, res) => {
   try {
     const deleteQuery = { _id: req.params.id };
-
     const deleteAudioPost = await Audio.findByIdAndDelete(deleteQuery);
-
     res.status(200).json(deleteAudioPost);
   } catch (error) {
     res.status(404).json({ error: "something went wrong" });
