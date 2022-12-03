@@ -118,9 +118,7 @@ exports.createNews = async (req, res) => {
     return res.status(400).json({ error: "Could not ceate news" });
   }
 };
-
 // to get all the news
-
 exports.getAllnews = async (req, res) => {
   try {
     const newsList = await News.find({}).sort({ date: "DESC" });
@@ -130,9 +128,7 @@ exports.getAllnews = async (req, res) => {
     res.status(400).json({ error: "Could not load news" });
   }
 };
-
 // to delete single news
-
 exports.deleteNews = async (req, res) => {
   try {
     var deleteQuery = { _id: req.params.id };
@@ -155,9 +151,7 @@ exports.delteMultipleNews = async (req, res) => {
     res.status(400).json({ error: "Soething went wrog" });
   }
 };
-
 // to edit news
-
 exports.editNews = async (req, res) => {
   try {
     const { title, des, image } = req.body;
@@ -175,9 +169,7 @@ exports.editNews = async (req, res) => {
     res.status(400).json({ error: "Something went wrong" });
   }
 };
-
 // upload image with formidble package and this is the best way to do it,,
-
 exports.uploadImageWithFormidble = async (req, res) => {
   try {
     const { imagefile } = req.files;
