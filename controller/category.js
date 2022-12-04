@@ -31,11 +31,7 @@ exports.createCategory = async (req, res) => {
 exports.getCategory = async (req, res) => {
   try {
     const catecoryList = await Category.find({}).sort({ date: "DESC" });
-
     const posts = await Post.find({categoryBy:catecoryList._id}).countDocuments();
-
-
-  
     res.json({ catecoryList,posts });
   } catch (err) {
     res
@@ -56,23 +52,15 @@ exports.getSingleCategory = async(req,res)=>{
     res.status(404).json({ err: "Something went wrong.Could find category" });
   }
 }
-
-
 // to update category name
-
 exports.editCategory = async (req, res) => {
   try {
     const { categoryName } = req.body;
-
     const slug = slugify(categoryName);
-
-
     const edit_query = { _id: req.params.id };
-
     const editcategory = await Category.findByIdAndUpdate(edit_query, {
       $set: { categoryName,slug },
     });
-
     res.status(200).json(editcategory);
   } catch (error) {
     return res.status(404).json({ error: "Category could not found to edit" });
