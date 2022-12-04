@@ -49,18 +49,14 @@ exports.uploadVideo = async (req, res) => {
 exports.createVideoPost = async (req, res) => {
   try {
     const { title, video_link } = req.body;
-
     if (!title) {
       return res.status(422).json({ error: "Please add title" });
     }
     if (!video_link) {
       return res.status(422).json({ error: "Please add video" });
     }
-
     const videoPost = new Video({ title, video_link });
-
     const saveVideo = await Video.create(videoPost);
-
     res.status(201).json(saveVideo);
   } catch (error) {
     return res.status(400).json({ error: "Something went wrong in video" });
@@ -72,15 +68,12 @@ exports.createVideoPost = async (req, res) => {
 exports.getAllvideos = async (req, res) => {
   try {
     const allvideopost = await Video.find({}).sort({ date: "DESC" });
-
     res.status(200).json(allvideopost);
   } catch (error) {
     return res.status(400).json({ error: "Something Went Wrong" });
   }
 };
-
 // to delete video
-
 exports.deleteVideoPost = async (req, res) => {
   try {
     var deleteQuery = { _id: req.params.id };
