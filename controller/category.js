@@ -37,7 +37,6 @@ exports.getCategory = async (req, res) => {
 // to get single category to update
 
 exports.getSingleCategory = async(req,res)=>{
-
   try {
     const single_category_query = { _id: req.params.id };
     const sinlgecategory = await Category.findOne(single_category_query);
@@ -60,9 +59,7 @@ exports.editCategory = async (req, res) => {
     return res.status(404).json({ error: "Category could not found to edit" });
   }
 };
-
 //to delete category list
-
 exports.deleteCategory = async (req, res) => {
   try {
     const delete_category_query = { _id: req.params.id };
