@@ -5,16 +5,12 @@ var slugify = require('slugify');
 exports.createCategory = async (req, res) => {
   try {
     const { categoryName } = req.body;
-
     const slug = slugify(categoryName);
-
-
     if (!categoryName) {
       return res
         .status(422)
         .json({ error: "Add a category name.................." });
     }
-
     const categgoryData = Category({
       categoryName,slug
     });
@@ -25,9 +21,7 @@ exports.createCategory = async (req, res) => {
   }
 
 };
-
 //to get all the category list
-
 exports.getCategory = async (req, res) => {
   try {
     const catecoryList = await Category.find({}).sort({ date: "DESC" });
