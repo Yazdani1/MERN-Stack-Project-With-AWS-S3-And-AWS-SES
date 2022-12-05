@@ -32,7 +32,6 @@ const PDFFeatures = () => {
         pdfData
       );
       setPdfFile(data.Location);
-
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -40,7 +39,6 @@ const PDFFeatures = () => {
         position: toast.POSITION.TOP_RIGHT,
       });
       setLoading(false);
-
     }
   };
   const onSubmitPdfPost = async (e) => {
@@ -69,9 +67,7 @@ const PDFFeatures = () => {
       });
     }
   };
-
   // load all pdf psots
-
   const loadAllpdf = async () => {
     try {
       const res = await getPdfPost();
